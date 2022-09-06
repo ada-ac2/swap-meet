@@ -2,7 +2,7 @@
 
 ## Skills Assessed
 
-- Following directions and reading comprehension
+- Comprehending and following code specifications
 - Reading tests
 - Creating classes
   - Classes have attributes and instance methods
