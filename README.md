@@ -16,11 +16,11 @@
 
 You want to organize a swap meet! You have a bunch of _stuff_. So do your friends! It would be awesome if each person could swap one of their things with another person's things.
 
-For this event, you want each person to register online as a vendor. Also, they should list an inventory list of things.
+For this event, you want each person to register online as a vendor. Also, they should add an inventory list of things.
 
 You envision an app where vendors can swap items between different inventories. But what would that backend logic look like?
 
-For this project, given some features that the vendors want, create a set of classes, following the directions below. The directions will lead you to create many class definitions, their attributes and instance methods, and some other cool features. Vendors will be able to swap their top item and swap items by category!
+For this project, given some features that the vendors want, create a set of classes, following the directions below. The directions will lead you to create many class definitions, their attributes and instance methods, and some other cool features. Vendors will be able to swap items based on values like quality, category, or id!
 
 ## Setup and Workflow
 
@@ -42,7 +42,7 @@ For more on different types of software testing, [here is a helpful resource](ht
 
 Code coverage is a term used to describe how much application code is executed when a particular test suite is run. It is a good practice to check our code coverage, to understand how much of our code is exercised by tests vs how much is still untested. A test suite with a high percentage of coverage is likely to be testing more throughly and have fewer bugs. A code coverage tool can partner with our testing suite to give us a report illustrating the coverage of our tests.
 
-Given that Ada provided all tests cases in this project, we should anticipate high code coverage.
+Given that Ada provided all test cases in this project, we should anticipate high code coverage.
 
 Review the [code coverage exercise](https://github.com/adaGold/code-coverage-exercise) on how to use `pytest-cov` to generate a code coverage report. We will need to change the directory where the application code is located from `student` to `swap_meet`.  
 
@@ -67,15 +67,14 @@ In Wave 1 we will create the `Vendor` class.
 - Each `Vendor` will have an attribute named `inventory`, which is an empty list by default
 - When we instantiate an instance of `Vendor`, we can optionally pass in a list with the keyword argument `inventory`
 
-
 - Every instance of `Vendor` has an instance method named `add`, which takes in one item
-- This method adds the item to the `inventory`
-- This method returns the item that was added
+    - This method adds the item to the `inventory`
+    - This method returns the item that was added
 
 - Similarly, every instance of `Vendor` has an instance method named `remove`, which takes in one item
-- This method removes the matching item from the `inventory`
-- This method returns the item that was removed
-- If there is no matching item in the `inventory`, the method should return `False`
+    - This method removes the matching item from the `inventory`
+    - This method returns the item that was removed
+    - If there is no matching item in the `inventory`, the method should explicitly return `none`
 
 ### Wave 2
 
