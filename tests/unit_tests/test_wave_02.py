@@ -9,6 +9,12 @@ def test_items_have_default_uuid_length_id():
     assert len(str(item.id)) >= 32
 
 @pytest.mark.skip
+def test_item_instances_have_different_default_ids():
+    item_a = Item()
+    item_b = Item()
+    assert item_a.id != item_b.id
+
+@pytest.mark.skip
 def test_items_use_custom_id_if_passed():
     item = Item(id=12345)
     assert isinstance(item.id, int)
