@@ -67,13 +67,13 @@ In Wave 1 we will create the `Vendor` class.
 - When we instantiate an instance of `Vendor`, we can optionally pass in a list with the keyword argument `inventory`
 
 - Every instance of `Vendor` has an instance method named `add`, which takes in one item
-    - This method adds the item to the `inventory`
-    - This method returns the item that was added
+  - This method adds the item to the `inventory`
+  - This method returns the item that was added
 
 - Similarly, every instance of `Vendor` has an instance method named `remove`, which takes in one item
-    - This method removes the matching item from the `inventory`
-    - This method returns the item that was removed
-    - If there is no matching item in the `inventory`, the method should explicitly return `None`
+  - This method removes the matching item from the `inventory`
+  - This method returns the item that was removed
+  - If there is no matching item in the `inventory`, the method should explicitly return `None`
 
 ### Wave 2
 
@@ -83,9 +83,9 @@ In Wave 2 we will create the `Item` class and the `Vendor` class's `get_by_id` m
 - Inside this module, there is a class named `Item`
 
 - Each `Item` will have an attribute named `id`, which is a unique integer by default.
-    - There are many ways to generate numbers, but generating numbers without duplicates takes some care. Happily, Python has a package called `uuid` that can help! 
-        - If we import the `uuid` package in `item.py`, with a little research we can use one of the functions `uuid` provides to create large unique numbers meant to be used as identifiers.
-        - This package creates `UUID` objects, it's functions don't directly return an integer, BUT `UUID` instances have an attribute `.int` which returns their value as an integer. 
+  - There are many ways to generate numbers, but generating numbers without duplicates takes some care. Happily, Python has a package called `uuid` that can help! 
+    - If we import the `uuid` package in `item.py`, with a little research we can use one of the functions `uuid` provides to create large unique numbers meant to be used as identifiers.
+    - This package creates `UUID` objects, it's functions don't directly return an integer, BUT `UUID` instances have an attribute `.int` which returns their value as an integer. 
 - When we initialize an instance of `Item`, we can optionally pass in an integer with the keyword argument `id` to manually set the `Item`'s `id`.
 - Each `Item` will have a function named `get_category`, which will return a string holding the name of the class. 
 
@@ -96,9 +96,10 @@ In Wave 2 we will create the `Item` class and the `Vendor` class's `get_by_id` m
 
 ### Wave 3
 
-In Wave 3 we will write a method to stringify an `Item` using `str()` and write the method `swap_items`.
+In Wave 3 we will write a method to stringify (convert to a string) an `Item` using `str()` and write the method `swap_items`.
 
-- When we stringify (convert to a string) an instance of `Item` using `str()`, it returns `"Hello World!"`
+- When we stringify an instance of `Item` using `str()`, it returns `"An object of type Item with id <id value>"`, where `<id value>` is the `id` of the `Item` instance that `str()` was called on.
+  - For example, if we had an `Item` instance with an `id` of `12345`, the result should be `"An object of type Item with id 12345"`.
   - This implies `Item` overrides its stringify method. We may need to research the `__str__` method for more details!
 
 The remaining tests in wave 3 imply:
