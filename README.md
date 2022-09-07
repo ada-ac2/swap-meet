@@ -128,27 +128,39 @@ In Wave 4 we will write one method, `swap_first_item`.
 
 ### Wave 5
 
-In Wave 5 we will create three additional modules with three additional classes and add a new method `get_by_category` to `Vendor`.
+In Wave 5 we will create three additional modules with three additional classes:
 
 Our new modules should be defined as follows:
 - `Clothing`
-  - Has an attribute `category` that is `"Clothing"`
-  - Its stringify method returns `"The finest clothing you could wear."`
-- `Decor`
-  - Has an attribute `category` that is `"Decor"`
-  - Its stringify method returns `"Something to decorate your space."`
-- `Electronics`
+  - Has an attribute `id` that is by default a unique integer
+  - Has an attribute `fabric` that is by default the string "Unknown".
+    - This attribute describes what fabric the clothing is made from; some example values might be `"Striped"`, `"Cotton"`, or `"Floral"` 
+    - When we initialize an instance of `Clothing`, we can optionally pass in a string with the keyword argument `fabric`.
+  - Has an function `get_category` that returns `"Clothing"`
+  - Its stringify method returns `"An object of type Clothing with id <id value>. It is made from <fabric value> fabric."`
+    - If we had a `Clothing` instance with an `id` of `123435` and `fabric` attribute that holds `"Wool"`, it's stringify method should return `"An object of type Clothing with id 12345. It is made from Wool fabric."`
 
-  - Has an attribute `category` that is `"Electronics"`
-  - Its stringify method returns `"A gadget full of buttons and secrets."`
+- `Decor`
+  - Has an attribute `id` that is by default a unique integer
+  - Holds 2 integer attributes `width` and `length`. 
+    - Both of these values should be 0 by default.
+    - When initializing an instance of `Decor`, we can optionally pass in integers with the keyword arguments `width` and `length`.
+  - Has an function `get_category` that returns `"Decor"`
+  - Its stringify method returns `"An object of type Decor with id <id value>. It takes up a <width value> by <length value> sized space."`
+    - If we had a `Decor` instance with an `id` of `123435`, `width` of `3` and `length` of `7`, it's stringify method should return `"An object of type Decor with id 12345. It takes up a 3 by 7 sized space."`
+
+- `Electronics`
+  - Has an attribute `id` that is by default a unique integer
+  - Has an attribute `type` that is by default the string "Unknown".
+    - This attribute describes what kind of electronic device this is. Some example values might be `“Kitchen Appliance”`, `“Game Console”`, or `“Health Tracker”` 
+    - When we initialize an instance of `Electronics`, we can optionally pass in a string with the keyword argument `type`.
+  - Has an function `get_category` that returns `"Electronics"`
+  - Its stringify method returns `"An object of type Electronics with id <id value>. This is a <type value> device."`
+    - If we had an `Electronics` instance with an `id` of `123435` and `type` attribute of `"Mobile Phone"`, it's stringify method should return `"An object of type Electronics with id 12345. This is a Mobile Phone device."`
 
 - All three classes and the `Item` class have an attribute called `condition`, which can be optionally provided in the initializer. The default value should be `0`.
 
 - All three classes and the `Item` class have an instance method named `condition_description`, which should describe the condition in words based on the value, assuming they all range from 0 to 5. These can be basic descriptions (eg. 'mint', 'heavily used') but feel free to have fun with these (e.g. 'You probably want a glove for this one..."). The one requirement is that the `condition_description` for all three classes above have the same behavior.
-
-- Instances of `Vendor` have an instance method named `get_by_category`
-  - It takes one argument: a string, representing a category
-  - This method returns a list of objects in the inventory with that category
 
 #### Using Inheritance
 
@@ -164,7 +176,11 @@ from swap_meet.item import Item
 
 ### Wave 6
 
-In Wave 6 we will write two methods, `get_best_by_category` and `swap_best_by_category`.
+In Wave 6 we will write three methods, `get_by_category`, `get_best_by_category`, and `swap_best_by_category`.
+
+- `Vendor` objects have an instance method named `get_by_category`
+  - It takes one argument: a string, representing a category
+  - This method returns a list of objects in the inventory with that category
 
 - `Vendor`s have a method named `get_best_by_category`, which will get the item with the best condition in a certain category
   - It takes one argument: a string that represents a category
