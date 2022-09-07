@@ -73,20 +73,26 @@ In Wave 1 we will create the `Vendor` class.
 - Similarly, every instance of `Vendor` has an instance method named `remove`, which takes in one item
     - This method removes the matching item from the `inventory`
     - This method returns the item that was removed
-    - If there is no matching item in the `inventory`, the method should return `False`
+    - If there is no matching item in the `inventory`, the method should explicitly return `None`
 
 ### Wave 2
 
-In Wave 2 we will create the `Item` class and the `get_by_category` method.
+In Wave 2 we will create the `Item` class and the `Vendor` class's `get_by_id` method.
 
 - There is a module (file) named `item.py` inside of the `swap_meet` package (folder)
-
 - Inside this module, there is a class named `Item`
-- Each `Item` will have an attribute named `category`, which is an empty string by default
-- When we initialize an instance of `Item`, we can optionally pass in a string with the keyword argument `category`
-- Instances of `Vendor` have an instance method named `get_by_category`
-  - It takes one argument: a string, representing a category
-  - This method returns a list of `Item`s in the inventory with that category
+
+- Each `Item` will have an attribute named `id`, which is a unique integer by default.
+    - There are many ways to generate numbers, but generating numbers without duplicates takes some care. Happily, Python has a package called `uuid` that can help! 
+        - If we import the `uuid` package in `item.py`, with a little research we can use one of the functions `uuid` provides to create large unique numbers meant to be used as identifiers.
+        - This package creates `UUID` objects, it's functions don't directly return an integer, BUT `UUID` instances have an attribute `.int` which returns their value as an integer. 
+- When we initialize an instance of `Item`, we can optionally pass in an integer with the keyword argument `id` to manually set the `Item`'s `id`.
+- Each `Item` will have a function named `get_category`, which will return a string holding the name of the class. 
+
+- Instances of `Vendor` have an instance method named `get_by_id`
+  - It takes one argument: an integer, representing an `Item`'s `id`
+  - This method returns the item with a matching `id` from the inventory
+  - If there is no matching item in the `inventory`, the method should explicitly return `None`
 
 ### Wave 3
 
@@ -121,8 +127,9 @@ In Wave 4 we will write one method, `swap_first_item`.
 
 ### Wave 5
 
-In Wave 5 we will create three additional modules with three additional classes:
+In Wave 5 we will create three additional modules with three additional classes and add a new method `get_by_category` to `Vendor`.
 
+Our new modules should be defined as follows:
 - `Clothing`
   - Has an attribute `category` that is `"Clothing"`
   - Its stringify method returns `"The finest clothing you could wear."`
@@ -138,11 +145,15 @@ In Wave 5 we will create three additional modules with three additional classes:
 
 - All three classes and the `Item` class have an instance method named `condition_description`, which should describe the condition in words based on the value, assuming they all range from 0 to 5. These can be basic descriptions (eg. 'mint', 'heavily used') but feel free to have fun with these (e.g. 'You probably want a glove for this one..."). The one requirement is that the `condition_description` for all three classes above have the same behavior.
 
+- Instances of `Vendor` have an instance method named `get_by_category`
+  - It takes one argument: a string, representing a category
+  - This method returns a list of objects in the inventory with that category
+
 #### Using Inheritance
 
 Now, we may notice that these three classes hold the same types of state and have the same general behavior as `Item`. That makes this is a great opportunity to use inheritance! If you haven't already, go back and implement the `Clothing`, `Decor`, and `Electronics` classes so that they inherit from the `Item` class. This should eliminate repetition in your code and greatly reduce the total number of lines code in your program!
 
-##### Hint: Importing Item
+##### Tip: Importing Item
 
 You'll need to refer to `Item` in order to declare it as a parent. To reference the `Item` class from these modules, try this import line:
 
