@@ -4,8 +4,7 @@
 
 - Comprehending and following code specifications
 - Reading tests
-- Creating classes
-  - Classes have attributes and instance methods
+- Creating classes with attributes and instance methods
 - Importing modules
 - Working with attributes that are lists of instances
 - Implementing instance methods that interact with other instances and objects
@@ -74,7 +73,7 @@ In Wave 1 we will create the `Vendor` class.
 - Similarly, every instance of `Vendor` has an instance method named `remove`, which takes in one item
     - This method removes the matching item from the `inventory`
     - This method returns the item that was removed
-    - If there is no matching item in the `inventory`, the method should explicitly return `none`
+    - If there is no matching item in the `inventory`, the method should return `False`
 
 ### Wave 2
 
