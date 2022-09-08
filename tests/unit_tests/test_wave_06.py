@@ -1,4 +1,5 @@
 import pytest
+from swap_meet.item import Item
 from swap_meet.vendor import Vendor
 from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
@@ -6,11 +7,13 @@ from swap_meet.electronics import Electronics
 
 @pytest.mark.skip
 def test_get_items_by_category():
-    item_a = Item(category="clothing")
-    item_b = Item(category="electronics")
-    item_c = Item(category="clothing")
+    item_a = Clothing()
+    item_b = Electronics()
+    item_c = Clothing()
+    item_d = Decor()
+    item_e = Item()
     vendor = Vendor(
-        inventory=[item_a, item_b, item_c]
+        inventory=[item_a, item_b, item_c, item_d, item_e]
     )
 
     items = vendor.get_by_category("clothing")
@@ -18,13 +21,12 @@ def test_get_items_by_category():
     assert len(items) == 2
     assert item_a in items
     assert item_c in items
-    assert item_b not in items
 
 @pytest.mark.skip
 def test_get_no_matching_items_by_category():
-    item_a = Item(category="clothing")
-    item_b = Item(category="clothing")
-    item_c = Item(category="clothing")
+    item_a = Clothing()
+    item_b = Item()
+    item_c = Decor()
     vendor = Vendor(
         inventory=[item_a, item_b, item_c]
     )
@@ -49,7 +51,7 @@ def test_best_by_category():
 
     best_item = tai.get_best_by_category("Clothing")
 
-    assert best_item.category == "Clothing"
+    assert best_item.get_category() == "Clothing"
     assert best_item.condition == pytest.approx(4.0)
 
 @pytest.mark.skip
@@ -79,7 +81,7 @@ def test_best_by_category_with_duplicates():
     best_item = tai.get_best_by_category("Clothing")
 
     # Assert
-    assert best_item.category == "Clothing"
+    assert best_item.get_category() == "Clothing"
     assert best_item.condition == pytest.approx(4.0)
 
 @pytest.mark.skip
