@@ -104,11 +104,173 @@ def test_display_inventory_no_items_with_category(capfd):
 
 # ~~~~~ swap_by_id Tests ~~~~~
 
-# successful swap
-# calling inventory empty
-# other inventory empty
-# calling inventory missing item
-# other inventory missing item 
+@pytest.mark.skip
+def test_swap_by_id_success_returns_true():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_by_id(
+        other=jesse,
+        my_item_id=456,
+        their_item_id=321
+    )
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_c in tai.inventory
+    assert item_d in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_b in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+@pytest.mark.skip
+def test_swap_by_id_with_caller_empty_inventory_returns_false():
+    # Arrange
+    tai = Vendor(inventory=[])
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_by_id(
+        other=jesse,
+        my_item_id=456,
+        their_item_id=321
+    )
+
+    # Assert
+    assert result == False
+    assert len(tai.inventory) == 0
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+@pytest.mark.skip
+def test_swap_by_id_with_other_empty_inventory_returns_false():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    jesse = Vendor(inventory=[])
+
+    # Act
+    result = tai.swap_by_id(
+        other=jesse,
+        my_item_id=456,
+        their_item_id=321
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 0
+
+@pytest.mark.skip
+def test_swap_by_id_fails_if_caller_missing_item():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_by_id(
+        other=jesse,
+        my_item_id=213,
+        their_item_id=654
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+@pytest.mark.skip
+def test_swap_by_id_fails_if_other_missing_item():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_by_id(
+        other=jesse,
+        my_item_id=123,
+        their_item_id=564
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 

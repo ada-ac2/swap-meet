@@ -231,7 +231,7 @@ In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, 
 - `Vendor`s have a method named `choose_and_swap_items`, which will let people display their inventory and choose which items to swap by their `id`s.
   - It takes 2 arguments:
     1. `other`, which represents another `Vendor` instance to trade with
-    2. `category`, an optional parameter which is a string representing a category
+    2. `category`, an optional parameter which is a string representing a category. Should default to an empty string.
   - The function will list the inventories for both the calling `Vendor` instance and the `Vendor` parameter `other`
     - If a category is passed as a parameter, only items of that category will be displayed by each `Vendor`
     - When listing an inventory, we should display a description of the items which includes their `id`
@@ -254,3 +254,8 @@ Should a project be completed before submission, and there is a desire for optio
 
 - Take a look for Error Handling opportunities
   - What issues could arise if we pass a string (or any object other than an integer) for the `id` of an Item? How could we prevent that? 
+  - What other opportunities for error handling do you see?
+
+- What is our test suite missing? 
+  - Identify gaps or edge cases it'd be helpful to cover
+  - Write tests for the cases you identify
