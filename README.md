@@ -212,10 +212,11 @@ Try it out and see if the tests still pass! If you can't get them to pass with t
 In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, `swap_by_id`, and `choose_and_swap_items`.
 
 - `Vendor`s have a method named `display_inventory`, which will print a list of the items in their inventory.
-  - It takes one optional parameter, a string representing a category
+  - It takes one optional argument, a string representing a category, that should default to an empty string 
   - If a category is passed as a parameter, only items of that category will be displayed
   - If no category is passed, the entire inventory is displayed
   - When an item is displayed, we should print a description of the item that includes the id
+  - If a `Vendor` has an empty inventory, or no items that match the category parameter, the string "No inventory to display." should be printed
 
 - `Vendor`s have a method named `swap_by_id`
   - It takes 3 arguments:
