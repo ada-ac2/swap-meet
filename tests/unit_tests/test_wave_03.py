@@ -14,15 +14,15 @@ def test_item_overrides_to_string():
 
 @pytest.mark.skip
 def test_swap_items_returns_true():
-    item_a = Item(category="clothing")
-    item_b = Item(category="clothing")
-    item_c = Item(category="clothing")
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
     fatimah = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Item(category="electronics")
-    item_e = Item(category="decor")
+    item_d = Item()
+    item_e = Item()
     jolie = Vendor(
         inventory=[item_d, item_e]
     )
@@ -42,15 +42,15 @@ def test_swap_items_returns_true():
 
 @pytest.mark.skip
 def test_swap_items_when_my_item_is_missing_returns_false():
-    item_a = Item(category="clothing")
-    item_b = Item(category="clothing")
-    item_c = Item(category="clothing")
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
     fatimah = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Item(category="electronics")
-    item_e = Item(category="decor")
+    item_d = Item()
+    item_e = Item()
     jolie = Vendor(
         inventory=[item_d, item_e]
     )
@@ -69,15 +69,15 @@ def test_swap_items_when_my_item_is_missing_returns_false():
 
 @pytest.mark.skip
 def test_swap_items_when_their_item_is_missing_returns_false():
-    item_a = Item(category="clothing")
-    item_b = Item(category="clothing")
-    item_c = Item(category="clothing")
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
     fatimah = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Item(category="electronics")
-    item_e = Item(category="decor")
+    item_d = Item()
+    item_e = Item()
     jolie = Vendor(
         inventory=[item_d, item_e]
     )
@@ -100,13 +100,13 @@ def test_swap_items_from_my_empty_returns_false():
         inventory=[]
     )
 
-    item_d = Item(category="electronics")
-    item_e = Item(category="decor")
+    item_d = Item()
+    item_e = Item()
     jolie = Vendor(
         inventory=[item_d, item_e]
     )
 
-    nobodys_item = Item(category="clothing")
+    nobodys_item = Item()
 
     result = fatimah.swap_items(jolie, nobodys_item, item_d)
 
@@ -116,9 +116,9 @@ def test_swap_items_from_my_empty_returns_false():
 
 @pytest.mark.skip
 def test_swap_items_from_their_empty_returns_false():
-    item_a = Item(category="clothing")
-    item_b = Item(category="clothing")
-    item_c = Item(category="clothing")
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
     fatimah = Vendor(
         inventory=[item_a, item_b, item_c]
     )
@@ -127,7 +127,7 @@ def test_swap_items_from_their_empty_returns_false():
         inventory=[]
     )
 
-    nobodys_item = Item(category="clothing")
+    nobodys_item = Item()
 
     result = fatimah.swap_items(jolie, item_b, nobodys_item)
 

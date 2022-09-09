@@ -24,7 +24,6 @@ def test_integration_wave_04_05_06():
     valentina.add(item_electronics2)
     valentina.add(item_decor1)
     valentina.add(item_decor2)
-    
 
     # swap first item
     result = camila.swap_first_item(valentina)
@@ -39,6 +38,15 @@ def test_integration_wave_04_05_06():
     assert item_electronics1 in valentina.inventory
     assert item_decor1 in valentina.inventory
     assert item_decor2 in valentina.inventory
+
+    # get item by category, truthy
+    items = camila.get_by_category("Electronics")
+    assert len(items) == 1
+    assert item_electronics1 in items
+
+    # get item by category, falsy
+    items = valentina.get_by_category("Clothing")
+    assert len(items) == 0
 
     # swap_best_category - falsy
     result = camila.swap_best_by_category(valentina, "Clothing", "Decor")

@@ -10,8 +10,8 @@ def test_integration_wave_01_02_03():
     assert len(vendor.inventory) == 0
 
     # add an item
-    item1 = Item(category="Clothing")
-    item2 = Item(category="Electronics")
+    item1 = Item()
+    item2 = Item()
     result1 = vendor.add(item1)
     result2 = vendor.add(item2)
 
@@ -28,20 +28,10 @@ def test_integration_wave_01_02_03():
     assert item1 not in vendor.inventory
     assert remove_result == item1
 
-    # get item by category, truthy
-    items = vendor.get_by_category("Electronics")
-
-    assert len(items) == 1
-    assert item2 in items
-
-    # get item by category, falsy
-    items = vendor.get_by_category("Clothing")
-    assert len(items) == 0
-
     other_vendor = Vendor()
 
     # swap items
-    item3 = Item(category="Decor")
+    item3 = Item()
     other_vendor.add(item3)
 
     vendor.swap_items(other_vendor, item2, item3)
