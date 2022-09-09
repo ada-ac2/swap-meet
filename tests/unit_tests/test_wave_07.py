@@ -274,8 +274,167 @@ def test_swap_by_id_fails_if_other_missing_item():
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 
-# Successful swap
-# calling inventory empty
+def test_choose_and_swap_items_success(monkeypatch):
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "987"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other=jesse)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+    assert item_f in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+
+def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
+    # Arrange
+    tai = Vendor(inventory=[])
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "987"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other=jesse)
+
+    # Assert
+    assert result == False
+    assert len(tai.inventory) == 0
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
 # other inventory empty
-# calling inventory missing item
-# other inventory missing item 
+def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    jesse = Vendor(inventory=[])
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "987"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other=jesse)
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 0
+
+
+def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["231", "987"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other=jesse)
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "564"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other=jesse)
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
