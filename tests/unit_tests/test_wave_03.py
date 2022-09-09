@@ -1,16 +1,15 @@
 import pytest
-import uuid
 from swap_meet.vendor import Vendor
 from swap_meet.item import Item
 
 @pytest.mark.skip
 def test_item_overrides_to_string():
-    test_uuid = uuid.uuid4().int
-    item = Item(id=test_uuid)
+    test_id = 12345
+    item = Item(id=test_id)
 
     item_as_string = str(item)
 
-    expected_result = f"An object of type Item with id {test_uuid}"
+    expected_result = f"An object of type Item with id {test_id}"
     assert item_as_string == expected_result
 
 @pytest.mark.skip

@@ -207,11 +207,49 @@ To further reduce the amount of repeated code in your project, consider how `swa
 
 Try it out and see if the tests still pass! If you can't get them to pass with this refactor, you can always return to the most recent working commit before you submit the project!
 
+### Wave 7
+
+In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, `swap_by_id`, and `choose_and_swap_items`.
+
+- `Vendor`s have a method named `display_inventory`, which will print a list of the items in their inventory.
+  - It takes one optional parameter, a string representing a category
+  - If a category is passed as a parameter, only items of that category will be displayed
+  - If no category is passed, the entire inventory is displayed
+  - When an item is displayed, we should print a description of the item that includes the id
+
+- `Vendor`s have a method named `swap_by_id`
+  - It takes 3 arguments:
+    1. `other`, which represents another `Vendor` instance to trade with
+    2. an integer (`my_item_id`), representing the `id` of the item this `Vendor` instance plans to give
+    3. an integer (`their_item_id`), representing the `id` of the item the friend `Vendor` plans to give
+  - The item with an `id` of `my_item_id` in my inventory is swapped with the item with `their_item_id` in the friend `Vendor`'s inventory
+    - It returns True
+    - If the `Vendor` has no item with an `id` matching `my_item_id`, swapping does not happen, and it returns `False`
+    - If `other` has no item with an `id` matching `their_item_id`, swapping does not happen, and it returns `False`
+
+- `Vendor`s have a method named `choose_and_swap_items`, which will let people display their inventory and choose which items to swap by their `id`s.
+  - It takes 2 arguments:
+    1. `other`, which represents another `Vendor` instance to trade with
+    2. `category`, an optional parameter which is a string representing a category
+  - The function will list the inventories for both the calling `Vendor` instance and the `Vendor` parameter `other`
+    - If a category is passed as a parameter, only items of that category will be displayed by each `Vendor`
+    - When listing an inventory, we should display a description of the items which includes their `id`
+  - After listing the inventories, the user will be prompted to provide 2 pieces of input:
+    1. The `id` of an item from the calling `Vendor` instance we want to swap
+    2. The `id` of an item from `other` we want to swap
+  - Once the user provides input, the items should be swapped
+    - It returns True if a swap occurs
+    - If the `Vendor` has no item with an `id` matching the user's first input, swapping does not happen, and it returns `False`
+    - If `other` has no item with an `id` matching the user's second input, swapping does not happen, and it returns `False`
+
+
 ## Optional Enhancements
 
-Should a project be completed before submission, and there is a desire for optional enhancements, consider this idea:
+Should a project be completed before submission, and there is a desire for optional enhancements, consider these ideas:
 
-- `Item`s have age
-  - Add an `age` attribute to all `Item`s
-  - Implement a `Vendor` method named `swap_by_newest`, using any logic that seems appropriate
-  - Write unit tests for `swap_by_newest`
+- `Item` subclasses have attributes we could use to swap similar items
+  - Add functions to swap Decor by space used, Clothing by like fabric, and Electronics by their type!
+  - Write unit tests for your new functions
+
+- Take a look for Error Handling opportunities
+  - What issues could arise if we pass a string (or any object other than an integer) for the `id` of an Item? How could we prevent that? 
