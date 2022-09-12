@@ -6,3 +6,6 @@ class Item:
 
     def get_category(self):
         return type(self).__name__
+
+    def __str__(self) -> str:
+        return f"An object of type {self.get_category()} with id {self.id}"
