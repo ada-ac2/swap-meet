@@ -25,7 +25,7 @@ For this project, given some features that the vendors want, create a set of cla
 
 Refer to [the viewing-party README](https://github.com/AdaGold/viewing-party) for detailed instructions on the One-Time Project Setup, Project Development Workflow, and Details About How to Run Tests.
 
-For this project, there are tests that you must complete for Waves 01, 02, and 06.
+For this project, there are tests that you must complete for Waves 01, 03, and 06.
 
 ## Integration Tests
 
