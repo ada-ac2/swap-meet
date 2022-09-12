@@ -1,9 +1,6 @@
 class Vendor:
     def __init__(self, inventory=None):
-        if inventory == None:
-            self.inventory = []
-        else:
-            self.inventory = inventory
+        self.inventory = inventory if inventory else []
 
     def add(self, item):
         self.inventory.append(item)
@@ -40,15 +37,35 @@ class Vendor:
         if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
             return False
 
-        # get first item   
         my_first_item = self.inventory[0]
         other_first_item = other_vendor.inventory[0]
 
-        # swap
-        self.inventory = self.inventory[1:]
-        other_vendor.inventory = other_vendor.inventory[1:]
+        return self.swap_items(other_vendor, my_first_item, other_first_item)
 
-        self.inventory.append(other_first_item)
-        other_vendor.inventory.append(my_first_item)
+    def get_by_category(self, category):
+        result = []
+        for item in self.inventory:
+            if item.get_category() == category:
+                result.append(item)
+        
+        return result
 
-        return True
+    def get_best_by_category(self, category):
+        highest = 0
+        best_item = None
+
+        for item in self.inventory:
+            if item.get_category() == category and item.condition > highest:
+                best_item = item
+                highest = item.condition
+
+        return best_item
+
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        my_best_item = self.get_best_by_category(their_priority)
+        their_best_item = other.get_best_by_category(my_priority)
+
+        if their_best_item is None or my_best_item is None:
+            return False
+
+        return self.swap_items(other, my_best_item, their_best_item)
