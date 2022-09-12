@@ -42,7 +42,7 @@ def test_integration_wave_04_05_06(capfd):
     # get item by category, truthy
     items = camila.get_by_category("Electronics")
     assert len(items) == 1
-    assert item_electronics1 in items
+    assert item_electronics2 in items
 
     # get item by category, falsy
     items = valentina.get_by_category("Clothing")
