@@ -4,7 +4,7 @@ from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @pytest.mark.integration_test
 def test_integration_wave_04_05_06(capfd):
     camila = Vendor()
@@ -42,7 +42,7 @@ def test_integration_wave_04_05_06(capfd):
     # get item by category, truthy
     items = camila.get_by_category("Electronics")
     assert len(items) == 1
-    assert item_electronics1 in items
+    assert item_electronics2 in items
 
     # get item by category, falsy
     items = valentina.get_by_category("Clothing")
@@ -82,7 +82,7 @@ def test_integration_wave_04_05_06(capfd):
     expected_str = (
         "1. An object of type Clothing with id 123. It is made from Geometric Pattern fabric.\n"
         "2. An object of type Electronics with id 654. This is a Kitchen Appliance device.\n"
-        "3. An object of type Decor with id 978. It takes up a 4 by 2 sized space.\n"
+        "3. An object of type Decor with id 987. It takes up a 4 by 2 sized space.\n"
     )
     assert captured.out == expected_str
 

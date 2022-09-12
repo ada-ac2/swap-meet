@@ -7,13 +7,13 @@ from swap_meet.electronics import Electronics
 
 # ~~~~~ display_inventory Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_items_no_category(capfd):
     # Arrange
     item_a = Clothing(id=123, fabric="Striped")
     item_b = Electronics(id=456, type="Handheld Game")
     item_c = Decor(id=789, width=2, length=4)
-    item_d = Item(id=000)
+    item_d = Item(id=100)
     vendor = Vendor(
         inventory=[item_a, item_b, item_c, item_d]
     )
@@ -27,11 +27,11 @@ def test_display_inventory_with_items_no_category(capfd):
         "1. An object of type Clothing with id 123. It is made from Striped fabric.\n"
         "2. An object of type Electronics with id 456. This is a Handheld Game device.\n"
         "3. An object of type Decor with id 789. It takes up a 2 by 4 sized space.\n"
-        "4. An object of type Item with id 000\n"
+        "4. An object of type Item with id 100\n"
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_items_and_category(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -52,7 +52,7 @@ def test_display_inventory_with_items_and_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_category_and_no_matching_items(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -72,7 +72,7 @@ def test_display_inventory_with_category_and_no_matching_items(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_no_items_no_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -87,7 +87,7 @@ def test_display_inventory_no_items_no_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_no_items_with_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -104,7 +104,7 @@ def test_display_inventory_no_items_with_category(capfd):
 
 # ~~~~~ swap_by_id Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_swap_by_id_success_returns_true():
     # Arrange
     item_a = Decor(id=123)
@@ -141,7 +141,7 @@ def test_swap_by_id_success_returns_true():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_swap_by_id_with_caller_empty_inventory_returns_false():
     # Arrange
     tai = Vendor(inventory=[])
@@ -169,7 +169,7 @@ def test_swap_by_id_with_caller_empty_inventory_returns_false():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_swap_by_id_with_other_empty_inventory_returns_false():
     # Arrange
     item_a = Decor(id=123)
@@ -198,7 +198,7 @@ def test_swap_by_id_with_other_empty_inventory_returns_false():
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_swap_by_id_fails_if_caller_missing_item():
     # Arrange
     item_a = Decor(id=123)
@@ -235,7 +235,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_swap_by_id_fails_if_other_missing_item():
     # Arrange
     item_a = Decor(id=123)
