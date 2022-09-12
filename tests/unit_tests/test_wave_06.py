@@ -16,7 +16,7 @@ def test_get_items_by_category():
         inventory=[item_a, item_b, item_c, item_d, item_e]
     )
 
-    items = vendor.get_by_category("clothing")
+    items = vendor.get_by_category("Clothing")
 
     assert len(items) == 2
     assert item_a in items
@@ -31,7 +31,7 @@ def test_get_no_matching_items_by_category():
         inventory=[item_a, item_b, item_c]
     )
 
-    items = vendor.get_by_category("electronics")
+    items = vendor.get_by_category("Electronics")
 
     raise Exception("Complete this test according to comments below.")
     # *********************************************************************
