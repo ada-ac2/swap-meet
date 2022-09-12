@@ -82,7 +82,7 @@ def test_integration_wave_04_05_06(capfd):
     expected_str = (
         "1. An object of type Clothing with id 123. It is made from Geometric Pattern fabric.\n"
         "2. An object of type Electronics with id 654. This is a Kitchen Appliance device.\n"
-        "3. An object of type Decor with id 978. It takes up a 4 by 2 sized space.\n"
+        "3. An object of type Decor with id 987. It takes up a 4 by 2 sized space.\n"
     )
     assert captured.out == expected_str
 
