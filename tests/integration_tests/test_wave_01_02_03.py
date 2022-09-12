@@ -29,11 +29,11 @@ def test_integration_wave_01_02_03():
     assert remove_result == item1
 
     # get item by id success
-    result = vendor.get_by_id(1234)
-    assert result == item1
+    result = vendor.get_by_id(5678)
+    assert result == item2
 
     # get by id, falsy
-    result = vendor.get_by_id(9876)
+    result = vendor.get_by_id(1234)
     assert not result
 
     # swap items
