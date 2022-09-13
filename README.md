@@ -179,7 +179,7 @@ from swap_meet.item import Item
 In Wave 6 we will write three methods, `get_by_category`, `get_best_by_category`, and `swap_best_by_category`.
 
 - `Vendor` objects have an instance method named `get_by_category`
-  - It takes one argument: a string, representing a category
+  - This method takes one argument: a string, representing a category
   - This method returns a list of objects in the inventory with that category
 
 - `Vendor`s have a method named `get_best_by_category`, which will get the item with the best condition in a certain category
