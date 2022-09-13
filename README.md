@@ -105,13 +105,13 @@ In Wave 3 we will write a method to stringify (convert to a string) an `Item` us
 The remaining tests in wave 3 imply:
 
 - Instances of `Vendor` have an instance method named `swap_items`
-  - It takes 3 arguments:
-    1. an instance of another `Vendor`, representing the friend that the vendor is swapping with
+  - `swap_items` takes 3 arguments:
+    1. an instance of another `Vendor` (`other_vendor`), representing the friend that the vendor is swapping with
     2. an instance of an `Item` (`my_item`), representing the item this `Vendor` instance plans to give
     3. an instance of an `Item` (`their_item`), representing the item the friend `Vendor` plans to give
-  - It removes the `my_item` from this `Vendor`'s inventory, and adds it to the friend's inventory
-  - It removes the `their_item` from the other `Vendor`'s inventory, and adds it to this `Vendor`'s inventory
-  - It returns `True`
+  - The method removes `my_item` from this `Vendor`'s inventory, and adds it to the friend's inventory
+  - The method removes `their_item` from the other `Vendor`'s inventory, and adds it to this `Vendor`'s inventory
+  - The method returns `True`
   - If this `Vendor`'s inventory doesn't contain `my_item` or the friend's inventory doesn't contain `their_item`, the method returns `False`
 
 ### Wave 4
@@ -119,7 +119,7 @@ The remaining tests in wave 3 imply:
 In Wave 4 we will write one method, `swap_first_item`.
 
 - Instances of `Vendor` have an instance method named `swap_first_item`
-  - It takes one argument: an instance of another `Vendor`, representing the friend that the vendor is swapping with
+  - It takes one argument: an instance of another `Vendor` (`other_vendor`), representing the friend that the vendor is swapping with
   - This method considers the first item in the instance's `inventory`, and the first item in the friend's `inventory`
   - It removes the first item from its `inventory`, and adds the friend's first item
   - It removes the first item from the friend's `inventory`, and adds the instances first item
@@ -158,9 +158,11 @@ Our new modules should be defined as follows:
   - Has a stringify method that returns `"An object of type Electronics with id <id value>. This is a <type value> device."`
     - For example, if we had an `Electronics` instance with an `id` of `123435` and `type` attribute of `"Mobile Phone"`, its stringify method should return `"An object of type Electronics with id 12345. This is a Mobile Phone device."`
 
-- All three classes and the `Item` class have an attribute called `condition`, which can be optionally provided in the initializer. The default value should be `0`
+- All three new classes and the `Item` class have an attribute called `condition`, which can be optionally provided in the initializer. The default value should be `0`
 
-- All three classes and the `Item` class have an instance method named `condition_description`, which should describe the condition in words based on the value, assuming they all range from 0 to 5. These can be basic descriptions (eg. 'mint', 'heavily used') but feel free to have fun with these (e.g. 'You probably want a glove for this one..."). The one requirement is that the `condition_description` for all three classes above have the same behavior.
+- All three new classes and the `Item` class have an instance method named `condition_description`, which should describe the condition in words based on the value, assuming they all range from 0 to 5. 
+  - These can be basic descriptions (eg. 'mint', 'heavily used') but feel free to have fun with these (e.g. 'You probably want a glove for this one..."). 
+  - The one requirement is that all the classes share the same `condition_description` behavior.
 
 #### Using Inheritance
 
@@ -181,6 +183,7 @@ In Wave 6 we will write three methods, `get_by_category`, `get_best_by_category`
 - `Vendor` objects have an instance method named `get_by_category`
   - This method takes one argument: a string, representing a category
   - This method returns a list of objects in the inventory with that category
+  - If there are no items in the `inventory` that match the category argument, the method returns an empty list
 
 - `Vendor`s have a method named `get_best_by_category`, which will get the item with the best condition in a certain category
   - It takes one argument: a string that represents a category
@@ -193,13 +196,13 @@ The remaining tests in wave 6 imply:
 
 - `Vendor`s have a method named `swap_best_by_category`, which will swap the best item of certain categories with another `Vendor`
   - It takes in three arguments
-    - `other`, which represents another `Vendor` instance to trade with
+    - `other_vendor`, which represents another `Vendor` instance to trade with
     - `my_priority`, which represents a category that the `Vendor` wants to receive
-    - `their_priority`, which represents a category that `other` wants to receive
-  - The best item in my inventory that matches `their_priority` category is swapped with the best item in `other`'s inventory that matches `my_priority`
+    - `their_priority`, which represents a category that `other_vendor` wants to receive
+  - The best item in my inventory that matches `their_priority` category is swapped with the best item in `other_vendor`'s inventory that matches `my_priority`
     - It returns `True`
     - If the `Vendor` has no item that matches `their_priority` category, swapping does not happen, and it returns `False`
-    - If `other` has no item that matches `my_priority` category, swapping does not happen, and it returns `False`
+    - If `other_vendor` has no item that matches `my_priority` category, swapping does not happen, and it returns `False`
 
 ### DRYing up the code
 
@@ -220,28 +223,28 @@ In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, 
 
 - `Vendor`s have a method named `swap_by_id`
   - The method takes 3 arguments:
-    1. `other`, which represents another `Vendor` instance to trade with
+    1. `other_vendor`, which represents another `Vendor` instance to trade with
     2. an integer (`my_item_id`), representing the `id` of the item this `Vendor` instance plans to give
     3. an integer (`their_item_id`), representing the `id` of the item the friend `Vendor` plans to give
   - The item with an `id` of `my_item_id` in my inventory is swapped with the item with `their_item_id` in the friend `Vendor`'s inventory
     - The method returns True
     - If the `Vendor` has no item with an `id` matching `my_item_id`, swapping does not happen, and the method returns `False`
-    - If `other` has no item with an `id` matching `their_item_id`, swapping does not happen, and the method returns `False`
+    - If `other_vendor` has no item with an `id` matching `their_item_id`, swapping does not happen, and the method returns `False`
 
 - `Vendor`s have a method named `choose_and_swap_items`, which will let people display their inventory and choose which items to swap by their `id`s.
   - The method takes 2 arguments:
-    1. `other`, which represents another `Vendor` instance to trade with
+    1. `other_vendor`, which represents another `Vendor` instance to trade with
     2. `category`, an optional parameter which is a string representing a category. Should default to an empty string.
-  - The function will list the inventories for both the calling `Vendor` instance and the `Vendor` parameter `other`
+  - The function will list the inventories for both the calling `Vendor` instance and the `Vendor` parameter `other_vendor`
     - If a category is passed as a parameter, only items of that category will be displayed by each `Vendor`
     - When listing an inventory, we should display a description of the items which includes their `id`
   - After listing the inventories, the user will be prompted to provide 2 pieces of input:
     1. The `id` of an item from the calling `Vendor` instance the user wants to swap
-    2. The `id` of an item from the `other` `Vendor` instance the user wants to swap
+    2. The `id` of an item from the `other_vendor` `Vendor` instance the user wants to swap
   - Once the user provides input, the items should be swapped
     - The method returns True if a swap occurs
     - If the `Vendor` has no item with an `id` matching the user's first input, swapping does not happen, and the method returns `False`
-    - If `other` has no item with an `id` matching the user's second input, swapping does not happen, and the method returns `False`
+    - If `other_vendor` has no item with an `id` matching the user's second input, swapping does not happen, and the method returns `False`
 
 
 ## Optional Enhancements

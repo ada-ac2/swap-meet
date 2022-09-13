@@ -44,7 +44,7 @@ def test_integration_wave_04_05_06(capfd):
     assert len(items) == 1
     assert item_electronics2 in items
 
-    # get item by category, falsy
+    # get item by category, empty list
     items = valentina.get_by_category("Clothing")
     assert len(items) == 0
 

@@ -123,7 +123,7 @@ def test_swap_by_id_success_returns_true():
 
     # Act
     result = tai.swap_by_id(
-        other=jesse,
+        other_vendor=jesse,
         my_item_id=456,
         their_item_id=321
     )
@@ -155,7 +155,7 @@ def test_swap_by_id_with_caller_empty_inventory_returns_false():
 
     # Act
     result = tai.swap_by_id(
-        other=jesse,
+        other_vendor=jesse,
         my_item_id=456,
         their_item_id=321
     )
@@ -183,7 +183,7 @@ def test_swap_by_id_with_other_empty_inventory_returns_false():
 
     # Act
     result = tai.swap_by_id(
-        other=jesse,
+        other_vendor=jesse,
         my_item_id=456,
         their_item_id=321
     )
@@ -217,7 +217,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
 
     # Act
     result = tai.swap_by_id(
-        other=jesse,
+        other_vendor=jesse,
         my_item_id=213,
         their_item_id=654
     )
@@ -254,7 +254,7 @@ def test_swap_by_id_fails_if_other_missing_item():
 
     # Act
     result = tai.swap_by_id(
-        other=jesse,
+        other_vendor=jesse,
         my_item_id=123,
         their_item_id=564
     )
@@ -296,7 +296,7 @@ def test_choose_and_swap_items_success(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
 
     # Act
-    result = tai.choose_and_swap_items(other=jesse)
+    result = tai.choose_and_swap_items(other_vendor=jesse)
 
     # Assert
     assert result == True
@@ -328,7 +328,7 @@ def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
 
     # Act
-    result = tai.choose_and_swap_items(other=jesse)
+    result = tai.choose_and_swap_items(other_vendor=jesse)
 
     # Assert
     assert result == False
@@ -356,7 +356,7 @@ def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
 
     # Act
-    result = tai.choose_and_swap_items(other=jesse)
+    result = tai.choose_and_swap_items(other_vendor=jesse)
 
     # Assert
     assert result == False
@@ -390,7 +390,7 @@ def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
 
     # Act
-    result = tai.choose_and_swap_items(other=jesse)
+    result = tai.choose_and_swap_items(other_vendor=jesse)
 
     # Assert
     assert result == False
@@ -427,7 +427,7 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
 
     # Act
-    result = tai.choose_and_swap_items(other=jesse)
+    result = tai.choose_and_swap_items(other_vendor=jesse)
 
     # Assert
     assert result == False
