@@ -2,7 +2,7 @@
 
 ## Skills Assessed
 
-- Comprehending and following code specifications
+- Understanding and following code specifications
 - Reading tests
 - Creating classes with attributes and instance methods
 - Importing modules
@@ -13,9 +13,9 @@
 
 ## Goal
 
-You want to organize a swap meet! You have a bunch of _stuff_. So do your friends! It would be awesome if each person could swap one of their things with another person's things.
+You want to organize a swap meet! You own a lot of things. So do your friends! It would be awesome if each person could swap one of their things with another person's things.
 
-For this event, you want each person to register online as a vendor. Also, they should add an inventory list of things.
+For this event, you want each person to register online as a vendor. Also, they should be able to add a list of things as their inventory.
 
 You envision an app where vendors can swap items between different inventories. But what would that backend logic look like?
 
@@ -77,20 +77,20 @@ In Wave 1 we will create the `Vendor` class.
 
 ### Wave 2
 
-In Wave 2 we will create the `Item` class and the `Vendor` class's `get_by_id` method.
+In Wave 2 we will create the `Item` class and the `Vendor` class' `get_by_id` method.
 
 - There is a module (file) named `item.py` inside of the `swap_meet` package (folder)
 - Inside this module, there is a class named `Item`
 
-- Each `Item` will have an attribute named `id`, which is a unique integer by default.
+- Each `Item` will have an attribute named `id`, which is a unique integer by default
   - There are many ways to generate numbers, but generating numbers without duplicates takes some care. Happily, Python has a package called `uuid` that can help! 
-    - If we import the `uuid` package in `item.py`, with a little research we can use one of the functions `uuid` provides to create large unique numbers meant to be used as identifiers.
-    - This package creates `UUID` objects, it's functions don't directly return an integer, BUT `UUID` instances have an attribute `.int` which returns their value as an integer. 
-- When we initialize an instance of `Item`, we can optionally pass in an integer with the keyword argument `id` to manually set the `Item`'s `id`.
-- Each `Item` will have a function named `get_category`, which will return a string holding the name of the class. 
+    - If we import the [`uuid` package](https://docs.python.org/3/library/uuid.html) in `item.py`, with a little research we can use one of the functions `uuid` provides to create large unique numbers meant to be used as identifiers
+    - This package creates `UUID` objects, its functions don't directly return an integer, **but** `UUID` instances have [an attribute `int`](https://docs.python.org/3/library/uuid.html#uuid.UUID.int) which allow us to access their value as an integer
+- When we initialize an instance of `Item`, we can optionally pass in an integer with the keyword argument `id` to manually set the `Item`'s `id`
+- Each `Item` will have a function named `get_category`, which will return a string holding the name of the class
 
 - Instances of `Vendor` have an instance method named `get_by_id`
-  - It takes one argument: an integer, representing an `Item`'s `id`
+  - This method takes one argument: an integer, representing an `Item`'s `id`
   - This method returns the item with a matching `id` from the inventory
   - If there is no matching item in the `inventory`, the method should explicitly return `None`
 
@@ -133,32 +133,32 @@ In Wave 5 we will create three additional modules with three additional classes:
 Our new modules should be defined as follows:
 - `Clothing`
   - Has an attribute `id` that is by default a unique integer
-  - Has an attribute `fabric` that is by default the string "Unknown".
+  - Has an attribute `fabric` that is by default the string "Unknown"
     - This attribute describes what fabric the clothing is made from; some example values might be `"Striped"`, `"Cotton"`, or `"Floral"` 
-    - When we initialize an instance of `Clothing`, we can optionally pass in a string with the keyword argument `fabric`.
-  - Has an function `get_category` that returns `"Clothing"`
-  - Its stringify method returns `"An object of type Clothing with id <id value>. It is made from <fabric value> fabric."`
-    - If we had a `Clothing` instance with an `id` of `123435` and `fabric` attribute that holds `"Wool"`, it's stringify method should return `"An object of type Clothing with id 12345. It is made from Wool fabric."`
+    - When we instantiate an instance of `Clothing`, we can optionally pass in a string with the keyword argument `fabric`
+  - Has a function `get_category` that returns `"Clothing"`
+  - Has a stringify method that returns `"An object of type Clothing with id <id value>. It is made from <fabric value> fabric."`
+    - For example, if we had a `Clothing` instance with an `id` of `123435` and a `fabric` attribute that holds `"Wool"`, its stringify method should return `"An object of type Clothing with id 12345. It is made from Wool fabric."`
 
 - `Decor`
   - Has an attribute `id` that is by default a unique integer
-  - Holds 2 integer attributes `width` and `length`. 
-    - Both of these values should be 0 by default.
-    - When initializing an instance of `Decor`, we can optionally pass in integers with the keyword arguments `width` and `length`.
-  - Has an function `get_category` that returns `"Decor"`
-  - Its stringify method returns `"An object of type Decor with id <id value>. It takes up a <width value> by <length value> sized space."`
-    - If we had a `Decor` instance with an `id` of `123435`, `width` of `3` and `length` of `7`, it's stringify method should return `"An object of type Decor with id 12345. It takes up a 3 by 7 sized space."`
+  - Holds 2 integer attributes `width` and `length`
+    - Both of these values should be 0 by default
+    - When we instantiate an instance of `Decor`, we can optionally pass in integers with the keyword arguments `width` and `length`
+  - Has a function `get_category` that returns `"Decor"`
+  - Has a stringify method that returns `"An object of type Decor with id <id value>. It takes up a <width value> by <length value> sized space."`
+    - For example, if we had a `Decor` instance with an `id` of `123435`, `width` of `3`, and `length` of `7`, its stringify method should return `"An object of type Decor with id 12345. It takes up a 3 by 7 sized space."`
 
 - `Electronics`
   - Has an attribute `id` that is by default a unique integer
-  - Has an attribute `type` that is by default the string "Unknown".
+  - Has an attribute `type` that is by default the string "Unknown"
     - This attribute describes what kind of electronic device this is. Some example values might be `“Kitchen Appliance”`, `“Game Console”`, or `“Health Tracker”` 
-    - When we initialize an instance of `Electronics`, we can optionally pass in a string with the keyword argument `type`.
+    - When we initialize an instance of `Electronics`, we can optionally pass in a string with the keyword argument `type`
   - Has an function `get_category` that returns `"Electronics"`
-  - Its stringify method returns `"An object of type Electronics with id <id value>. This is a <type value> device."`
-    - If we had an `Electronics` instance with an `id` of `123435` and `type` attribute of `"Mobile Phone"`, it's stringify method should return `"An object of type Electronics with id 12345. This is a Mobile Phone device."`
+  - Has a stringify method that returns `"An object of type Electronics with id <id value>. This is a <type value> device."`
+    - For example, if we had an `Electronics` instance with an `id` of `123435` and `type` attribute of `"Mobile Phone"`, its stringify method should return `"An object of type Electronics with id 12345. This is a Mobile Phone device."`
 
-- All three classes and the `Item` class have an attribute called `condition`, which can be optionally provided in the initializer. The default value should be `0`.
+- All three classes and the `Item` class have an attribute called `condition`, which can be optionally provided in the initializer. The default value should be `0`
 
 - All three classes and the `Item` class have an instance method named `condition_description`, which should describe the condition in words based on the value, assuming they all range from 0 to 5. These can be basic descriptions (eg. 'mint', 'heavily used') but feel free to have fun with these (e.g. 'You probably want a glove for this one..."). The one requirement is that the `condition_description` for all three classes above have the same behavior.
 
@@ -212,36 +212,36 @@ Try it out and see if the tests still pass! If you can't get them to pass with t
 In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, `swap_by_id`, and `choose_and_swap_items`.
 
 - `Vendor`s have a method named `display_inventory`, which will print a list of the items in their inventory.
-  - It takes one optional argument, a string representing a category, that should default to an empty string 
+  - The method takes one optional argument, a string representing a category, that should default to an empty string 
   - If a category is passed as a parameter, only items of that category will be displayed
   - If no category is passed, the entire inventory is displayed
-  - When an item is displayed, we should print a description of the item that includes the id
+  - When an item is displayed, the method should print a description of the item that includes the id
   - If a `Vendor` has an empty inventory, or no items that match the category parameter, the string "No inventory to display." should be printed
 
 - `Vendor`s have a method named `swap_by_id`
-  - It takes 3 arguments:
+  - The method takes 3 arguments:
     1. `other`, which represents another `Vendor` instance to trade with
     2. an integer (`my_item_id`), representing the `id` of the item this `Vendor` instance plans to give
     3. an integer (`their_item_id`), representing the `id` of the item the friend `Vendor` plans to give
   - The item with an `id` of `my_item_id` in my inventory is swapped with the item with `their_item_id` in the friend `Vendor`'s inventory
-    - It returns True
-    - If the `Vendor` has no item with an `id` matching `my_item_id`, swapping does not happen, and it returns `False`
-    - If `other` has no item with an `id` matching `their_item_id`, swapping does not happen, and it returns `False`
+    - The method returns True
+    - If the `Vendor` has no item with an `id` matching `my_item_id`, swapping does not happen, and the method returns `False`
+    - If `other` has no item with an `id` matching `their_item_id`, swapping does not happen, and the method returns `False`
 
 - `Vendor`s have a method named `choose_and_swap_items`, which will let people display their inventory and choose which items to swap by their `id`s.
-  - It takes 2 arguments:
+  - The method takes 2 arguments:
     1. `other`, which represents another `Vendor` instance to trade with
     2. `category`, an optional parameter which is a string representing a category. Should default to an empty string.
   - The function will list the inventories for both the calling `Vendor` instance and the `Vendor` parameter `other`
     - If a category is passed as a parameter, only items of that category will be displayed by each `Vendor`
     - When listing an inventory, we should display a description of the items which includes their `id`
   - After listing the inventories, the user will be prompted to provide 2 pieces of input:
-    1. The `id` of an item from the calling `Vendor` instance we want to swap
-    2. The `id` of an item from `other` we want to swap
+    1. The `id` of an item from the calling `Vendor` instance the user wants to swap
+    2. The `id` of an item from the `other` `Vendor` instance the user wants to swap
   - Once the user provides input, the items should be swapped
-    - It returns True if a swap occurs
-    - If the `Vendor` has no item with an `id` matching the user's first input, swapping does not happen, and it returns `False`
-    - If `other` has no item with an `id` matching the user's second input, swapping does not happen, and it returns `False`
+    - The method returns True if a swap occurs
+    - If the `Vendor` has no item with an `id` matching the user's first input, swapping does not happen, and the method returns `False`
+    - If `other` has no item with an `id` matching the user's second input, swapping does not happen, and the method returns `False`
 
 
 ## Optional Enhancements
@@ -249,10 +249,10 @@ In Wave 7 we will add three methods to the `Vendor` class, `display_inventory`, 
 Should a project be completed before submission, and there is a desire for optional enhancements, consider these ideas:
 
 - `Item` subclasses have attributes we could use to swap similar items
-  - Add functions to swap Decor by space used, Clothing by like fabric, and Electronics by their type!
+  - Add functions to swap `Decor` by space used, `Clothing` by the same fabric, and `Electronics` by their type!
   - Write unit tests for your new functions
 
-- Take a look for Error Handling opportunities
+- Take a look for error handling opportunities
   - What issues could arise if we pass a string (or any object other than an integer) for the `id` of an Item? How could we prevent that? 
   - What other opportunities for error handling do you see?
 
