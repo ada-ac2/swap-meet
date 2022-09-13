@@ -99,7 +99,7 @@ In Wave 2 we will create the `Item` class and the `Vendor` class' `get_by_id` me
 In Wave 3 we will write a method to stringify (convert to a string) an `Item` using `str()` and write the method `swap_items`.
 
 - When we stringify an instance of `Item` using `str()`, it returns `"An object of type Item with id <id value>"`, where `<id value>` is the `id` of the `Item` instance that `str()` was called on.
-  - For example, if we had an `Item` instance with an `id` of `12345`, the result should be `"An object of type Item with id 12345"`.
+  - For example, if we had an `Item` instance `item_a = Item(id=12345)`, the output of `str(item_a)` should be `"An object of type Item with id 12345"`.
   - This implies `Item` overrides its stringify method. We may need to research the `__str__` method for more details!
 
 The remaining tests in wave 3 imply:
