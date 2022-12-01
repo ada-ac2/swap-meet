@@ -1,7 +1,9 @@
 class Vendor:
     def __init__(self, inventory = None):
-        #validate that iventory is a list
-        self.inventory = [] if inventory == None else inventory 
+        self.inventory = [] if inventory is None else inventory 
+        print(self.inventory)
+        if type(self.inventory) is not list:
+            raise TypeError("Please enter the inventory as a list.")
 
     def add(self, item):
         self.inventory.append(item)
@@ -15,6 +17,6 @@ class Vendor:
         
         return item
 
-# friend = Vendor(["pj", "pc"])
+# friend = Vendor()
 # friend.remove("bracelet")
-# print(friend.inventory)
+#print(friend.inventory)
