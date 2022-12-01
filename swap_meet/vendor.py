@@ -10,5 +10,14 @@ class Vendor:
         if item in self.inventory:
             self.inventory.remove(item)
             return item
-        else:
-            return None
+        return None
+
+    def get_by_id(self, id):
+
+        for item in self.inventory:
+            if item.id == id:
+                self.inventory.remove(item)
+                return item
+
+        return None
+    
