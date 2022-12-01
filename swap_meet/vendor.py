@@ -1,10 +1,10 @@
 class Vendor:
-    def __init__(self, inventory=None):
-        if inventory is not None:
+    def __init__(self, inventory = None):
+        if inventory is None:
             self.inventory = []
-            self.inventory = inventory
         else:
             self.inventory = inventory
+
     
     def add(self, item):
         self.inventory.append(item)
