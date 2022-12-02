@@ -13,3 +13,9 @@ class Item:
         whoami = type(self).__name__
         return whoami
     
+    def __str__(self):
+        """
+        return a message about the item instance
+        """
+        stringified = f"An object of type Item with id {self.id}"
+        return stringified

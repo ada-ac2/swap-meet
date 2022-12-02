@@ -35,3 +35,16 @@ class Vendor:
                 found = item
         return found
 
+    def swap_items(self, other_vendor, my_item, their_item):
+        """
+        swap given items between my inventory and other vendor
+        return True if targeted items exist and swapped, False otherwise
+        """
+        swapped = False
+        found_mine = self.get_by_id(my_item.id)
+        found_theirs = other_vendor.get_by_id(their_item.id)
+        if found_mine is not None and found_theirs is not None:
+            other_vendor.add(self.remove(my_item))
+            self.add(other_vendor.remove(their_item))
+            swapped = True
+        return swapped
