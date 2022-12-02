@@ -12,8 +12,6 @@ def test_items_have_default_uuid_length_id():
 def test_item_instances_have_different_default_ids():
     item_a = Item()
     item_b = Item()
-    print(f"item_a id: {item_a.id}")
-    print(f"item_b id: {item_b.id}")
     assert item_a.id != item_b.id
 
 
@@ -30,15 +28,14 @@ def test_item_obj_returns_text_item_for_category():
 
 def test_get_item_by_id():
     test_id = 12345
+    # new_Item_instance = Item(id=test_id)
+    # item_custom_id = new_Item_instance
     item_custom_id = Item(id=test_id)
     vendor = Vendor(
         inventory=[Item(), Item(), item_custom_id]
     )
 
     result_item = vendor.get_by_id(test_id)
-    print(vendor.inventory)
-    print(f"result item: {result_item}")
-    print(f"item_custom_id: {item_custom_id}")
     assert result_item is item_custom_id
 
 
