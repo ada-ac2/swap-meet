@@ -46,3 +46,8 @@ class Vendor:
             self.add(their_item)
             return True
 
+    def get_by_category(self, category):
+        pass
+
+    def get_best_by_category(self, category):
+        pass
