@@ -75,7 +75,51 @@ class Vendor:
         if not self.inventory or not other_vendor.inventory:
             return False
 
-        self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
+        swapped = self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
 
-        return True
+        return swapped
+
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        if not their_item or not my_item:
+            return False
+
+        swapped = self.swap_items(other_vendor, my_item, their_item)
+            
+        return swapped
+
+    def choose_and_swap_items(self, other_vendor, category = ''):
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
+
+        my_item_id = input('Enter item from your inventory by id: ')
+        their_item_id = input('Enter item from their inventory by id: ')
+
+        swapped = self.swap_by_id(other_vendor, int(my_item_id), int(their_item_id))
+
+        return swapped
+
+
+    def display_inventory(self, category = ''):
+        
+        # Refactor
+
+        if not self.inventory:
+            print("No inventory to display.")
+            return
+
+        if category:
+            items = self.get_by_category(category)
+            if items:
+                for i in range(len(items)):
+                    print(f"{i + 1}. {str(items[i])}")
+            else: 
+                print("No inventory to display.")
+        else:
+            for i in range(len(self.inventory)):
+                print(f"{i + 1}. {str(self.inventory[i])}")
+
+        
     
