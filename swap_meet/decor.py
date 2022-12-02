@@ -7,6 +7,7 @@ class Decor(Item):
         self.length = length
 
     def __str__(self):
+        
         summary = super().__str__()
         class_summary = f"It takes up a {self.width} by {self.length} sized space."
 
