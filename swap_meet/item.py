@@ -9,7 +9,7 @@ class Item:
             self.condition = condition
         else:
             self.condition = 0.0   
-        #print(self.id)
+        
     
     def get_category(self):
         return f"{self.__class__.__name__}"
