@@ -1,7 +1,6 @@
 class Vendor:
     def __init__(self, inventory = None):
         self.inventory = [] if inventory is None else inventory 
-        print(self.inventory)
         if type(self.inventory) is not list:
             raise TypeError("Please enter the inventory as a list.")
 
@@ -12,11 +11,16 @@ class Vendor:
     def remove(self, item):
         if item in self.inventory:
             self.inventory.remove(item)
+            return item
         else:
             return None
-        
-        return item
 
-# friend = Vendor()
-# friend.remove("bracelet")
-#print(friend.inventory)
+    def get_by_id(self, item_id):  
+        specific_item = list(filter(lambda item: item.id == item_id, self.inventory))
+        return specific_item[0] if specific_item else None
+
+        # for item in self.inventory:
+        #     if item.id == item_id:
+        #         return item
+
+        # return None
