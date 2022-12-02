@@ -2,8 +2,8 @@ import uuid
 from swap_meet.item import Item
 class Decor(Item):
 
-    def __init__(self, id=None, width=None, length =None) :
-        super().__init__(id)
+    def __init__(self, id=None, condition=None, width=None, length =None) :
+        super().__init__(id, condition)
         if width or length:
             self.width = width
             self.length = length
@@ -18,3 +18,6 @@ class Decor(Item):
         #return f"An object of type {self.__class__.__name__} with id {self.id}. It is made from {self.fabric} fabric."
     def __str__(self):
         return f"An object of type {self.__class__.__name__} with id {self.id}. It takes up a {self.width} by {self.length} sized space."
+
+    def condition_description(self):
+        super().condition_description()
