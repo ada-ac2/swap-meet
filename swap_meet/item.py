@@ -6,7 +6,7 @@ class Item:
         else:
             self.id = id
             
-        print(self.id)
+        #print(self.id)
     
     def get_category(self):
         return f"{self.__class__.__name__}"

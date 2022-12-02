@@ -1,11 +1,12 @@
-from .item import Item
+import uuid
+from swap_meet.item import Item
 class Vendor:
     def __init__(self, inventory = None,):
         if inventory is None:
             self.inventory = []
         else:
             self.inventory = inventory
-        #self.item = item
+        
 
     
     def add(self, item):
@@ -20,11 +21,10 @@ class Vendor:
             return None
     # need check
     def get_by_id(self, id):
-        for item in self.inventory:
-            if id == item.id:
-                return item.id
-            else:
-                return None
+        for n in self.inventory:
+            if n.id == id:
+                return n.id
+        return None
     
     def swap_items(self, b_vendor, my_item, their_item):
         if my_item not in self.inventory or their_item not in b_vendor.inventory :
@@ -41,10 +41,8 @@ class Vendor:
             return False
         else:
             my_item = self.inventory.pop(0)
-            #print(my_item)
             b_vendor.add(my_item)
             their_item = b_vendor.inventory.pop(0)
             self.add(their_item)
-            #b_vendor.remove(their_item)
             return True
 

@@ -34,6 +34,7 @@ def test_get_item_by_id():
     )
 
     result_item = vendor.get_by_id(test_id)
+    print(result_item)
     assert result_item is item_custom_id
 
 #@pytest.mark.skip
