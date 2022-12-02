@@ -7,7 +7,8 @@ class Item:
         self.condition = condition
 
     def get_category(self):
-        return "Item"
+        return type(self).__name__
+        
 
     def condition_description(self):
         switch = {
@@ -21,4 +22,4 @@ class Item:
         return switch.get(self.condition)
 
     def __str__(self):
-        return f"An object of type Item with id {self.id}"
+        return f"An object of type {self.get_category()} with id {self.id}"
