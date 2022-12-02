@@ -54,3 +54,12 @@ def test_get_item_by_id_no_matching():
     assert item_a in items
     assert item_b in items
     assert item_c in items
+
+def test_get_item_by_id_empty_inventory():
+    test_id = 12345
+    vendor = Vendor()
+
+    item = vendor.get_by_id(test_id)
+
+    assert item is None
+    assert len(vendor.inventory) == 0
