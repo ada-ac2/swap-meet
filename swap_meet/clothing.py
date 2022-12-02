@@ -12,10 +12,7 @@ class Clothing(Item):
     #是否使用super()?
     #def get_category(self):
         #super().get_category()
-    def get_category(self):
-        return f"{self.__class__.__name__}"
-        #return f"An object of type {self.__class__.__name__} with id {self.id}. It is made from {self.fabric} fabric."
+    
     def __str__(self):
-        return f"An object of type {self.__class__.__name__} with id {self.id}. It is made from {self.fabric} fabric."
-    def condition_description(self):
-        Item.condition_description()
+        return f"An object of type {self.get_category()} with id {self.id}. It is made from {self.fabric} fabric."
+    

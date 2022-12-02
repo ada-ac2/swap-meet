@@ -10,14 +10,10 @@ class Decor(Item):
         else:
             self.width = 0
             self.length = 0
-    #是否使用super()?
-    #def get_category(self):
-        #super().get_category()
-    def get_category(self):
-        return f"{self.__class__.__name__}"
-        #return f"An object of type {self.__class__.__name__} with id {self.id}. It is made from {self.fabric} fabric."
+    
+    
+        
     def __str__(self):
-        return f"An object of type {self.__class__.__name__} with id {self.id}. It takes up a {self.width} by {self.length} sized space."
+        return f"An object of type {self.get_category()} with id {self.id}. It takes up a {self.width} by {self.length} sized space."
 
-    def condition_description(self):
-        super().condition_description()
+    
