@@ -65,7 +65,7 @@ def test_adding_duplicated_item_raise_error():
         vendor.add(item)
 
 def test_adding_empty_item_raise_error(): 
-    item = "     "
+    item = ""
     vendor = Vendor(
         inventory=["a", "b", "c"]
     )
