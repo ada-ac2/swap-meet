@@ -19,11 +19,11 @@ class Vendor:
             return item
         else:
             return None
-    # need check
+    
     def get_by_id(self, id):
-        for n in self.inventory:
-            if n.id == id:
-                return n.id
+        for item in self.inventory:
+            if item.id == id:
+                return item
         return None
     
     def swap_items(self, b_vendor, my_item, their_item):
