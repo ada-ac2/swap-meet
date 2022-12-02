@@ -40,4 +40,20 @@ class Vendor:
         
         return True 
 
+    def swap_first_item(self, other_vendor): 
+        # Check if either vendor's inventory is empty 
+        if len(other_vendor.inventory) == 0 or len(self.inventory) == 0:
+            return False 
+            
+        # Removes the first item from both vendors' inventory 
+        other_first_item = other_vendor.remove(other_vendor.inventory[0])
+        my_first_item = self.remove(self.inventory[0])
+        # Add/Swap items 
+        self.add(other_first_item)
+        other_vendor.add(my_first_item)
+
+        return True 
+
+
+
 
