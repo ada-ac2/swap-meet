@@ -27,7 +27,18 @@ class Vendor:
             #using pop to return removed items and store in swapped_item vars
             my_swapped_item = self.inventory.pop(self.inventory.index(my_item))
             their_swapped_item = other_vendor.inventory.pop(other_vendor.inventory.index(their_item))
-            
+
             other_vendor.inventory.append(my_swapped_item)
             self.inventory.append(their_swapped_item)
+            return True
+
+    def swap_first_item(self, other_vendor):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        else:
+            my_first_item = self.inventory.pop(0)
+            their_first_item = other_vendor.inventory.pop(0)
+
+            other_vendor.inventory.append(my_first_item)
+            self.inventory.append(their_first_item)
             return True
