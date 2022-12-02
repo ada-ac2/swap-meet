@@ -48,3 +48,15 @@ class Vendor:
             self.add(other_vendor.remove(their_item))
             swapped = True
         return swapped
+    
+    def swap_first_item(self, other_vendor):
+        """
+        swap first item of inventory from self and other vendor
+        return True if both inventories are not empty and swapped, False otherwise
+        """
+        swapped = False
+        if self.inventory and other_vendor.inventory:
+            other_vendor.add(self.remove(self.inventory[0]))
+            self.add(other_vendor.remove(other_vendor.inventory[0]))
+            swapped = True
+        return swapped
