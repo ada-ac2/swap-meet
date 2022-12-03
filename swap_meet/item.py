@@ -6,7 +6,7 @@ class Item:
         self.condition = condition 
 
     def get_category(self): 
-        return "Item"
+        return type(self).__name__
 
     def condition_description(self):
         if self.condition == 0:
@@ -22,4 +22,4 @@ class Item:
 
     # Override str from python built-in  
     def __str__(self): 
-        return f"An object of type Item with id {self.id}"
+        return f"An object of type {self.get_category()} with id {self.id}"

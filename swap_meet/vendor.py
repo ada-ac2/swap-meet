@@ -97,19 +97,7 @@ class Vendor:
         else:
             index = 1
             for item in items_in_category:
-                if item.get_category() == "Clothing":
-                    print(
-                        f"{index}. An object of type {item.get_category()} with id {item.id}. It is made from {item.fabric} fabric.")
-                elif item.get_category() == "Electronics":
-                    print(
-                        f"{index}. An object of type {item.get_category()} with id {item.id}. This is a {item.type} device.")
-                elif item.get_category() == "Decor":
-                    print(
-                        f"{index}. An object of type {item.get_category()} with id {item.id}. It takes up a {item.width} by {item.length} sized space.")
-                else:
-                    print(
-                        f"{index}. An object of type {item.get_category()} with id {item.id}")
-
+                print(f"{index}. {item.__str__()}") 
                 index += 1
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
