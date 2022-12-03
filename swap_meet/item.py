@@ -8,5 +8,5 @@ class Item:
         return f"An object of type Item with id {str(self.id)}"
 
     def get_category(self):
-        return "Item"
+        return self.__class__.__name__
     
