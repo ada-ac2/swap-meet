@@ -4,7 +4,9 @@ class Item:
     def __init__(self, id=None):
         self.id = id if id else uuid.uuid4().int
     
-    def get_category(self):
-        return f"{self.class_name}" # string holding name of the class?
+    def __str__(self):
+        # override Item stringify method and instead return this string when str(self) called        
+        return f'An object of type Item with id {self.id}'
     
-    #### wave 3
+    def get_category(self):
+        return type(self).__name__
