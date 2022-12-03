@@ -1,6 +1,8 @@
-class Electronics:
-    def __init__(self, id=None, type="Unknown", condition=0):
-        self.id = id if id else uuid.uuid4().int
+from .item import Item
+
+class Electronics(Item):
+    def __init__(self, id=None, condition=0, type="Unknown"):
+        super().__init__(id, condition)
         self.type = type
         self.condition = condition
     
@@ -8,6 +10,3 @@ class Electronics:
         return (f'An object of type Electronics with id {self.id}. '
                 f'This is a {self.type} device.'
         )
-
-    def get_category(self):
-        return type(self).__name__
