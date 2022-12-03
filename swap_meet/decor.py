@@ -12,6 +12,3 @@ class Decor(Item):
         return (f'An object of type Decor with id {self.id}. '
                 f'It takes up a {self.width} by {self.length} sized space.'
         )
-    
-    # def get_category(self):
-    #     return type(self).__name__
