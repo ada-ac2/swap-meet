@@ -1,4 +1,4 @@
-from .item import Item
+
 class Vendor:
 
     def __init__(self, inventory=None):
@@ -9,7 +9,8 @@ class Vendor:
         add an item to the inventory
         return added item
         """
-        self.inventory.append(item)
+        if item:
+            self.inventory.append(item)
         return item
     
     def remove(self, item):
@@ -98,34 +99,53 @@ class Vendor:
         return self.swap_items(other_vendor, i_have, vendor_has)
     
     def display_inventory(self, category=None):
+        """
+        print all inventory of some inventory of a given category
+        print a message if inventory is empty or no inventory of the given category
+        """
         items = list()
         if category is None:
+            # list out entire inventory
             items = self.inventory
-            # items = [item1, item2, item3]
         else:
+            # list out inventory of given category
             items = self.get_by_category(category)
-        result = ''
+        result = str()
         if items:
             for ind, item in enumerate(items):
-                if item is not None:
-                    result += '{}. {}\n'.format(ind+1, item.__str__())
+                # this part took me (and Sam) forever to figure out :/
+                # and Monica told me she prints out line by line so never encountered such problem
+                result += '{}. {}'.format(ind+1, item.__str__())
+                result += '\n' if ind+1 < len(items) else ''
         else:
             result = "No inventory to display."
         print(result)
 
-"""
-if __name__ == "__main__":
-    from clothing import Clothing
-    from electronics import Electronics
-    from decor import Decor
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        """
+        use my_item_id and their_item_id to find the corresponding items
+        return True if two items swapped successfully, False otherwise
+        """
+        my_item = None
+        for item in self.inventory:
+            if item.id == my_item_id:
+                my_item = item
+        their_item = None
+        for item in other_vendor.inventory:
+            if item.id == their_item_id:
+                their_item = item
+        return self.swap_items(other_vendor, my_item, their_item)
 
-
-    item_a = Clothing(id=123, fabric="Striped")
-    item_b = Electronics(id=456, type="Handheld Game")
-    item_c = Decor(id=789, width=2, length=4)
-    item_d = Item(id=100)
-    vendor = Vendor(
-        inventory=[item_a, item_b, item_c, item_d]
-    )
-
-    vendor.display_inventory()"""
+    def choose_and_swap_items(self, other_vendor, category=""):
+        """
+        let user choose items the swap the choosen items
+        return True if swap succeed, False otherwise
+        """
+        # list inventory
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
+        # promp user for input
+        self_id = int(input("Please enter the id number of the item from your own inventory: "))
+        other_id = int(input("Please enter the id number of the item from the other vendor's inventory: "))
+        # swap the two items
+        return self.swap_by_id(other_vendor, self_id, other_id)
