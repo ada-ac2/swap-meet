@@ -17,3 +17,11 @@ class Vendor:
             return check_item
         else:
             return None
+
+#check id in inventory,return id. if not, return None
+    def get_by_id(self,id):
+        for item in self.inventory:
+            if id == item.id:
+                return item
+        else:
+            return None
