@@ -40,3 +40,28 @@ class Vendor:
         self.inventory.insert(0, first_item_other_inventory)
         other_vendor.inventory.insert(0, first_item_my_inventory)
         return True
+
+    def get_by_category(self, category):
+        category_list = []
+
+        for item in self.inventory:
+            if category == item.get_category():
+                category_list.append(item)
+
+        return category_list
+
+    def get_best_by_category(self, category):
+        category_list = self.get_by_category(category)
+        if len(category_list) == 0:
+            return None
+
+        #highest_condition = category_list[0].condition
+        #best_item = category_list[0]
+        #for item in category_list:
+            #if item.condition > highest_condition:
+                #highest_condition = item.condition
+                #best_item = item
+
+        #return best_item
+
+        return max(category_list, key=lambda item: item.condition)
