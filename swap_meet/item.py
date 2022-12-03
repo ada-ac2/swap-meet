@@ -13,4 +13,6 @@ class Item:
     def get_category(self):
         return self.__class__.__name__
 
-    def stringify(self,)
+    #stringify Item and return str
+    def __str__(self):
+        return f"An object of type {self.get_category()} with id {self.id}"
