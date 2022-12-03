@@ -37,3 +37,21 @@ class Vendor:
             
         else:
             return False
+
+#swap first item method takes one argument
+# return True when successfully swap item.
+# return False if any empty inventory list
+    def swap_first_item(self,other_vendor):
+        if len(self.inventory) == 0  or len(other_vendor.inventory) == 0:
+            return False
+        else:
+            vendor_first_item = other_vendor.inventory[0]
+            self_first_item = self.inventory[0]
+            self.inventory[0] = vendor_first_item
+            other_vendor.inventory[0] = self_first_item
+            #another way to meet requirements.
+            #self.inventory.remove(self_first_item)
+            #self.inventory.append(vendor_first_item)
+            #other_vendor.inventory.remove(vendor_first_item)
+            #other_vendor.inventory.append(self_first_item)
+            return True
