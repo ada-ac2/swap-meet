@@ -27,11 +27,11 @@ class Item:
         return description of instance's condition
         """
         conditions = {
-            0: "mint",
-            1: "excellent",
-            2: "very good",
-            3: "good",
-            4: "fair",
-            5: "heavily used",
+            5: "mint",
+            4: "excellent",
+            3: "very good",
+            2: "good",
+            1: "fair",
+            0: "heavily used",
         }
         return conditions[round(self.condition)]
