@@ -74,16 +74,58 @@ class Vendor:
     
     def get_best_by_category(self, category):
         # I was thinking implement it with only lambda function, but couldn't figure out how to :/
+        """
+        return None if inventory is empty or no such category DNE in the inventory
+        else return the first best conditioned item of the category
+        """
         items = self.get_by_category(category)
-        if items == []:
+        if not items:
             item = None
         else:
             item = max(items, key=lambda i: i.condition)
-            if item == []:
+            if not item:
                 item = None
         return item
     
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
+        """
+        find best conditioned item of given category of each person (self vendor, other vendor)
+        if desired items are in eachother's inventory, swap them
+        if any items not exist or inventory empty, return None
+        """
         i_have = self.get_best_by_category(their_priority)
         vendor_has = other_vendor.get_best_by_category(my_priority)
         return self.swap_items(other_vendor, i_have, vendor_has)
+    
+    def display_inventory(self, category=None):
+        items = list()
+        if category is None:
+            items = self.inventory
+            # items = [item1, item2, item3]
+        else:
+            items = self.get_by_category(category)
+        result = ''
+        if items:
+            for ind, item in enumerate(items):
+                if item is not None:
+                    result += '{}. {}\n'.format(ind+1, item.__str__())
+        else:
+            result = "No inventory to display."
+        print(result)
+
+"""
+if __name__ == "__main__":
+    from clothing import Clothing
+    from electronics import Electronics
+    from decor import Decor
+
+
+    item_a = Clothing(id=123, fabric="Striped")
+    item_b = Electronics(id=456, type="Handheld Game")
+    item_c = Decor(id=789, width=2, length=4)
+    item_d = Item(id=100)
+    vendor = Vendor(
+        inventory=[item_a, item_b, item_c, item_d]
+    )
+
+    vendor.display_inventory()"""
