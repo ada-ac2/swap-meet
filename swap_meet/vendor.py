@@ -1,8 +1,8 @@
 #from .item import Item
 
 class Vendor:
-    def __init__(self, inventory=[]):
-        self.inventory = inventory
+    def __init__(self, inventory=None):
+        self.inventory = inventory if inventory is not None else []
 
     def add(self, item):
         self.inventory.append(item)
@@ -16,10 +16,17 @@ class Vendor:
         return item
 
     def get_by_id(self, id):      
-        #return id if id in self.inventory else None
         for item in self.inventory:
             if id == item.id:
-                return id
+                return item
         return None
 
+    def swap_items(self, other_vendor, my_item, their_item):       
+        if my_item not in self.inventory or their_item not in other_vendor.inventory:
+            return False
+
+        other_vendor.add(self.remove(my_item))
+        self.add(other_vendor.remove(their_item))
+
+        return True
         
