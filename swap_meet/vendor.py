@@ -60,16 +60,17 @@ class Vendor:
             return None
         else:
             n = sorted(category_lst, key=lambda item: item.condition, reverse= True)
-            return n[0]
+        return n[0]
 
     def swap_best_by_category(self, other_vendor, my_priority,their_priority):
         if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
             return False
-        my_priority_item = self.get_best_by_category(my_priority)
-        their_priority_item = other_vendor.get_best_by_category(their_priority)
-        if not my_priority_item or not their_priority_item:
-            return False
-        n = self.swap_items(self, other_vendor, my_priority, their_priority)
+        their_want_item = self.get_best_by_category(their_priority)
+        
+        my_want_item = other_vendor.get_best_by_category(my_priority)
+        #if not my_priority_item or not their_priority_item:
+            #return "False2"
+        n = self.swap_items(other_vendor, their_want_item, my_want_item)
         return n
 
 
