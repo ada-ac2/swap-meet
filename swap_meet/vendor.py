@@ -56,3 +56,15 @@ class Vendor:
         other_vendor.inventory.pop(0)
 
         return True
+
+    def get_by_category(self, category):
+        if not category: 
+            return []
+
+        list_by_cate = []
+        for item in self.inventory:
+            if item.get_category() == category:
+                list_by_cate.append(item)
+
+        return list_by_cate 
+
