@@ -75,20 +75,34 @@ class Vendor:
 
     def display_inventory(self, category=None):
         if len(self.inventory) == 0:
-            return "No inventory to display."
+            print("No inventory to display.")
+            #print("No inventory to display.")
         if not category:
+            #w_ls = []
             for item in self.inventory:
-                return item.__str__()
+                print(item.item.__str__())
+            
         elif category:
             item_lst = self.get_by_category(category)
             if len(item_lst)==0:
-                return "No inventory to display."
+                print("No inventory to display.")
+        
             else:
                 for item in item_lst:
                     return item.__str__()
 
         
 
-    def swap_by_id(self):
-        pass
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+        if  my_item and their_item:
+            swap_items(self, other_vendor, my_item, their_item)
+            return True
+        return False
         
+    def choose_and_swap_items(self, other_vendor, category=None):
+        if not category:
+            self.display_inventory()
+            other_vendor.display_
+        pass  

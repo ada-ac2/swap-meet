@@ -23,6 +23,7 @@ def test_display_inventory_with_items_no_category(capfd):
 
     # Assert
     captured = capfd.readouterr()
+    print(captured)
     expected_str = (
         "1. An object of type Clothing with id 123. It is made from Striped fabric.\n"
         "2. An object of type Electronics with id 456. This is a Handheld Game device.\n"
@@ -235,7 +236,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_fails_if_other_missing_item():
     # Arrange
     item_a = Decor(id=123)
@@ -274,7 +275,7 @@ def test_swap_by_id_fails_if_other_missing_item():
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_success(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -311,7 +312,7 @@ def test_choose_and_swap_items_success(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     # Arrange
     tai = Vendor(inventory=[])
@@ -339,7 +340,7 @@ def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -368,7 +369,7 @@ def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -405,7 +406,7 @@ def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
