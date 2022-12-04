@@ -54,6 +54,18 @@ class Vendor:
             if item.get_category() == category:
                 inventory_with_category.append(item)
         return inventory_with_category
+    
+    def get_best_by_category(self, category):
+        cur_best_item = None
+        cur_best_condition = None
+        for item in self.inventory:
+            if item.get_category() == category:
+                if cur_best_item is None or item.condition > cur_best_condition:
+                    cur_best_item = item
+                    cur_best_condition = item.condition
+        return cur_best_item
+
+
 
 
 
