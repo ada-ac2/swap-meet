@@ -72,6 +72,28 @@ class Vendor:
         if my_best_item and their_priority:
             return self.swap_items(other_vendor, my_best_item, their_best_item)
         return False
+    
+    def display_inventory(self, category=""):
+        assigned_category_inventory = []
+        if not category:  # When there is no assigned category, it should display all inventory
+            assigned_category_inventory = list(self.inventory)
+        
+        for item in self.inventory:
+            if item.get_category() == category:
+                assigned_category_inventory.append(item)
+        
+
+        if not assigned_category_inventory:
+            print("No inventory to display.")
+        
+        count = 1
+        for item in assigned_category_inventory:
+            print(f"{count}. {item.__str__()}")
+            count += 1
+
+
+
+
 
 
 
