@@ -14,5 +14,5 @@ class Clothing(Item):
         #super().get_category()
     
     def __str__(self):
-        return f"An object of type {self.get_category()} with id {self.id}. It is made from {self.fabric} fabric.\n"
+        return f"An object of type {self.get_category()} with id {self.id}. It is made from {self.fabric} fabric."
     
