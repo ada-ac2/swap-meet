@@ -9,7 +9,7 @@ def test_item_overrides_to_string():
 
     item_as_string = str(item)
 
-    expected_result = f"An object of type Item with id {test_id}"
+    expected_result = f"An object of type Item with id {test_id}."
     assert item_as_string == expected_result
 
 #@pytest.mark.skip
