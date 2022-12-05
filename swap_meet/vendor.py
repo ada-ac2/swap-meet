@@ -34,11 +34,8 @@ class Vendor:
         if not category: 
             return []
 
-        list_by_cate = []
-        for item in self.inventory:
-            if item.get_category() == category:
-                list_by_cate.append(item)
-
+        list_by_cate = [item for item in self.inventory if item.get_category() == category]
+    
         return list_by_cate 
 
     def get_best_by_category(self, category):
@@ -54,10 +51,7 @@ class Vendor:
         if other_vendor is None or my_item is None or their_item is None:
             return False
 
-        if my_item not in self.inventory:
-            return False
-
-        if their_item not in other_vendor.inventory:
+        if my_item not in self.inventory or their_item not in other_vendor.inventory:
             return False
 
         self.add(their_item)
@@ -78,5 +72,16 @@ class Vendor:
         return True
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
-       pass
+        if not my_priority or not their_priority:
+            return False
+
+        my_interest_item = other_vendor.get_best_by_category(my_priority)
+        their_interest_item = self.get_best_by_category(their_priority)
+
+        if not my_interest_item or not their_interest_item:
+            return False
+
+        return self.swap_items(other_vendor,their_interest_item,my_interest_item)
+
+
 
