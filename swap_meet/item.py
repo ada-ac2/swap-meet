@@ -7,7 +7,9 @@ class Item:
         else:
             self.id = id
 
-    def get_category(self):
+    def __str__(self):
+        return f"An object of type Item with id {str(self.id)}"      
+
+    def get_category( self ):
         category = self.__class__
         return str(category.__name__)
-        
