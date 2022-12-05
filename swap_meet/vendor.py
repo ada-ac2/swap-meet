@@ -96,15 +96,13 @@ class Vendor:
         their_item = other_vendor.get_by_id(their_item_id)
 
         return self.swap_items(other_vendor, my_item, their_item)
+    
+    def choose_and_swap_items(self, other_vendor, category=""):
+        my_inventory = self.display_inventory(category)
+        their_inventory = other_vendor.display_inventory(category)
 
+        category = "Item" if not category else category
+        my_item_id = int(input(f"Please provide the id of the {category} you want to swap to {other_vendor}: "))
+        their_item_id = int(input(f"Please provide the id of the {category} you want to swap from {other_vendor}: "))
 
-
-
-
-
-
-
-
-
-
-
+        return self.swap_by_id(other_vendor, my_item_id, their_item_id)
