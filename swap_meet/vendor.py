@@ -79,8 +79,43 @@ class Vendor:
                 best_item = item
         return best_item
 
-
+#this function will return True if swap successfully
+#else, return False 
     def swap_best_by_category(self,other_vendor,my_priority,their_priority):
         my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
         return self.swap_items(other_vendor,my_best_item,their_best_item)
+
+#print out a string that has all the item in the inventory.
+    def display_inventory(self,category = ""):
+        index = 1
+        if len(self.inventory) == 0:
+            print("No inventory to display.")
+        else:
+            if category == "":
+                for item in self.inventory:
+                    print(str(index) + ". " + item.__str__())
+                    index += 1
+            else:
+                for item in self.inventory:
+                    if item.get_category()==category:
+                        print(str(index) + ". " + item.__str__())
+                        index += 1
+                if index == 1:
+                    print("No inventory to display.")
+
+#swap items based on id
+    def swap_by_id(self,other_vendor,my_item_id,their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+        return self.swap_items(other_vendor,my_item,their_item)
+
+#
+    def choose_and_swap_items(self,other_vendor,category = ""):
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
+        my_item_id = int(input("Which item would you like to swap from my list?"))
+        their_item_id = int(input("Which item would you like to swap from their list?"))
+        return self.swap_by_id(other_vendor,my_item_id,their_item_id)
+
+

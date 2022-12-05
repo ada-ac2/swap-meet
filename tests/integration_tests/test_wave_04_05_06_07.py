@@ -4,8 +4,8 @@ from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
 
-@pytest.mark.skip
-@pytest.mark.integration_test
+#@pytest.mark.skip
+#@pytest.mark.integration_test
 def test_integration_wave_04_05_06(capfd):
     camila = Vendor()
     valentina = Vendor()
@@ -80,8 +80,8 @@ def test_integration_wave_04_05_06(capfd):
     camila.display_inventory()
     captured = capfd.readouterr()
     expected_str = (
-        "1. An object of type Clothing with id 123. It is made from Geometric Pattern fabric.\n"
-        "2. An object of type Electronics with id 654. This is a Kitchen Appliance device.\n"
+        "1. An object of type Electronics with id 654. This is a Kitchen Appliance device.\n"
+        "2. An object of type Clothing with id 123. It is made from Geometric Pattern fabric.\n"
         "3. An object of type Decor with id 987. It takes up a 4 by 2 sized space.\n"
     )
     assert captured.out == expected_str

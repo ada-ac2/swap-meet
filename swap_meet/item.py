@@ -5,12 +5,12 @@ class Item:
     def __init__(self,id = None,condition = 0):
         if id is not None:
             self.id = id
-            print(id)
+            #print(id)
         else:
             self.id = uuid.uuid4().int
         #if condition != 0:
         self.condition = condition
-        print(self.condition)
+        #print(self.condition)
 
 
     def get_category(self):
