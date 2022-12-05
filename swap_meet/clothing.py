@@ -9,9 +9,6 @@ class Clothing(Item):
             self.fabric = fabric
         else:
             self.fabric = "Unknown"
-    #是否使用super()?
-    #def get_category(self):
-        #super().get_category()
     
     def __str__(self):
         return f"An object of type {self.get_category()} with id {self.id}. It is made from {self.fabric} fabric."

@@ -1,7 +1,8 @@
 import uuid
 from swap_meet.item import Item
 class Vendor:
-    def __init__(self, inventory = None,):
+    def __init__(self, inventory = None):
+        # inventory default []
         if inventory is None:
             self.inventory = []
         else:
@@ -14,12 +15,13 @@ class Vendor:
         return item
 
     def remove(self, item):
+        # can I use filter()
         if item in self.inventory:
             self.inventory.remove(item)
             return item
         else:
             return None
-    
+    #filter()
     def get_by_id(self, id):
         for item in self.inventory:
             if item.id == id:
@@ -45,22 +47,18 @@ class Vendor:
             their_item = b_vendor.inventory.pop(0)
             self.add(their_item)
             return True
-
+    # List comprehension
     def get_by_category(self, category):
-        item_lst = []
-        for item in self.inventory:
-            if item.get_category() == category:
-                item_lst.append(item)
-        return item_lst
+        return [item for item in self.inventory if item.get_category() == category]
                 
-    #max()?
+    
     def get_best_by_category(self, category):
         category_lst = self.get_by_category(category)
         if len(category_lst) == 0:
             return None
         else:
-            n = sorted(category_lst, key=lambda item: item.condition, reverse= True)
-        return n[0]
+            return max(category_lst, key=lambda item: item.condition)
+        
 
     def swap_best_by_category(self, other_vendor, my_priority,their_priority):
         if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
@@ -68,10 +66,9 @@ class Vendor:
         their_want_item = self.get_best_by_category(their_priority)
         
         my_want_item = other_vendor.get_best_by_category(my_priority)
-        #if not my_priority_item or not their_priority_item:
-            #return "False2"
-        n = self.swap_items(other_vendor, their_want_item, my_want_item)
-        return n
+        
+        result = self.swap_items(other_vendor, their_want_item, my_want_item)
+        return result
 
     def display_inventory(self, category=None):
         if len(self.inventory) == 0:
@@ -113,4 +110,4 @@ class Vendor:
         return res
 
 
-        pass  
+         

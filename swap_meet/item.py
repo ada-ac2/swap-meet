@@ -29,6 +29,7 @@ class Item:
             return "Fair"
         elif self.condition == 1:
             return "Poor"
-        
+
+    def    
 
     
