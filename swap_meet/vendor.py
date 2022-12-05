@@ -90,6 +90,12 @@ class Vendor:
         for item in assigned_category_inventory:
             print(f"{count}. {item.__str__()}")
             count += 1
+    
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        return self.swap_items(other_vendor, my_item, their_item)
 
 
 
