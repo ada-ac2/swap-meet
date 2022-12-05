@@ -102,7 +102,7 @@ class Vendor:
         their_inventory = other_vendor.display_inventory(category)
 
         category = "Item" if not category else category
-        my_item_id = int(input(f"Please provide the id of the {category} you want to swap to {other_vendor}: "))
-        their_item_id = int(input(f"Please provide the id of the {category} you want to swap from {other_vendor}: "))
+        my_item_id = int(input(f"Please provide the id of the {category} you want to give in exchange: "))
+        their_item_id = int(input(f"Please provide the id of the {category} you want to receive in exchange: "))
 
         return self.swap_by_id(other_vendor, my_item_id, their_item_id)
