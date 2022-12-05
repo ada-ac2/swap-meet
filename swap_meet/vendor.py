@@ -59,22 +59,37 @@ class Vendor:
             self.swap_items(other_vendor, my_best_for_other, their_best_for_me)
             return True
         
-    def display_inventory(self, category=""):
-        if not self.inventory or not self.get_by_category(category):
-            print('No inventory to display.') # return??
+    def display_inventory(self, category=''):
+        if not self.inventory:
+            print('No inventory to display.')
         else:
-            print([get_by_category(category) if category else self.inventory]) # return????
+            ### what is wrong here ??????
+            items = [self.get_by_category(category) if category else self.inventory]
+            [print(item) for item in items]
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
-        my_item, their_item = self.get_by_id(my_item_id), other_vendor.get_by_id(their_item_id)
+        my_item = self.get_by_id(my_item_id) 
+        their_item = other_vendor.get_by_id(their_item_id)
         if not my_item or not their_item:
             return False
         else:
             self.swap_items(other_vendor, my_item, their_item)
             return True
 
-    def choose_and_swap_items(self, other_vendor, category=""):
+    def choose_and_swap_items(self, other_vendor, category=''):
         [vendor.display_inventory(category) for vendor in [self, other_vendor]]
         my_item_id = input('Please input the item ID you would like to give to the other vendor: ')
         their_item_id = input('Please input the item ID you would like to take from the other vendor: ')
         return True if self.swap_by_id(other_vendor, my_item_id, their_item_id) else False
+
+# debugging
+from .clothing import Clothing
+from .electronics import Electronics
+from .decor import Decor
+from .item import Item
+item_a = Clothing(id=123, fabric="Striped")
+item_b = Electronics(id=456, type="Handheld Game")
+item_c = Decor(id=789, width=2, length=4)
+item_d = Item(id=100)
+vendor = Vendor(inventory=[item_a, item_b, item_c, item_d])
+vendor.display_inventory()

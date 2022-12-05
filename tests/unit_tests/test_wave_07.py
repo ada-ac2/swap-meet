@@ -7,7 +7,7 @@ from swap_meet.electronics import Electronics
 
 # ~~~~~ display_inventory Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_with_items_no_category(capfd):
     # Arrange
     item_a = Clothing(id=123, fabric="Striped")
@@ -29,6 +29,7 @@ def test_display_inventory_with_items_no_category(capfd):
         "3. An object of type Decor with id 789. It takes up a 2 by 4 sized space.\n"
         "4. An object of type Item with id 100\n"
     )
+    print(captured)
     assert captured.out == expected_str
 
 @pytest.mark.skip
