@@ -60,12 +60,11 @@ class Vendor:
             return True
         
     def display_inventory(self, category=''):
-        if not self.inventory:
-            print('No inventory to display.')
+        items = self.get_by_category(category) if category else self.inventory
+        if items:
+            [print(f'{i}. {item}') for i, item in enumerate(items, 1)]
         else:
-            ### what is wrong here ??????
-            items = [self.get_by_category(category) if category else self.inventory]
-            [print(item) for item in items]
+            print('No inventory to display.')
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
         my_item = self.get_by_id(my_item_id) 
@@ -78,18 +77,6 @@ class Vendor:
 
     def choose_and_swap_items(self, other_vendor, category=''):
         [vendor.display_inventory(category) for vendor in [self, other_vendor]]
-        my_item_id = input('Please input the item ID you would like to give to the other vendor: ')
-        their_item_id = input('Please input the item ID you would like to take from the other vendor: ')
+        my_item_id = int(input('Please input the item ID you would like to give to the other vendor: '))
+        their_item_id = int(input('Please input the item ID you would like to take from the other vendor: '))
         return True if self.swap_by_id(other_vendor, my_item_id, their_item_id) else False
-
-# debugging
-from .clothing import Clothing
-from .electronics import Electronics
-from .decor import Decor
-from .item import Item
-item_a = Clothing(id=123, fabric="Striped")
-item_b = Electronics(id=456, type="Handheld Game")
-item_c = Decor(id=789, width=2, length=4)
-item_d = Item(id=100)
-vendor = Vendor(inventory=[item_a, item_b, item_c, item_d])
-vendor.display_inventory()
