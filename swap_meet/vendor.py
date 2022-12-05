@@ -1,5 +1,5 @@
 #Wave 1
-#from swap_meet.item import Item
+
 class Vendor:
     def __init__(self, inventory = None):
         if inventory is not None:
@@ -70,7 +70,7 @@ class Vendor:
         self.swap_items(other_vendor,best_item_from_my_inventory,best_item_from_their_inventory)
         return True
     #Wave 7 
-    # (Needs a lot of work)
+    
     
     def display_inventory(self,category = ""):
         if self.inventory == []: 
