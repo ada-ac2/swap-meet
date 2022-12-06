@@ -5,6 +5,7 @@ class Decor(Item):
         super().__init__(id, condition)
         self.width = width
         self.length = length
+        self.area = width * length
         self.condition = condition
 
     def __str__(self):
