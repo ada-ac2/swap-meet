@@ -78,5 +78,15 @@ class Vendor:
 
         return self.swap_items(other_vendor,their_interest_item,my_interest_item)
 
+    def display_inventory(self, category=""):
+        display_items = self.get_by_category(category) if category else self.inventory
+        
+        if not display_items:
+            print("No inventory to display.")
+            return
+
+        for i in range(len(display_items)):
+            print(f"{i+1}. {display_items[i]}")
+
 
 
