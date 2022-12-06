@@ -15,7 +15,6 @@ class Item:
         return f"An object of type {self.get_category()} with id {self.id}"
         
     def condition_description(self):
-        #condition scale 0-5
         if self.condition == 0:
             return "Yikes!"
         elif 0 < self.condition <= 1:
