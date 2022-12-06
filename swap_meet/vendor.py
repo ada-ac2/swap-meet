@@ -41,3 +41,16 @@ class Vendor:
         self.inventory[0] = other_vendor.inventory[0]
         other_vendor.inventory[0] = my_first_item
         return True
+
+    def get_by_category(self, category):
+        if not self.inventory:
+            raise ValueError("Empty Inventory")
+            
+        filtered_list = list(filter(lambda item: item.get_category() == category, self.inventory))
+        return filtered_list
+
+    def get_best_by_category(self):
+        pass
+
+    def swap_best_by_category(self):
+        pass
