@@ -20,7 +20,7 @@ def test_swap__when_no_matching_area_returns_false():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Decor',
-        attribute='area',
+        attr='area',
         attr_val=12
     )
 
@@ -44,7 +44,7 @@ def test_swap_decor_when_matching_areas_returns_true():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Decor',
-        attribute='area',
+        attr='area',
         attr_val=12
     )
 
@@ -68,7 +68,7 @@ def test_swap_best_decor_when_multiple_matching_areas():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Decor',
-        attribute='area',
+        attr='area',
         attr_val=12
     )
 
@@ -93,7 +93,7 @@ def test_swap_clothing_with_no_matching_fabrics_returns_false():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Clothing',
-        attribute='fabric',
+        attr='fabric',
         attr_val='wool'
     )
 
@@ -118,7 +118,7 @@ def test_swap_clothing_when_matching_fabrics_returns_True():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Clothing',
-        attribute='fabric',
+        attr='fabric',
         attr_val='silk'
     )
 
@@ -143,7 +143,7 @@ def test_swap_best_clothing_when_multiple_matching_fabrics():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Clothing',
-        attribute='fabric',
+        attr='fabric',
         attr_val='silk'
     )
 
@@ -168,7 +168,7 @@ def test_swap_electronics_with_no_matching_type_returns_false():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Electronics',
-        attribute='type',
+        attr='type',
         attr_val='electric toothbrush'
     )
 
@@ -192,7 +192,7 @@ def test_swap_electronics_when_matching_types_returns_True():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Electronics',
-        attribute='type',
+        attr='type',
         attr_val='computer'
     )
 
@@ -216,7 +216,7 @@ def test_swap_best_electronics_when_multiple_matching_types():
     result = stewart.swap_by_category_attribute(
         other_vendor=jenny,
         category='Electronics',
-        attribute='type',
+        attr='type',
         attr_val='computer'
     )
 
