@@ -64,6 +64,15 @@ class Vendor:
 
         return self.swap_items(other_vendor, item_for_them, item_for_me)
 
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+        # # no swap if items are missing from either vendor's inventory
+        # if not my_item or not their_item:
+        #     return False
+        return self.swap_items(other_vendor, my_item, their_item)
+        
+
     def display_inventory(self, category=""):
         inventory_summaries = ""
         if not category:
