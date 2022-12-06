@@ -19,6 +19,8 @@ class Vendor:
         return None
 
     def swap_items(self, other_vendor, my_item, their_item):
+        if my_item == their_item:
+            return False
         if my_item not in self.inventory or their_item not in other_vendor.inventory:
             return False
 
