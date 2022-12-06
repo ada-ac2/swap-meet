@@ -10,3 +10,7 @@ class Item:
 
     def __str__(self):
         return f"An object of type {self.get_category()} with id {self.id}"
+
+    def condition_description(self):
+        descriptions = {0: "torn", 1: "a bit shredded", 2: "defs used", 3: "lightly used", 4: "near perfect", 5: "perf",}
+        return descriptions[self.condition]
