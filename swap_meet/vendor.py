@@ -32,8 +32,9 @@ class Vendor:
         return True
     
     def swap_first_item(self, other_vendor):
-        # if the first items are the same
         if not self.inventory or not other_vendor.inventory:
+            return False
+        if self.inventory[0] == other_vendor.inventory[0]:
             return False
         
         my_first_item = self.inventory[0]
