@@ -44,13 +44,7 @@ class Vendor:
         if not self.inventory or \
         not other_vendor.inventory:
             return False
-        my_item = self.inventory[0]
-        their_item = other_vendor.inventory[0]
-        self.remove(self.inventory[0])
-        self.add(their_item)
-        other_vendor.remove(their_item)
-        other_vendor.add(my_item)
-        return True
+        return self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
 
     def get_by_category(self, category):
         list_of_objects = []
@@ -74,6 +68,45 @@ class Vendor:
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
         best_item_for_them = self.get_best_by_category(their_priority)
         best_item_for_me = other_vendor.get_best_by_category(my_priority)
-#        if not best_item_for_them or not best_item_for_me:
-#            return False
         return self.swap_items(other_vendor, best_item_for_them, best_item_for_me)
+
+    def display_inventory(self, category = None):
+        if not self.inventory:
+            print("No inventory to display.")
+            return None
+        if category == None:
+            for index in range(len(self.inventory)):
+                print(f"{index+1}. {self.inventory[index]}")
+        else:
+            count = 0
+            for item in self.inventory:
+                if item.get_category() == category:
+                    count += 1
+                    print(f"{count}. {item}")
+            if count == 0:
+                print("No inventory to display.")
+                return None   
+
+    def swap_by_id( self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+        if not my_item or not their_item:
+            return False
+        else:
+            return self.swap_items(other_vendor, my_item, their_item)
+
+    def choose_and_swap_items(self, other_vendor, category = None):
+        if category == None:
+            self.category = ""
+        else:
+            self.category = category
+        self.display_inventory(self.category)
+        other_vendor.display_inventory(self.category)
+
+        my_item_id = int(input("Please enter the id of the item from my inventory:")) 
+        their_item_id = int(input("Please enter the id of the item from their inventory:"))
+
+        if self.swap_by_id(other_vendor, my_item_id, their_item_id):
+            return True
+        return False
+        
