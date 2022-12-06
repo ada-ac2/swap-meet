@@ -15,7 +15,6 @@ class Vendor:
             return None
     
     def get_by_id(self, id):
-        # lambda filter functions - read up
         result = list(filter(lambda item: item.id == id, self.inventory))
         return result[0] if result else None
     
@@ -23,11 +22,10 @@ class Vendor:
         if my_item not in self.inventory or their_item not in other_vendor.inventory:
             return False
         else:
-            # refactor?
-            self.inventory.remove(my_item)
-            self.inventory.append(their_item)
-            other_vendor.inventory.append(my_item)
-            other_vendor.inventory.remove(their_item)
+            self.remove(my_item)
+            self.add(their_item)
+            other_vendor.add(my_item)
+            other_vendor.remove(their_item)
             return True
             
     def swap_first_item(self, other_vendor):
@@ -43,8 +41,8 @@ class Vendor:
         )
         return result
     
-    def get_best_by_category(self, category):
-        items = self.get_by_category(category)
+    def get_best_by_category(self, category=None, list=None):
+        items = list if list else self.get_by_category(category)
         if items:
             result = max(items, key=lambda item: item.condition)
             return result
@@ -80,3 +78,21 @@ class Vendor:
         my_item_id = int(input('Please input the item ID you would like to give to the other vendor: '))
         their_item_id = int(input('Please input the item ID you would like to take from the other vendor: '))
         return True if self.swap_by_id(other_vendor, my_item_id, their_item_id) else False
+
+    def get_by_category_attribute(self, category, attribute, val):
+        items = self.get_by_category(category)
+        items_by_attr = []
+        for item in items:
+            if val == getattr(item, attribute):
+                items_by_attr.append(item)
+        return items_by_attr
+    
+    def swap_by_category_attribute(self, other_vendor, category, attribute, attr_val):
+        my_items = self.get_by_category_attribute(category, attribute, attr_val)
+        their_items = other_vendor.get_by_category_attribute(category, attribute, attr_val)
+        result = self.swap_items(
+            other_vendor,
+            self.get_best_by_category(list=my_items),
+            other_vendor.get_best_by_category(list=their_items)
+        )
+        return result
