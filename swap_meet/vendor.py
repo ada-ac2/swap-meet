@@ -45,12 +45,17 @@ class Vendor:
     def get_by_category(self, category):
         if not self.inventory:
             raise ValueError("Empty Inventory")
-            
-        filtered_list = list(filter(lambda item: item.get_category() == category, self.inventory))
-        return filtered_list
 
-    def get_best_by_category(self):
-        pass
+        item_category_list = list(filter(lambda item: item.get_category() == category, self.inventory))
+        return item_category_list
+
+    def get_best_by_category(self, category):
+        item_category_list = self.get_by_category(category)
+        if not item_category_list:
+            return None
+
+        max_item = max(item_category_list, key=lambda item: item.condition)
+        return max_item
 
     def swap_best_by_category(self):
         pass
