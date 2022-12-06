@@ -83,10 +83,12 @@ class Vendor:
             for i in range(len(self.inventory)):
                 inventory_summaries += f"{i+1}. {self.inventory[i].__str__()}\n"
         else:
+            items = 0
             for i in range(len(self.inventory)):
                 if self.inventory[i].get_category() == category:
-                    inventory_summaries += f"{i+1}. {self.inventory[i].__str__()}\n"
+                    inventory_summaries += f"{items+1}. {self.inventory[i].__str__()}\n"
+                    items += 1
         if inventory_summaries == "":
             print("No inventory to display.")
         else:
-            print(inventory_summaries)
+            print(inventory_summaries, end="")
