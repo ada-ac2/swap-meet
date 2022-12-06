@@ -14,7 +14,6 @@ def test_item_instances_have_different_default_ids():
     item_b = Item()
     assert item_a.id != item_b.id
 
-
 #@pytest.mark.skip
 def test_items_use_custom_id_if_passed():
     item = Item(id=12345)
@@ -55,3 +54,9 @@ def test_get_item_by_id_no_matching():
     assert item_a in items
     assert item_b in items
     assert item_c in items
+
+# Additional tests added by Monica Bao 
+def test_items_have_invalid_id_input_raise_ValueError():
+    with pytest.raises(ValueError):
+        item = Item(id = "888")
+    

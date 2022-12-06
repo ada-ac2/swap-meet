@@ -69,7 +69,6 @@ class Vendor:
         # My own logic to find the highest condition:
         # best_condition = objects_in_category[0].condition
         # best_condition_object = objects_in_category[0]
-
         # for object in objects_in_category:
         #     condition = object.condition
         #     if condition == 5: # Best condition is 5, no need to check for the rest
@@ -114,3 +113,35 @@ class Vendor:
         id_to_get_after_swap = int(input("Please enter the id of the item you want to get from other vendor after swap: "))
 
         return self.swap_by_id(other_vendor, id_to_swap, id_to_get_after_swap)
+
+
+    # ***************************************
+    # ****** Optional Enhancements **********
+    # ***************************************
+    def swap_decor_by_space(self, other_vendor): 
+        for item in self.inventory: 
+            my_size = item.width * item.length 
+            for their_item in other_vendor.inventory:
+                if my_size == their_item.width * their_item.length: 
+                    self.swap_items(other_vendor, item, their_item)
+                    return True 
+        
+        return False 
+
+    def swap_clothings_by_fabric(self, other_vendor): 
+        for item in self.inventory: 
+            for their_item in other_vendor.inventory:
+                if item.fabric  == their_item.fabric: 
+                    self.swap_items(other_vendor, item, their_item)
+                    return True 
+        
+        return False 
+
+    def swap_electronics_by_type(self, other_vendor): 
+        for item in self.inventory: 
+            for their_item in other_vendor.inventory:
+                if item.type  == their_item.type: 
+                    self.swap_items(other_vendor, item, their_item)
+                    return True 
+        
+        return False 

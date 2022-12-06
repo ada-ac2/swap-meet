@@ -2,6 +2,9 @@ import uuid
 
 class Item:
     def __init__(self, id = None, condition = 0):
+        if id and not isinstance(id, int):
+            raise ValueError("ID must be an integer.")
+            
         self.id = id if id else uuid.uuid1().int
         self.condition = condition 
 
@@ -23,3 +26,5 @@ class Item:
     # Override str from python built-in  
     def __str__(self): 
         return f"An object of type {self.get_category()} with id {self.id}"
+
+
