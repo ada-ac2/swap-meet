@@ -22,10 +22,10 @@ class Item:
         return f"An object of type {self.get_category()} with id {str(self.id)}"
     
     def condition_description(self):
-        condition_list = ["New",
-                        "Used - Great Condition",
-                        "Used - Very Good Condition",
-                        "Used - Good Condition",
-                        "Heavily Used", 
-                        "Poor Condition"]
+        condition_list = ["Poor Condition",     # condition = 0
+                        "Heavily Used",         # condition = 1
+                        "Used - Good Condition",      # condition = 2
+                        "Used - Very Good Condition", # condition = 3
+                        "Used - Great Condition",   # condition = 4
+                        "New"]                      # condition = 5
         return condition_list[self.condition]
