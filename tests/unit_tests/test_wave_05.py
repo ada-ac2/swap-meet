@@ -97,7 +97,7 @@ def test_electronics_has_expected_to_str_with_custom_type():
 
 # ~~~~~ Item Tests ~~~~~
 
-@pytest.mark.skip
+
 def test_items_have_condition_as_float():
     items = [
         Clothing(condition=3.5),
