@@ -7,5 +7,5 @@ class Clothing(Item):
         self.fabric = fabric
     
     def __str__(self):
-        txt = super().__str__()
-        return f"{txt}. It is made from {self.fabric} fabric."
+        item_message = super().__str__()
+        return f"{item_message}. It is made from {self.fabric} fabric."

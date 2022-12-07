@@ -7,6 +7,6 @@ class Electronics(Item):
         self.type = type
         
     def __str__(self):
-        txt = super().__str__()
-        return f"{txt}. This is a {self.type} device."
+        item_message = super().__str__()
+        return f"{item_message}. This is a {self.type} device."
     

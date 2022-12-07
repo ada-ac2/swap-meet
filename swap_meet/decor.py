@@ -8,5 +8,5 @@ class Decor(Item):
         self.length = length
     
     def __str__(self):
-        txt = super().__str__()
-        return f"{txt}. It takes up a {self.width} by {self.length} sized space."
+        item_message = super().__str__()
+        return f"{item_message}. It takes up a {self.width} by {self.length} sized space."

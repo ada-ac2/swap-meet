@@ -12,12 +12,14 @@ class Item:
 
     def get_category(self):
         return self.__class__.__name__#type(self).__name__
+
 # Wave 3
     def __str__(self):
         return f"An object of type {self.get_category()} with id {self.id}"
+
 # Wave 5
     def condition_description(self):
-        description_of_condition = ["Mint","Heavily Used","Like New","Best Used","Gently Used","New"]
+        description_of_condition = ["Mint","Heavily Used","Like New","Gently Used","Best Used","New"]
         return description_of_condition[self.condition]
     
     
