@@ -27,6 +27,27 @@ def test_adding_to_inventory():
     assert item in vendor.inventory
     assert result == item
 
+def test_adding_to_inventory_none_items():
+    vendor = Vendor()
+    item = None
+
+    result = vendor.add(item)
+
+    assert len(vendor.inventory) == 0
+    assert item not in vendor.inventory
+    assert result == item
+
+def test_adding_duplicate_items():
+    vendor = Vendor()
+    item = "A"
+
+    vendor.add(item)
+    result = vendor.add(item)
+
+    assert len(vendor.inventory) == 1
+    assert item in vendor.inventory
+    assert result == item
+
 #@pytest.mark.skip
 def test_removing_from_inventory_returns_item():
     item = "item to remove"
