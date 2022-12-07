@@ -81,10 +81,12 @@ class Vendor:
         return result
 
     def choose_and_swap_items(self, other_vendor, category=None):
-        print(f"My inventory: \n {self.display_inventory(category)}")
-        print(f"Other inventory: \n {other_vendor.display_inventory(category)}")
         my_id = int(input("Enter my id: "))
-        other_id = int(input("Enter other id: "))
+        their_id = int(input("Enter their id: "))
 
-        result = self.swap_by_id(other_vendor, my_id, other_id)
+        result = self.swap_by_id(other_vendor, my_id, their_id)
         return result
+
+    #Optional Enhancements
+    def swap_by_similar(self, other_vendor, my_attributes, their_attributes):
+        pass
