@@ -64,9 +64,7 @@ class Vendor:
         my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
 
-        if my_best_item and their_priority:
-            return self.swap_items(other_vendor, my_best_item, their_best_item)
-        return False
+        return self.swap_items(other_vendor, my_best_item, their_best_item)
     
     def display_inventory(self, category=""):
         assigned_category_inventory = []
