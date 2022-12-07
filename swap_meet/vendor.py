@@ -12,7 +12,6 @@ class Vendor:
                 "Item already exist in the current inventory, item has not been added")
 
         self.inventory.append(item)
-
         return item
 
     def remove(self, item):
@@ -66,28 +65,19 @@ class Vendor:
 
         return max(objects_in_category, key=lambda object: object.condition)
 
-        # My own logic to find the highest condition:
-        # best_condition = objects_in_category[0].condition
-        # best_condition_object = objects_in_category[0]
-        # for object in objects_in_category:
-        #     condition = object.condition
-        #     if condition == 5: # Best condition is 5, no need to check for the rest
-        #         return object
-        #     if condition > best_condition:
-        #         best_condition = condition
-        #         best_condition_object = object
-
-        # return best_condition_object
-
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
+        # Call get_best_by_category to get the best items from each vendor 
         my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
 
+        # Swap items by calling swap_items method 
         return self.swap_items(other_vendor, my_best_item, their_best_item)
 
     def display_inventory(self, category=""):
+        # Display inventory for specific category type requested by user 
         if category:
             items_in_category = self.get_by_category(category)
+        # Display all inventory, if user doesn't specify 
         else:
             items_in_category = self.inventory
 
@@ -100,6 +90,7 @@ class Vendor:
                 index += 1
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        # Get item by id 
         my_item = self.get_by_id(my_item_id)
         their_item = other_vendor.get_by_id(their_item_id)
 
@@ -115,9 +106,10 @@ class Vendor:
         return self.swap_by_id(other_vendor, id_to_swap, id_to_get_after_swap)
 
 
-    # ***************************************
-    # ****** Optional Enhancements **********
-    # ***************************************
+    # ***************************************************************************************
+    # ****************************** Optional Enhancements **********************************
+    # ***************************************************************************************
+
     def swap_decor_by_space(self, other_vendor): 
         for item in self.inventory: 
             my_size = item.width * item.length 

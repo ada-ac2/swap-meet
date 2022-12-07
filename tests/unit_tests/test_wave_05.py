@@ -37,8 +37,6 @@ def test_clothing_has_expected_to_str_with_custom_fabric():
     assert str(clothing) == expected_str
 
 # ~~~~~ Decor Tests ~~~~~
-
-
 #@pytest.mark.skip
 def test_decor_has_default_uuid_length_id():
     decor = Decor()
@@ -71,7 +69,6 @@ def test_decor_has_expected_to_str_with_custom_size():
     assert str(decor) == expected_str
 
 # ~~~~~ Electronics Tests ~~~~~
-
 #@pytest.mark.skip
 def test_electronics_has_default_uuid_length_id():
     electronics = Electronics()
@@ -117,7 +114,7 @@ def test_items_have_condition_as_float():
         assert item.condition == pytest.approx(3.5)
 
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type():
     items = [
         Clothing(condition=5),
@@ -140,8 +137,6 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
     assert one_condition_description != five_condition_description
 
 # ~~~~~ Helper Functions ~~~~~
-
-
 def check_for_default_uuid_length_id(to_check):
     assert isinstance(to_check.id, int)
     assert len(str(to_check.id)) >= 32

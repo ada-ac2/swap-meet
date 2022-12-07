@@ -3,8 +3,6 @@ from swap_meet.vendor import Vendor
 from swap_meet.item import Item
 
 # @pytest.mark.skip
-
-
 def test_swap_first_item_returns_true():
     item_a = Item()
     item_b = Item()
