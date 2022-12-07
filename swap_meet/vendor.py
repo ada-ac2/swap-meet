@@ -1,5 +1,3 @@
-from swap_meet.item import Item
-
 class Vendor:
     def __init__(self, inventory = None) :
         self.inventory = inventory if inventory is not None else []
@@ -78,6 +76,12 @@ class Vendor:
 
         return self.swap_items(other_vendor,their_interest_item,my_interest_item)
 
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        return self.swap_items(other_vendor,my_item,their_item)
+        
     def display_inventory(self, category=""):
         display_items = self.get_by_category(category) if category else self.inventory
         
@@ -88,11 +92,16 @@ class Vendor:
         for i in range(len(display_items)):
             print(f"{i+1}. {display_items[i]}")
 
-    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
-        my_item = self.get_by_id(my_item_id)
-        their_item = other_vendor.get_by_id(their_item_id)
+    def choose_and_swap_items(self, other_vendor, category=""):
+        print("My items:")
+        self.display_inventory(category)
+        print("\nTheir items:")
+        other_vendor.display_inventory(category)
 
-        return self.swap_items(other_vendor,my_item,their_item)
+        #add code to prevent exceptions when receiving non int ids
+        my_item_id = int(input("Provide the id of the item you want swap: "))
+        their_item_id = int(input("Provide the id of the item they want to swap: "))
 
+        return self.swap_by_id(other_vendor,my_item_id,their_item_id)
 
 
