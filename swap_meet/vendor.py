@@ -88,5 +88,11 @@ class Vendor:
         for i in range(len(display_items)):
             print(f"{i+1}. {display_items[i]}")
 
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        return self.swap_items(other_vendor,my_item,their_item)
+
 
 
