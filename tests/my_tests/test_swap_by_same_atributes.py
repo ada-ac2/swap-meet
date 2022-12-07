@@ -41,6 +41,75 @@ def test_swap_clothing_by_same_attributes_success_returns_true():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
+
+def test_swap_all_clothing_by_same_attributes_success_returns_true():
+    # Arrange
+    item_a = Clothing(fabric = "Silk")
+    item_b = Clothing(fabric = "Cotton")
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(fabric = "Cotton")
+    item_e = Decor(id=654)
+    item_f = Clothing(fabric = "Silk")
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_all_clothing_by_attributes(
+        other_vendor=jesse)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_f in tai.inventory
+    assert item_c in tai.inventory
+    assert item_d in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_b in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_a in jesse.inventory
+
+
+def test_swap_one_clothing_by_same_attributes_more_then_one_success_returns_true():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Clothing(fabric = "Cotton")
+    item_c = Clothing(fabric = "Silk")
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(fabric = "Cotton")
+    item_e = Decor(id=654)
+    item_f = Clothing(fabric = "Silk")
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_clothing_by_attributes(
+        other_vendor=jesse)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_c in tai.inventory
+    assert item_d in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_b in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+
 def test_swap_clothing_by_same_attributes_empty_my_inventory_returns_False():
     # Arrange
     tai = Vendor(

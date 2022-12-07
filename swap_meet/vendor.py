@@ -137,19 +137,42 @@ class Vendor:
         if self.swap_by_id( other_vendor, my_item_id, their_item_id ):
             return True
         return False
-        
+
+# Function swap first two clothing with the same attribute fabric
+# If we want to swap all clothing with the same fabric
+# we can use next function : swap_all_clothing_by_attributes( self, other_vendor )
     def swap_clothing_by_attributes( self, other_vendor ):
         list_of_my_clothing = self.get_by_category( "Clothing" )
         list_of_their_clothing = other_vendor.get_by_category( "Clothing" )
-        
+
         for my_item in list_of_my_clothing:
             for their_item in list_of_their_clothing:
+
                 if my_item.fabric == their_item.fabric:
                     self.swap_by_id( other_vendor, my_item.id, their_item.id )
                     return True
 
         return False
-    
+
+# Function swap all clothing with the same attribute fabric
+    def swap_all_clothing_by_attributes( self, other_vendor ):
+        list_of_my_clothing = self.get_by_category( "Clothing" )
+        list_of_their_clothing = other_vendor.get_by_category( "Clothing" )
+        counter = 0
+
+        for my_item in list_of_my_clothing:
+            for their_item in list_of_their_clothing:
+                
+                if my_item.fabric == their_item.fabric:
+                    counter +=1
+                    self.swap_by_id( other_vendor, my_item.id, their_item.id )
+        
+        if counter > 0:
+            return True
+
+        return False
+
+
     def swap_decor_by_attributes( self, other_vendor ):
         list_of_my_decor = self.get_by_category( "Decor" )
         list_of_their_decor = other_vendor.get_by_category( "Decor" )
