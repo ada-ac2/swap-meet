@@ -103,7 +103,7 @@ class Vendor:
             their_item_id = int(input("Provide the id of the item they want to swap: "))
 
         except ValueError:
-            print("An invalid id's was provided")
+            print("An invalid id was provided")
             return False
 
         return self.swap_by_id(other_vendor,my_item_id,their_item_id)

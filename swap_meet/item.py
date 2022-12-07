@@ -10,9 +10,13 @@ class Item:
 
     def __init__(self, id= None, condition=0) :
         if id is not None:
-            self.id = id
+            if type(id) is int:
+                self.id = id
+            else:
+                raise ValueError("The id for Item obj must be an integer")
         else:
             self.id = uuid.uuid4().int
+
         self.condition = condition
 
     def get_category(self):
