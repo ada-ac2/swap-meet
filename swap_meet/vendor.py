@@ -67,14 +67,10 @@ class Vendor:
         return self.swap_items(other_vendor, my_best_item, their_best_item)
     
     def display_inventory(self, category=""):
-        assigned_category_inventory = []
-        if not category:  # When there is no assigned category, it should display all inventory
-            assigned_category_inventory = list(self.inventory)
-        
-        for item in self.inventory:
-            if item.get_category() == category:
-                assigned_category_inventory.append(item)
-        
+        # When there is no assigned category, it should display all inventory    
+        assigned_category_inventory = list(filter(
+            lambda item: item.get_category() == category if category else True,
+            self.inventory))
 
         if not assigned_category_inventory:
             print("No inventory to display.")
