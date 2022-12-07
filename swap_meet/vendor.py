@@ -98,9 +98,13 @@ class Vendor:
         print("\nTheir items:")
         other_vendor.display_inventory(category)
 
-        #add code to prevent exceptions when receiving non int ids
-        my_item_id = int(input("Provide the id of the item you want swap: "))
-        their_item_id = int(input("Provide the id of the item they want to swap: "))
+        try:
+            my_item_id = int(input("Provide the id of the item you want swap: "))
+            their_item_id = int(input("Provide the id of the item they want to swap: "))
+
+        except ValueError:
+            print("An invalid id's was provided")
+            return False
 
         return self.swap_by_id(other_vendor,my_item_id,their_item_id)
 
