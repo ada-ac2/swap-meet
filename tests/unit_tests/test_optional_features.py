@@ -226,3 +226,52 @@ def test_swap_best_electronics_when_multiple_matching_types():
     assert len(stewart.inventory) == 2
     assert item_d and item_b in stewart.inventory
     assert item_a and item_c in jenny.inventory
+
+# ~~~~~ Test invalid id inputs ~~~~~
+def test_string_id_input_in_different_items():
+    # Arrange
+    string_id = "4068793"
+
+    # Act
+    item_a = Clothing(id=string_id)
+    item_b = Decor(id=string_id)
+    item_c = Electronics(id=string_id)
+    item_d = Item(id=string_id)
+
+    # Assert
+    item_a.id, item_b.id, item_c.id, item_d.id == 4068793
+
+def test_float_id():
+    # Arrange
+    string_id = 0.84937
+    
+    # Assert
+    with pytest.raises(ValueError):
+        item_a = Clothing(id=string_id)
+        item_b = Decor(id=string_id)
+        item_c = Electronics(id=string_id)
+        item_d = Item(id=string_id)
+
+def test_nonnumeric_string_id():
+    # Arrange
+    string_id = "!89a"
+    
+    # Assert
+    with pytest.raises(ValueError):
+        item_a = Clothing(id=string_id)
+        item_b = Decor(id=string_id)
+        item_c = Electronics(id=string_id)
+        item_d = Item(id=string_id)
+
+def test_empty_string_id():
+    # Arrange
+    string_id = ""
+    
+    # Act
+    item_a = Clothing(id=string_id)
+    item_b = Decor(id=string_id)
+    item_c = Electronics(id=string_id)
+    item_d = Item(id=string_id)
+
+    # Assert
+    assert [type(item) == int for item in [item_a.id, item_b.id, item_c.id, item_d]]
