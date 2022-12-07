@@ -58,4 +58,33 @@ class Vendor:
         get_best_by_their_category = other_vendor.get_best_by_category(my_priority)
 
         result = self.swap_items(other_vendor, get_best_by_my_category, get_best_by_their_category)
+        return result 
+
+    def display(self, list_to_display):
+        i = 1
+        for item in list_to_display:
+            print(f"{i}. {item.__str__()}")
+            i += 1
+
+    def display_inventory(self, category=None):
+        get_category_list = self.get_by_category(category)
+        if not self.inventory or (category is not None and not get_category_list):
+            print("No inventory to display.")
+
+        if category is not None:
+            self.display(get_category_list)
+        else:
+            self.display(self.inventory)
+
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        result = self.swap_items(other_vendor, self.get_by_id(my_item_id), other_vendor.get_by_id(their_item_id))
+        return result
+
+    def choose_and_swap_items(self, other_vendor, category=None):
+        print(f"My inventory: \n {self.display_inventory(category)}")
+        print(f"Other inventory: \n {other_vendor.display_inventory(category)}")
+        my_id = int(input("Enter my id: "))
+        other_id = int(input("Enter other id: "))
+
+        result = self.swap_by_id(other_vendor, my_id, other_id)
         return result
