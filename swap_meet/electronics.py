@@ -5,6 +5,9 @@ class Electronics(Item):
         super().__init__(id, condition)
         self.type = type
 
+    def get_attribute(self):
+        return self.type
+
     def __str__(self):
         
         summary = super().__str__()

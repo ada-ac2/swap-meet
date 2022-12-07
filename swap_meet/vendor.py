@@ -73,6 +73,29 @@ class Vendor:
             
         return True
 
+    # Optional get_by method
+
+    def get_by_category_attribute(self, category, attribute):
+
+        category_items = self.get_by_category(category)
+
+        items = [item for item in category_items if attribute == item.get_attribute()]
+
+        return items
+
+    # Optional swap method
+
+    def swap_by_attribute(self, other_vendor, category, attribute):
+        my_items = self.get_by_category_attribute(category, attribute)
+        their_items = other_vendor.get_by_category_attribute(category, attribute)
+        
+        my_item = my_items[0]
+        their_item = their_items[0]
+        
+        swapped = swapped = self.swap_items(other_vendor, my_item, their_item)
+
+        return True
+
     def swap_items(self, other_vendor, my_item, their_item):
 
         if my_item not in self.inventory or \

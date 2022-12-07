@@ -5,6 +5,9 @@ class Clothing(Item):
         super().__init__(id, condition)
         self.fabric = fabric
 
+    def get_attribute(self):
+        return self.fabric
+
     def __str__(self):
         summary = super().__str__()
         class_summary = f"It is made from {self.fabric} fabric."

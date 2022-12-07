@@ -6,6 +6,9 @@ class Decor(Item):
         self.width = width
         self.length = length
 
+    def get_attribute(self):
+        return self.width * self.length
+
     def __str__(self):
         
         summary = super().__str__()
