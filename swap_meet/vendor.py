@@ -1,4 +1,4 @@
-#from .item import Item
+
 
 class Vendor:
     def __init__(self, inventory=None):
@@ -88,5 +88,14 @@ class Vendor:
         return result
 
     #Optional Enhancements
+    def get_by_attribute(self, attribute):
+        for item in self.inventory:
+            if attribute in item.__str__():
+                return item
+        return None
+
     def swap_by_similar(self, other_vendor, my_attributes, their_attributes):
-        pass
+        my_item = self.get_by_attribute(my_attributes)
+        their_item = other_vendor.get_by_attribute(their_attributes)
+        result = self.swap_items(other_vendor, my_item, their_item)
+        return result

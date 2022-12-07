@@ -22,3 +22,5 @@ class Item:
             return "Good"
         elif 4 < self.condition <= 5:
             return "Very good."
+
+   
