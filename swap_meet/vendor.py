@@ -14,36 +14,52 @@ class Vendor:
 
     def get_by_id(self, id):
 
-        for item in self.inventory:
-            if item.id == id:
-                return item
+        # for item in self.inventory:
+        #     if item.id == id:
+        #         return item
+        # item = list(filter(lambda x: x.id == id, self.inventory))[0]
+        # return item if item else None
 
-        return None
+        item = next((i for i in self.inventory if i.id == id), None)
+
+        return item
 
     def get_by_category(self, category):
-        category_items = []
 
-        for item in self.inventory:
-            if item.get_category() == category:
-                category_items.append(item)
+        items = [i for i in self.inventory if i.get_category() == category]
+
+        return items
+
+        # category_items = []
+
+        # for item in self.inventory:
+        #     if item.get_category() == category:
+        #         category_items.append(item)
         
-        return category_items
+        # return category_items
 
 
     def get_best_by_category(self, category):
 
-        category_items = self.get_by_category(category)
-        if not category_items:
+        items = self.get_by_category(category)
+        
+        if not items:
             return None
 
-        highest_value = 0
-        item_to_return = None
+        max_value = max([i.condition for i in items])
 
-        for item in category_items:
-            if item.condition > highest_value:
-                highest_value = item.condition
-                item_to_return = item
-        return item_to_return
+        item = next((i for i in items if i.condition == max_value), None)
+
+        return item
+
+        # highest_value = 0
+        # item_to_return = None
+
+        # for item in category_items:
+        #     if item.condition > highest_value:
+        #         highest_value = item.condition
+        #         item_to_return = item
+        # return item_to_return
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
         
@@ -75,11 +91,15 @@ class Vendor:
         if not self.inventory or not other_vendor.inventory:
             return False
 
-        swapped = self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
+        my_item = self.inventory[0]
+        their_item = other_vendor.inventory[0]
+
+        swapped = self.swap_items(other_vendor, my_item, their_item)
 
         return swapped
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        
         my_item = self.get_by_id(my_item_id)
         their_item = other_vendor.get_by_id(their_item_id)
 
@@ -91,35 +111,45 @@ class Vendor:
         return swapped
 
     def choose_and_swap_items(self, other_vendor, category = ''):
+        
         self.display_inventory(category)
         other_vendor.display_inventory(category)
 
-        my_item_id = input('Enter item from your inventory by id: ')
-        their_item_id = input('Enter item from their inventory by id: ')
+        my_item_id = int(input('Enter item from your inventory by id: '))
+        their_item_id = int(input('Enter item from their inventory by id: '))
 
-        swapped = self.swap_by_id(other_vendor, int(my_item_id), int(their_item_id))
+        swapped = self.swap_by_id(other_vendor, my_item_id, their_item_id)
 
         return swapped
 
 
     def display_inventory(self, category = ''):
         
-        # Refactor
+        # Refactored
 
         if not self.inventory:
             print("No inventory to display.")
             return
 
-        if category:
-            items = self.get_by_category(category)
-            if items:
-                for i in range(len(items)):
-                    print(f"{i + 1}. {str(items[i])}")
-            else: 
-                print("No inventory to display.")
-        else:
-            for i in range(len(self.inventory)):
-                print(f"{i + 1}. {str(self.inventory[i])}")
+        items = self.get_by_category(category) if category else self.inventory
 
-        
-    
+        if items:
+            for i, item in enumerate(items, 1):
+                print(f"{i}. {str(item)}")
+        else: 
+            print("No inventory to display.")
+
+        # if not self.inventory:
+        #     print("No inventory to display.")
+        #     return
+
+        # if category:
+        #     items = self.get_by_category(category)
+        #     if items:
+        #         for i in range(len(items)):
+        #             print(f"{i + 1}. {str(items[i])}")
+        #     else: 
+        #         print("No inventory to display.")
+        # else:
+        #     for i in range(len(self.inventory)):
+        #         print(f"{i + 1}. {str(self.inventory[i])}")
