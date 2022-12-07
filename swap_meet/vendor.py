@@ -109,3 +109,35 @@ class Vendor:
             return True
         return False
         
+    def swap_clothing_by_attributes(self, other_vendor):
+        list_of_my_clothing = self.get_by_category("Clothing")
+        list_of_their_clothing = other_vendor.get_by_category("Clothing")
+        for my_item in list_of_my_clothing:
+            for their_item in list_of_their_clothing:
+                if my_item.fabric == their_item.fabric:
+                    self.swap_by_id(other_vendor, my_item.id, their_item.id)
+                    return True
+        return False
+    
+    def swap_decor_by_attributes(self, other_vendor):
+        list_of_my_decor = self.get_by_category("Decor")
+        list_of_their_decor = other_vendor.get_by_category("Decor")
+        for my_item in list_of_my_decor:
+            for their_item in list_of_their_decor:
+                if my_item.width == their_item.width \
+                    and my_item.lenght == their_item.lenght \
+                    or my_item.width * my_item.lenght == their_item.width * their_item.lenght:
+                    
+                    self.swap_by_id(other_vendor, my_item.id, their_item.id)
+                    return True
+        return False
+    
+    def swap_electronics_by_attributes(self, other_vendor):
+        list_of_my_electronics = self.get_by_category("Electronics")
+        list_of_their_electronics = other_vendor.get_by_category("Electronics")
+        for my_item in list_of_my_electronics:
+            for their_item in list_of_their_electronics:
+                if my_item.type == their_item.type:
+                    self.swap_by_id(other_vendor, my_item.id, their_item.id)
+                    return True
+        return False
