@@ -44,8 +44,7 @@ class Vendor:
 
     def get_by_category(self, category):
         if not self.inventory:
-            raise ValueError("Empty Inventory")
-            # change to return None?
+            return []
 
         item_category_list = list(filter(lambda item: item.get_category() == category, self.inventory))
         return item_category_list

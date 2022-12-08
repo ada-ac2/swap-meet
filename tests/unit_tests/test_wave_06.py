@@ -42,10 +42,11 @@ def test_raise_error_for_empty_vendor_no_matching_items_by_category():
     vendor = Vendor(
         inventory=[]
     )
-    with pytest.raises(ValueError):
-        items = vendor.get_by_category("Electronics")
 
+    items = vendor.get_by_category("Electronics")
 
+    assert len(items) == 0
+    assert not items
 
 def test_best_by_category():
     item_a = Clothing(condition=2.0)
