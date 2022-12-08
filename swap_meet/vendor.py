@@ -72,3 +72,16 @@ class Vendor:
         else:
             self.swap_items(other_vendor, self.get_best_by_category(their_priority), other_vendor.get_best_by_category(my_priority))
             return True
+
+    def display_inventory(self, category = ''):
+        if not category and self.inventory:
+            result_list = self.inventory
+        elif not self.get_by_category(category) or not self.inventory:
+            print("No inventory to display.")
+            return False
+        else:
+            result_list = self.get_by_category(category)
+
+        for i in range(len(result_list)):
+            print(f"{i+1}. {result_list[i]}")
+        return True

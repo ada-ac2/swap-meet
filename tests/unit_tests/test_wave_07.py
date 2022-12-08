@@ -7,7 +7,7 @@ from swap_meet.electronics import Electronics
 
 # ~~~~~ display_inventory Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_items_no_category(capfd):
     # Arrange
     item_a = Clothing(id=123, fabric="Striped")
@@ -31,7 +31,7 @@ def test_display_inventory_with_items_no_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_items_and_category(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -52,7 +52,7 @@ def test_display_inventory_with_items_and_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_with_category_and_no_matching_items(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -72,7 +72,7 @@ def test_display_inventory_with_category_and_no_matching_items(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_no_items_no_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -87,7 +87,7 @@ def test_display_inventory_no_items_no_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_display_inventory_no_items_with_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
