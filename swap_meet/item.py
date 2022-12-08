@@ -9,6 +9,9 @@ class Item:
     def __str__(self):
         return f'An object of type Item with id {self.id}'
 
+    def get_category(self):
+        return "Item"
+
     def condition_description(self):
         if self.condition <= 1.0:
             return 'trash'
