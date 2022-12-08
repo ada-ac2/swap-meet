@@ -8,6 +8,7 @@ def test_items_have_default_uuid_length_id():
     assert isinstance(item.id, int)
     assert len(str(item.id)) >= 32
 
+
 #@pytest.mark.skip
 def test_item_instances_have_different_default_ids():
     item_a = Item()
@@ -35,6 +36,19 @@ def test_get_item_by_id():
 
     result_item = vendor.get_by_id(test_id)
     assert result_item is item_custom_id
+#########New Test
+#@pytest.mark.skip
+def test_get_by_id_for_none_id():
+    #Arrange
+    
+    item_with_no_id = Item()
+    vendor = Vendor(
+        inventory=[Item(),Item(),item_with_no_id]
+    )
+    result_item = vendor.get_by_id(None)
+    #Assert 
+    assert result_item == None
+
 
 #@pytest.mark.skip
 def test_get_item_by_id_no_matching():
@@ -47,6 +61,7 @@ def test_get_item_by_id_no_matching():
     )
 
     result_item = vendor.get_by_id(test_id)
+    
     assert result_item is None
 
     items = vendor.inventory
