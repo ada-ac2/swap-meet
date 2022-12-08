@@ -55,3 +55,24 @@ class Vendor:
          if not my_best_item or not their_best_item:
             return False
          return self.swap_items(other_vendor, my_best_item, their_best_item)
+    
+    def display_inventory(self, category=None):
+        items = self.get_by_category(category) if category else self.inventory
+        if items:
+            for index, item in enumerate(items):
+                print(f"{index+1}. {str(item)}")
+        else:
+            print("No inventory to display.")
+    
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        if (not self.get_by_id(my_item_id)) or (not other_vendor.get_by_id(their_item_id)):
+            return False
+        return self.swap_items(other_vendor, self.get_by_id(my_item_id), other_vendor.get_by_id(their_item_id))
+
+    def choose_and_swap_items(self, other_vendor, category=None):
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
+        my_item_id = int(input(f"Enter the item id from first inventory to swap: "))
+        their_item_id = int(input(f"Enter the item id from second inventory to swap: "))
+        return self.swap_by_id(other_vendor, my_item_id, their_item_id)
+
