@@ -38,9 +38,9 @@ class Vendor:
             return False
         
         my_first_item = self.inventory[0]
-        self.inventory[0] = other_vendor.inventory[0]
-        other_vendor.inventory[0] = my_first_item
-        return True
+        their_first_item = other_vendor.inventory[0]
+
+        return self.swap_items(other_vendor, my_first_item, their_first_item)
 
     def get_by_category(self, category):
         if not self.inventory:
@@ -108,7 +108,7 @@ class Vendor:
 def print_inventory(inventory):
     inventory_item = 1
     for item in inventory:
-        print(f"{inventory_item}. {str(item)}")
+        print(f"{inventory_item}. {item. __str__()}")
         inventory_item += 1
     return
 
