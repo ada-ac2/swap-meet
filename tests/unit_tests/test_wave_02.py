@@ -28,6 +28,14 @@ def test_item_init_raises_exception_when_given_non_numeric_condition():
     with pytest.raises(TypeError):
         item = Item(condition="New")
 
+def test_item_init_raises_exception_when_given_condition_greater_than_5():
+    with pytest.raises(ValueError):
+        item = Item(condition=8.0)
+
+def test_item_init_raises_exception_when_given_condition_lesser_than_0():
+    with pytest.raises(ValueError):
+        item = Item(condition=-1)
+
 #@pytest.mark.skip
 def test_item_obj_returns_text_item_for_category():
     item = Item()

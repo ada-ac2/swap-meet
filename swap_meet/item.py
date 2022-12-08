@@ -17,8 +17,13 @@ class Item:
         else:
             self.id = uuid.uuid4().int
 
-        if type(condition) is int or type(condition) is float:
+        is_number = type(condition) is int or type(condition) is float
+        if is_number and condition <= 5 and condition >=0:
             self.condition = condition
+        elif condition > 5:
+            raise ValueError("The condition for Item can't be greater than Five")
+        elif condition < 0:
+            raise ValueError("The condition for Item must be greater or equal to Zero")
         else:
             raise TypeError("The condition for an Item must me numerical")
 
