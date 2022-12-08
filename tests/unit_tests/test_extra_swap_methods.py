@@ -108,7 +108,6 @@ def test_swap_decor_by_space_no_matching_item_in_other():
     assert len(maty.inventory) == 2
     assert maty.inventory == [item_d, item_e]
 
-
 def test_swap_decor_by_space_no_decor_items_in_self_inventory():
     item_a = Item()
     item_b = Item()
@@ -378,6 +377,198 @@ def test_swap_clothing_by_fabric_no_other_inventory():
     )
 
     result = maty.swap_clothing_by_fabric(nad,"Unknown")
+
+    assert not result
+    assert len(nad.inventory) == 0
+    assert nad.inventory == []
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+# ------------ tests for swap_electronics_by_type ----------------
+
+def test_swap_electronics_by_type_returns_true_default_type():
+    item_a = Electronics()
+    item_b = Clothing()
+    item_c = Clothing()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics()
+    item_e = Clothing()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+    
+    result = nad.swap_electronics_by_type(maty,"Unknown")
+
+    assert result
+    assert item_d in nad.inventory
+    assert item_a not in nad.inventory
+    assert item_b in nad.inventory
+    assert item_c in nad.inventory
+    assert len(nad.inventory) == 3
+
+    assert item_a in maty.inventory
+    assert item_d not in maty.inventory
+    assert item_e in maty.inventory
+    assert len(maty.inventory) == 2
+
+
+def test_swap_electronics_by_type_returns_true_non_default_type():
+    item_a = Electronics(type="tablet")
+    item_b = Item()
+    item_c = Clothing()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing()
+    item_e = Electronics(type="tablet")
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+    
+    result = nad.swap_electronics_by_type(maty,"tablet")
+
+    assert result
+    assert item_e in nad.inventory
+    assert item_a not in nad.inventory
+    assert item_b in nad.inventory
+    assert item_c in nad.inventory
+    assert len(nad.inventory) == 3
+
+    assert item_a in maty.inventory
+    assert item_e not in maty.inventory
+    assert item_d in maty.inventory
+    assert len(maty.inventory) == 2
+
+def test_swap_electronics_by_type_no_matching_item_in_self():
+    item_a = Electronics()
+    item_b = Clothing()
+    item_c = Decor()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics(type="phone")
+    item_e = Decor()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+    
+    result = nad.swap_electronics_by_type(maty,"phone")
+
+    assert not result
+    assert len(nad.inventory) == 3
+    assert nad.inventory == [item_a,item_b,item_c]
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+def test_swap_electronics_by_type_no_matching_item_in_other():
+    item_a = Electronics()
+    item_b = Decor()
+    item_c = Decor()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics(type="phone")
+    item_e = Clothing()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+    
+    result = nad.swap_electronics_by_type(maty,"Unknown")
+
+    assert not result
+    assert len(nad.inventory) == 3
+    assert nad.inventory == [item_a,item_b,item_c]
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+
+def test_swap_electronics_by_type_no_electronic_items_in_self_inventory():
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Item()
+    item_e = Electronics()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+
+    result = nad.swap_electronics_by_type(maty,"Unknown")
+
+    assert not result
+    assert len(nad.inventory) == 3
+    assert nad.inventory == [item_a,item_b,item_c]
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+def test_swap_electronics_by_type_no_electronic_items_in_other_inventory():
+    item_a = Item()
+    item_b = Electronics()
+    item_c = Item()
+    nad = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Item()
+    item_e = Item()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+
+    result = nad.swap_electronics_by_type(maty,"Unknown")
+
+    assert not result
+    assert len(nad.inventory) == 3
+    assert nad.inventory == [item_a,item_b,item_c]
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+def test_swap_electronics_by_type_no_self_inventory():
+    nad = Vendor(
+        inventory=[]
+    )
+
+    item_d = Electronics()
+    item_e = Electronics()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+
+    result = nad.swap_electronics_by_type(maty,"Unknown")
+
+    assert not result
+    assert len(nad.inventory) == 0
+    assert nad.inventory == []
+
+    assert len(maty.inventory) == 2
+    assert maty.inventory == [item_d, item_e]
+
+def test_swap_electronics_by_type_no_other_inventory():
+    nad = Vendor(
+        inventory=[]
+    )
+
+    item_d = Item()
+    item_e = Item()
+    maty = Vendor(
+        inventory=[item_d, item_e]
+    )
+
+    result = maty.swap_electronics_by_type(nad,"Unknown")
 
     assert not result
     assert len(nad.inventory) == 0
