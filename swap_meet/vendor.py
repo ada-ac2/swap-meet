@@ -72,7 +72,7 @@ class Vendor:
             return
 
         if not category:
-            self.print_inventory(self.inventory)
+            print_inventory(self.inventory)
             return
 
         category_based_inventory = self.get_by_category(category)
@@ -80,35 +80,20 @@ class Vendor:
             print("No inventory to display.")
             return
 
-        self.print_inventory(category_based_inventory)
-        return
-
-    def print_inventory(self, inventory):
-        inventory_item = 1
-        for item in inventory:
-            print(f"{inventory_item}. {str(item)}")
-            inventory_item += 1
+        print_inventory(category_based_inventory)
         return
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
         if my_item_id == their_item_id:
             return False
         
-        my_item = self.item_with_matching_id(self.inventory, my_item_id)
-        their_item = self.item_with_matching_id(other_vendor.inventory, their_item_id)
+        my_item = item_with_matching_id(self.inventory, my_item_id)
+        their_item = item_with_matching_id(other_vendor.inventory, their_item_id)
         if not my_item or not their_item:
             return False
 
         self.swap_items(other_vendor, my_item, their_item)
         return True
-
-    def item_with_matching_id(self, inventory, item_id):
-        matching_item = 0
-        for item in inventory:
-            if item.id == item_id:
-                matching_item = item
-        return matching_item
-
 
     def choose_and_swap_items(self, other_vendor, category=""):
         print("**Vendor 1**")
@@ -119,3 +104,17 @@ class Vendor:
         user_vendor_2_id = input("Choose an item based on id")
         print("userid", user_vendor_1_id, user_vendor_2_id)
         return self.swap_by_id(other_vendor, int(user_vendor_1_id), int(user_vendor_2_id))
+
+def print_inventory(inventory):
+    inventory_item = 1
+    for item in inventory:
+        print(f"{inventory_item}. {str(item)}")
+        inventory_item += 1
+    return
+
+def item_with_matching_id(inventory, item_id):
+    matching_item = 0
+    for item in inventory:
+        if item.id == item_id:
+            matching_item = item
+    return matching_item
