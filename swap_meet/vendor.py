@@ -85,3 +85,14 @@ class Vendor:
         for i in range(len(result_list)):
             print(f"{i+1}. {result_list[i]}")
         return True
+
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        if not my_item or not their_item:
+            return False
+
+        self.swap_items(other_vendor,my_item, their_item )
+        return True
+        
