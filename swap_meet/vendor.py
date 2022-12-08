@@ -41,8 +41,8 @@ class Vendor:
         if not their_item or not my_item:
             return False
         
-        self.swap_items(other_vendor, my_item, their_item)
-        return True
+        swapped = self.swap_items(other_vendor, my_item, their_item)
+        return swapped
 
     def get_by_category_attribute(self, category, attribute):
         category_items = self.get_by_category(category)
