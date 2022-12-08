@@ -103,11 +103,30 @@ class Vendor:
         else:
             self.display_inventory(category)
             other_vendor.display_inventory(category)
-
+        
+        
         first_item = int(input("Please input a number"))
         second_item = int(input("Please input a number"))
         res = self.swap_by_id(other_vendor,first_item,second_item)
         return res
 
+# new method swap clothing by fabric
+    def swap_clothing_by_fabric(self, other_vendor,category="Clothing",fabric="Cotton"):
+        if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
+            return False
+        self_category_lst = self.get_by_category(category)
+        other_category_lst = other_vendor.get_by_category(category)
+        for item_a in self_category_lst:
+            if item_a.fabric == fabric:
+                their_want_item = item_a
+                print(their_want_item)
+                break
+        
+        for item_b in other_category_lst:
+            if item_b.fabric == fabric:
+                my_want_item = item_b
+                print(my_want_item)
+                break
 
-         
+        result = self.swap_items(other_vendor, their_want_item, my_want_item)
+        return result     

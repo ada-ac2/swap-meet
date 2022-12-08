@@ -217,11 +217,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     )
 
     # Act
-    result = tai.swap_by_id(
-        other_vendor=jesse,
-        my_item_id=213,
-        their_item_id=654
-    )
+    result = tai.swap_by_id(other_vendor=jesse, my_item_id=213, their_item_id=654)
 
     # Assert
     assert result == False
@@ -442,3 +438,117 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
+
+
+    # new test 
+def test_choose_and_swap_items_with_category_clothing_return_true(monkeypatch):
+    # Arrange
+    item_a = Clothing(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "321"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other_vendor=jesse, category=Clothing)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_d in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+
+def test_choose_and_swap_items_with_category_clothing_return_false(monkeypatch):
+    # Arrange
+    item_a = Clothing(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "988"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    
+    result = tai.choose_and_swap_items(other_vendor=jesse, category=Clothing)
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+
+
+def test_swap_by_id_success_returns_true():
+    # Arrange
+    item_a = Clothing(fabric="Cotton")
+    item_b = Clothing(fabric="Leather")
+    item_c = Clothing(fabric="Cotton")
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(fabric="Striped")
+    item_e = Clothing(fabric="Leather")
+    item_f = Clothing(fabric="Cotton")
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_clothing_by_fabric(
+        other_vendor=jesse,
+        category="Clothing",
+        fabric="Cotton"
+    )
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_f in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_d in jesse.inventory
