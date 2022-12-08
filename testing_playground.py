@@ -4,6 +4,8 @@ from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics  
     
 item_a = Decor(id=123)
+print(item_a)
+
 item_b = Electronics(id=456)
 item_c = Decor(id=789)
 tai = Vendor(
