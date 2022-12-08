@@ -65,6 +65,23 @@ class Vendor:
         else:
             return self.swap_items(other_vendor, my_best_item, their_best_item)
 
+    def display_inventory(self, category =""):
+        if category:
+            category_list = self.get_by_category(category)
+            if category_list:
+                for num, item in enumerate(category_list,1):
+                    print(f"{num}. " + str(item))
+            else:
+                print("No inventory to display.")
+                
+
+        else:
+            inventory_list =  self.inventory
+            if inventory_list:
+                for num, item in enumerate(inventory_list,1):
+                    print(f"{num}. " + str(item))
+            else: 
+                print("No inventory to display.")
 
 
 
