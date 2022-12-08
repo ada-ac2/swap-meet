@@ -454,7 +454,7 @@ def test_swap_by_attribute_success_returns_true():
     )
 
     item_d = Electronics(type='radio')
-    item_e = Decor(width=4, length=3)
+    item_e = Decor(width=4, length=2)
     item_f = Clothing(fabric='denim')
     tai = Vendor(
         inventory=[item_d, item_e, item_f]
@@ -463,21 +463,21 @@ def test_swap_by_attribute_success_returns_true():
     # Act
     result = jesse.swap_by_attribute(
         other_vendor=tai,
-        category='Electronics',
-        attribute='radio'
+        category='Decor',
+        attribute=8
     )
 
     # Assert
     assert result == True
 
     assert len(jesse.inventory) == 3
-    assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_b in jesse.inventory
     assert item_c in jesse.inventory
-    assert item_d in jesse.inventory
 
     assert len(tai.inventory) == 3
-    assert item_b in tai.inventory
-    assert item_e in tai.inventory
+    assert item_d in tai.inventory
+    assert item_a in tai.inventory
     assert item_f in tai.inventory
     
 def test_swap_by_attribute_with_caller_empty_inventory_returns_false():

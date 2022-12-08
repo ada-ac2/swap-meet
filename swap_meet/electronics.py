@@ -12,5 +12,4 @@ class Electronics(Item):
         
         summary = super().__str__()
         class_summary = f"This is a {self.type} device."
-        
         return ". ".join((summary, class_summary))

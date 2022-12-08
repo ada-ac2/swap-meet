@@ -9,7 +9,6 @@ class Item:
     def get_category(self):
         return type(self).__name__
         
-
     def condition_description(self):
         switch = {
             0 : "gross",

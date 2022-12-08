@@ -11,5 +11,4 @@ class Clothing(Item):
     def __str__(self):
         summary = super().__str__()
         class_summary = f"It is made from {self.fabric} fabric."
-
         return ". ".join((summary, class_summary))

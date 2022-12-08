@@ -13,5 +13,4 @@ class Decor(Item):
         
         summary = super().__str__()
         class_summary = f"It takes up a {self.width} by {self.length} sized space."
-
         return ". ".join((summary, class_summary))
