@@ -2,7 +2,7 @@ import pytest
 from swap_meet.vendor import Vendor
 from swap_meet.item import Item
 
-@pytest.mark.skip
+
 def test_item_overrides_to_string():
     test_id = 12345
     item = Item(id=test_id)
@@ -12,7 +12,7 @@ def test_item_overrides_to_string():
     expected_result = f"An object of type Item with id {test_id}"
     assert item_as_string == expected_result
 
-@pytest.mark.skip
+
 def test_swap_items_returns_true():
     item_a = Item()
     item_b = Item()
@@ -40,7 +40,7 @@ def test_swap_items_returns_true():
     assert item_b in jolie.inventory
     assert result
 
-@pytest.mark.skip
+
 def test_swap_items_when_my_item_is_missing_returns_false():
     item_a = Item()
     item_b = Item()
@@ -67,7 +67,7 @@ def test_swap_items_when_my_item_is_missing_returns_false():
     assert item_e in jolie.inventory
     assert not result
 
-@pytest.mark.skip
+
 def test_swap_items_when_their_item_is_missing_returns_false():
     item_a = Item()
     item_b = Item()
@@ -94,7 +94,7 @@ def test_swap_items_when_their_item_is_missing_returns_false():
     assert item_e in jolie.inventory
     assert not result
 
-@pytest.mark.skip
+
 def test_swap_items_from_my_empty_returns_false():
     fatimah = Vendor(
         inventory=[]
@@ -114,7 +114,7 @@ def test_swap_items_from_my_empty_returns_false():
     assert len(jolie.inventory) == 2
     assert not result
 
-@pytest.mark.skip
+
 def test_swap_items_from_their_empty_returns_false():
     item_a = Item()
     item_b = Item()
@@ -130,8 +130,32 @@ def test_swap_items_from_their_empty_returns_false():
     nobodys_item = Item()
 
     result = fatimah.swap_items(jolie, item_b, nobodys_item)
+    assert len(fatimah.inventory) == 3
+    assert len(jolie.inventory) == 0
+    assert not result
 
-    raise Exception("Complete this test according to comments below.")
-    # *********************************************************************
-    # ****** Complete Assert Portion of this test **********
-    # *********************************************************************
+def test_swap_items_when_items_are_the_same():
+    item_a = Item()
+    item_b = Item()
+    item_c = Item()
+    fatimah = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Item()
+    item_e = Item()
+    item_f = item_b
+    jolie = Vendor(
+        inventory=[item_d, item_f, item_e]
+    )
+
+    result = fatimah.swap_items(jolie, item_b, item_b)
+
+    assert len(fatimah.inventory) == 3
+    assert item_a in fatimah.inventory
+    assert item_b in fatimah.inventory
+    assert item_c in fatimah.inventory
+    assert len(jolie.inventory) == 3
+    assert item_d in jolie.inventory
+    assert item_e in jolie.inventory
+    assert not result

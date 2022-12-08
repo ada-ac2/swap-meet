@@ -2,7 +2,7 @@ import pytest
 from swap_meet.vendor import Vendor
 from swap_meet.item import Item
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @pytest.mark.integration_test
 def test_integration_wave_01_02_03():
     # make a vendor  
@@ -38,9 +38,9 @@ def test_integration_wave_01_02_03():
 
     # swap items
     other_vendor = Vendor()
+
     item3 = Item()
     other_vendor.add(item3)
-
     vendor.swap_items(other_vendor, item2, item3)
 
     assert len(vendor.inventory) == 1
