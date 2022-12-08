@@ -129,6 +129,38 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
 
     assert one_condition_description != five_condition_description
 
+#@pytest.mark.skip
+def test_items_have_various_condition_descriptions_that_are_different_from_each_other():
+    items = [
+        Clothing(condition=2),
+        Decor(condition=3),
+        Electronics(condition=4),
+        Electronics(condition=0)
+    ]
+    two_condition_description = items[0].condition_description()
+    assert isinstance(two_condition_description, str)
+
+    three_condition_description = items[1].condition_description()
+    assert isinstance(three_condition_description, str)
+
+    assert two_condition_description != three_condition_description
+
+    four_condition_description = items[2].condition_description()
+    assert isinstance(four_condition_description, str)
+
+    zero_condition_description = items[3].condition_description()
+    assert isinstance(zero_condition_description, str)
+
+    assert four_condition_description != zero_condition_description
+
+#@pytest.mark.skip
+def test_create_item_with_unknown_condition():
+    items = [
+        Decor(condition=10)
+    ]
+    unknown_condition_description = items[0].condition_description()
+    assert isinstance(unknown_condition_description, str)
+
 # ~~~~~ Helper Functions ~~~~~
 
 def check_for_default_uuid_length_id(to_check):
