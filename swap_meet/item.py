@@ -13,11 +13,11 @@ class Item:
             if type(id) is int:
                 self.id = id
             else:
-                raise ValueError("The id for Item obj must be an integer")
+                raise ValueError("The id for Item object must be an integer")
         else:
             self.id = uuid.uuid4().int
 
-        self.condition = condition
+        self.condition = round(condition)
 
     def get_category(self):
         return self.__class__.__name__
@@ -27,4 +27,4 @@ class Item:
         return str_item
 
     def condition_description(self):
-        return self.cond_descriptions[int(self.condition-1)]
+        return self.cond_descriptions[int(self.condition)]

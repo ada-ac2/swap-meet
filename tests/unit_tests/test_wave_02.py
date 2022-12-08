@@ -20,10 +20,13 @@ def test_items_use_custom_id_if_passed():
     assert isinstance(item.id, int)
     assert item.id == 12345
 
-def test_item_raises_exception_when_invalid_custom_id_passed():
+def test_item_init_raises_exception_when_invalid_custom_id_passed():
     with pytest.raises(ValueError):
         item = Item(id=1.234)
     
+def test_item_init_raises_exception_when_given_non_numeric_condition():
+    with pytest.raises(TypeError):
+        item = Item(condition="New")
 
 #@pytest.mark.skip
 def test_item_obj_returns_text_item_for_category():
