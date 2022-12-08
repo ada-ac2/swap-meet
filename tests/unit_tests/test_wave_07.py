@@ -517,7 +517,7 @@ def test_choose_and_swap_items_with_category_clothing_return_false(monkeypatch):
 
 
 
-def test_swap_by_id_success_returns_true():
+def test_swap_clothing_by_fabic_success_returns_true():
     # Arrange
     item_a = Clothing(fabric="Cotton")
     item_b = Clothing(fabric="Leather")
@@ -550,5 +550,79 @@ def test_swap_by_id_success_returns_true():
 
     assert len(jesse.inventory) == 3
     assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_d in jesse.inventory
+
+#self inventory no match fabric return false
+def test_swap_clothing_by_fabic_self_inventory_no_match_returns_false():
+    # Arrange
+    item_a = Clothing(fabric="Cotton")
+    item_b = Clothing(fabric="Leather")
+    item_c = Clothing(fabric="Cotton")
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(fabric="Striped")
+    item_e = Clothing(fabric="Leather")
+    item_f = Clothing(fabric="Cotton")
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_clothing_by_fabric(
+        other_vendor=jesse,
+        category="Clothing",
+        fabric="Striped"
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_f in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_d in jesse.inventory
+
+# other inventory no match fabric return false
+def test_swap_clothing_by_fabic_self_inventory_no_match_returns_false():
+    # Arrange
+    item_a = Clothing(fabric="Cotton")
+    item_b = Clothing(fabric="Leather")
+    item_c = Clothing(fabric="Cotton")
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing()
+    item_e = Clothing(fabric="Leather")
+    item_f = Clothing(fabric="Cotton")
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_clothing_by_fabric(
+        other_vendor=jesse,
+        category="Clothing",
+        fabric="Striped"
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_f in jesse.inventory
     assert item_e in jesse.inventory
     assert item_d in jesse.inventory

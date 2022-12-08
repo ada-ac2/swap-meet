@@ -116,17 +116,30 @@ class Vendor:
             return False
         self_category_lst = self.get_by_category(category)
         other_category_lst = other_vendor.get_by_category(category)
-        for item_a in self_category_lst:
-            if item_a.fabric == fabric:
-                their_want_item = item_a
-                print(their_want_item)
-                break
+        if len(self_category_lst) == 0 or len(other_category_lst) == 0:
+            return False
         
-        for item_b in other_category_lst:
-            if item_b.fabric == fabric:
-                my_want_item = item_b
-                print(my_want_item)
-                break
-
-        result = self.swap_items(other_vendor, their_want_item, my_want_item)
-        return result     
+        else:
+            self_not_match_fabric = []
+            for item_a in self_category_lst:
+                if item_a.fabric == fabric:
+                    their_want_item = item_a
+                    #print(their_want_item)
+                    break
+                else:
+                    self_not_match_fabric.append(item_a)
+            if len(self_not_match_fabric) == len(self_category_lst):
+              return False
+        
+            other_not_match_fabric = []       
+            for item_b in other_category_lst:
+                if item_b.fabric == fabric:
+                    my_want_item = item_b
+                    #print(my_want_item)
+                    break
+                else:
+                   other_not_match_fabric.append(item_b)
+            if len(other_not_match_fabric) == len(other_category_lst):
+              return False
+            result = self.swap_items(other_vendor, their_want_item, my_want_item)
+            return result     
