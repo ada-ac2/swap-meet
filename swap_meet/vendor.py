@@ -20,14 +20,16 @@ class Vendor:
         # item = list(filter(lambda x: x.id == id, self.inventory))[0]
         # return item if item else None
 
-        item = next((i for i in self.inventory if i.id == id), None)
+        item = next((item for item in self.inventory if item.id == id), None)
 
         return item
 
     def get_by_category(self, category):
 
-        items = [i for i in self.inventory if i.get_category() == category]
+        inventory = self.inventory
 
+        items = [item for item in inventory if item.get_category() == category]
+        
         return items
 
         # category_items = []
@@ -46,9 +48,10 @@ class Vendor:
         if not items:
             return None
 
-        max_value = max([i.condition for i in items])
+        max_value = max([item.condition for item in items])
 
-        item = next((i for i in items if i.condition == max_value), None)
+        item = \
+            next((item for item in items if item.condition == max_value), None)
 
         return item
 
@@ -79,15 +82,23 @@ class Vendor:
 
         category_items = self.get_by_category(category)
 
-        items = [item for item in category_items if attribute == item.get_attribute()]
+        items = [item for item in category_items \
+            if attribute == item.get_attribute()]
 
         return items
 
     # Optional swap method
 
     def swap_by_attribute(self, other_vendor, category, attribute):
+        # if not self.inventory or not other_vendor.inventory:
+        #     return False
+        
         my_items = self.get_by_category_attribute(category, attribute)
-        their_items = other_vendor.get_by_category_attribute(category, attribute)
+        their_items = \
+            other_vendor.get_by_category_attribute(category, attribute)
+
+        if not their_items or not my_items:
+            return False
         
         my_item = my_items[0]
         their_item = their_items[0]
@@ -97,7 +108,7 @@ class Vendor:
         return True
 
     def swap_items(self, other_vendor, my_item, their_item):
-
+        
         if my_item not in self.inventory or \
             their_item not in other_vendor.inventory:
             return False

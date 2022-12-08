@@ -441,3 +441,199 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
+
+
+# ~~~~~ swap_by_attribute Tests ~~~~~
+def test_swap_by_attribute_success_returns_true():
+    # Arrange
+    item_a = Decor(width=2, length=4)
+    item_b = Electronics(type='radio')
+    item_c = Decor(width=1, length=3)
+    jesse = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics(type='radio')
+    item_e = Decor(width=4, length=3)
+    item_f = Clothing(fabric='denim')
+    tai = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = jesse.swap_by_attribute(
+        other_vendor=tai,
+        category='Electronics',
+        attribute='radio'
+    )
+
+    # Assert
+    assert result == True
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_c in jesse.inventory
+    assert item_d in jesse.inventory
+
+    assert len(tai.inventory) == 3
+    assert item_b in tai.inventory
+    assert item_e in tai.inventory
+    assert item_f in tai.inventory
+    
+def test_swap_by_attribute_with_caller_empty_inventory_returns_false():
+    # Arrange
+    tai = Vendor(inventory=[])
+
+    item_d = Electronics(type='radio')
+    item_e = Decor(width=4, length=3)
+    item_f = Clothing(fabric='denim')
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_by_attribute(
+        other_vendor=jesse,
+        category='Electronics',
+        attribute='radio'
+    )
+
+    # Assert
+    assert result == False
+    assert len(tai.inventory) == 0
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+def test_swap_by_attribute_with_other_empty_inventory_returns_false():
+    # Arrange
+    item_a = Decor(width=2, length=4)
+    item_b = Electronics(type='radio')
+    item_c = Decor(width=1, length=3)
+    jesse = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    tai = Vendor(inventory=[])
+
+    # Act
+    result = jesse.swap_by_attribute(
+        other_vendor=tai,
+        category='Electronics',
+        attribute='radio'
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_b in jesse.inventory
+    assert item_c in jesse.inventory
+
+    assert len(tai.inventory) == 0
+
+def test_swap_by_attribute_fails_if_caller_missing_item():
+    # Arrange
+    item_a = Decor(width=2, length=4)
+    item_b = Electronics(type='laptop')
+    item_c = Decor(width=1, length=3)
+    jesse = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics(type='radio')
+    item_e = Decor(width=4, length=3)
+    item_f = Clothing(fabric='denim')
+    tai = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = jesse.swap_by_attribute(
+        other_vendor=tai,
+        category='Electronics',
+        attribute='radio'
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_b in jesse.inventory
+    assert item_c in jesse.inventory
+
+    assert len(tai.inventory) == 3
+    assert item_d in tai.inventory
+    assert item_e in tai.inventory
+    assert item_f in tai.inventory
+
+def test_swap_by_attribute_fails_if_other_missing_item():
+    # Arrange
+    item_a = Decor(width=2, length=4)
+    item_b = Electronics(type='laptop')
+    item_c = Decor(width=1, length=3)
+    jesse = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Electronics(type='radio')
+    item_e = Decor(width=4, length=3)
+    item_f = Clothing(fabric='denim')
+    tai = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = jesse.swap_by_attribute(
+        other_vendor=tai,
+        category='Electronics',
+        attribute='laptop'
+    )
+
+    # Assert
+    assert result == False
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_b in jesse.inventory
+    assert item_c in jesse.inventory
+
+    assert len(tai.inventory) == 3
+    assert item_d in tai.inventory
+    assert item_e in tai.inventory
+    assert item_f in tai.inventory
+
+# ~~~~~ get_by_category_attribute Tests ~~~~~
+
+def test_get_items_by_category_attribute():
+    item_a = Clothing(fabric="silk")
+    item_b = Electronics(type="radio")
+    item_c = Clothing(fabric="silk")
+    item_d = Decor(width=1, length=2)
+    item_e = Item(condition=0)
+    vendor = Vendor(
+        inventory=[item_a, item_b, item_c, item_d, item_e]
+    )
+
+    items = vendor.get_by_category_attribute("Clothing", "silk")
+
+    assert len(items) == 2
+    assert item_a in items
+    assert item_c in items
+
+def test_get_no_matching_items_by_category_attribute():
+    item_a = Decor(width=2, length=4)
+    item_b = Electronics(type="laptop")
+    item_c = Decor(width=1, length=3)
+    vendor = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    items = vendor.get_by_category_attribute("Electronics", "radio")
+
+    assert items == []
+    assert len(items) == 0
