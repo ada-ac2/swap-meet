@@ -1,3 +1,7 @@
+from swap_meet.clothing import Clothing
+from swap_meet.decor import Decor
+from swap_meet.electronics import Electronics
+
 class Vendor:
     def __init__(self, inventory = None) :
         self.inventory = inventory if inventory is not None else []
@@ -44,6 +48,22 @@ class Vendor:
 
         best_item = max(items_by_cate, key = lambda item: item.condition)
         return best_item
+
+    def get_clothes_by_fabric(self,fabric):
+        clothing = [item for item in self.inventory if isinstance(item, Clothing) 
+                    and item.fabric == fabric]
+        return clothing
+
+    def get_decors_by_space(self, space):
+        decors = [item for item in self.inventory if isinstance(item, Decor)
+                  and item.get_space() == space]
+        return decors
+
+    def get_electronics_by_type(self, type):
+        electronics = [item for item in self.inventory if isinstance(item, Electronics)
+                       and item.type == type]
+        return electronics
+
 
     def display_inventory(self, category=""):
         display_items = self.get_by_category(category) if category else self.inventory
@@ -105,27 +125,65 @@ class Vendor:
         if not other_vendor:
             return False
 
-        my_decor_items = self.get_by_category("Decor")
-        if not my_decor_items:
-            return False
-
-        their_decor_items = other_vendor.get_by_category("Decor")
-        if not their_decor_items:
-            return False
-
-        my_items_with_their_space = [item for item in my_decor_items if item.get_space() == their_desired_space ]
+        my_items_with_their_space = self.get_decors_by_space(their_desired_space)
         if not my_items_with_their_space:
             return False
 
-        their_items_with_my_space = [item for item in their_decor_items if item.get_space() == my_desired_space]
+        their_items_with_my_space = other_vendor.get_decors_by_space(my_desired_space)
         if not their_items_with_my_space:
             return False
 
-        #Swaping occurs. Didn't used the function swap_items to avoid going through validations twice
+        '''
+        Swaping occurs. Didn't used the function swap_items to avoid going through validations and looking 
+        for the item twice'''
         self.add(their_items_with_my_space[0])
         other_vendor.add(my_items_with_their_space[0])
         self.remove(my_items_with_their_space[0])
         other_vendor.remove(their_items_with_my_space[0])
+
+        return True
+
+    def swap_clothing_by_fabric(self, other_vendor, fabric):
+        if not other_vendor:
+            return False
+
+        my_items_with_fabric = self.get_clothes_by_fabric(fabric)
+        if not my_items_with_fabric:
+            return False
+
+        their_items_with_fabric = other_vendor.get_clothes_by_fabric(fabric)
+        if not their_items_with_fabric:
+            return False
+
+        '''
+        Swaping occurs. Didn't used the function swap_items to avoid going through validations and looking 
+        for the item twice'''
+        self.add(their_items_with_fabric[0])
+        other_vendor.add(my_items_with_fabric[0])
+        self.remove(my_items_with_fabric[0])
+        other_vendor.remove(their_items_with_fabric[0])
+
+        return True
+
+    def swap_electronics_by_type(self,other_vendor, type):
+        if not other_vendor:
+            return False
+
+        my_electronics_type = self.get_electronics_by_type(type)
+        if not my_electronics_type:
+            return False
+
+        their_electronics_type = other_vendor.get_electronics_by_type(type)
+        if not their_electronics_type:
+            return False
+
+        '''
+        Swaping of the first found occurs. Didn't used the function swap_items to avoid going through validations and looking 
+        for the item twice'''
+        self.add(their_electronics_type[0])
+        other_vendor.add(my_electronics_type[0])
+        self.remove(my_electronics_type[0])
+        other_vendor.remove(their_electronics_type[0])
 
         return True
 
