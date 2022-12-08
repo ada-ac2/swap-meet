@@ -13,20 +13,20 @@ class Item:
     def get_category(self):
         return self.__class__.__name__
 
-    def condition_description(self):
+    def condition_description(self) : 
         match math.floor(self.condition):
             case 0:
-                return ("condition is 0")
+                return ("Eww... You will definitely need to clean it before use")
             case 1:
-                return ("condition is 1")
+                return ("I hope you like antique style...")
             case 2:
-                return ("condition is 2")
+                return ("I think this one might look nice after you clean it.")
             case 3:
-                return ("condition is 3")
+                return ("Not bad!!")
             case 4:
-                return ("condition is 4")
+                return ("This looks almost new.")
             case other:
-                return ("Lucky one with best condition")
+                return ("Fresh out of the factory. Did anyone even touch it?")
     
     def is_similar(self):
         return True
