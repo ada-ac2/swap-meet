@@ -36,17 +36,11 @@ def test_integration_wave_01_02_03():
     result = vendor.get_by_id(1234)
     assert not result
 
-    print("vendor inventory", vendor.inventory)
     # swap items
     other_vendor = Vendor()
-    print("other inventory", other_vendor.inventory)
+
     item3 = Item()
     other_vendor.add(item3)
-    print("vendor inventory", vendor.inventory)
-    print("other inventory", other_vendor.inventory)
-
-    new_obj = Vendor()
-    print("new obj", new_obj.inventory)
     vendor.swap_items(other_vendor, item2, item3)
 
     assert len(vendor.inventory) == 1
