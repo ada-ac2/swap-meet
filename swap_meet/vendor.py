@@ -5,11 +5,12 @@ class Vendor:
 
     def __init__(self, inventory = None):
         """Creates Vendor instance"""
+        
         self.inventory = inventory if inventory is not None else []
     
     def add(self, item):
         """Adds items to inventory. Returns item."""
-
+        
         self.inventory.append(item)
         return item
 
