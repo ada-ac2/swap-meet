@@ -21,6 +21,11 @@ def test_items_use_custom_id_if_passed():
     assert item.id == 12345
 
 # @pytest.mark.skip
+def test_items_use_string_as_custom_id_raises_value_error():
+    with pytest.raises(ValueError):
+        item = Item(id="142")
+
+# @pytest.mark.skip
 def test_item_obj_returns_text_item_for_category():
     item = Item()
     assert item.get_category() == "Item"

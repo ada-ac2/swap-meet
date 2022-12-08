@@ -31,6 +31,7 @@ class Vendor:
         
         item = next(
             (item for item in items if item.condition == max_value), None)
+        
         return item
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
@@ -96,17 +97,17 @@ class Vendor:
         swapped = self.swap_items(other_vendor, my_item, their_item)
         return swapped
 
-    def choose_and_swap_items(self, other_vendor, category = ''):
+    def choose_and_swap_items(self, other_vendor, category = ""):
         
         self.display_inventory(category)
         other_vendor.display_inventory(category)
 
-        my_item_id = int(input('Enter item from your inventory by id: '))
-        their_item_id = int(input('Enter item from their inventory by id: '))
+        my_item_id = int(input("Enter item from your inventory by id: "))
+        their_item_id = int(input("Enter item from their inventory by id: "))
         swapped = self.swap_by_id(other_vendor, my_item_id, their_item_id)
         return swapped
 
-    def display_inventory(self, category = ''):
+    def display_inventory(self, category = ""):
         
         if not self.inventory:
             print("No inventory to display.")

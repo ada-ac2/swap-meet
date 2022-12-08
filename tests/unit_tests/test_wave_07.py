@@ -447,15 +447,15 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
 def test_swap_by_attribute_success_returns_true():
     # Arrange
     item_a = Decor(width=2, length=4)
-    item_b = Electronics(type='radio')
+    item_b = Electronics(type="radio")
     item_c = Decor(width=1, length=3)
     jesse = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Electronics(type='radio')
+    item_d = Electronics(type="radio")
     item_e = Decor(width=4, length=2)
-    item_f = Clothing(fabric='denim')
+    item_f = Clothing(fabric="denim")
     tai = Vendor(
         inventory=[item_d, item_e, item_f]
     )
@@ -463,7 +463,7 @@ def test_swap_by_attribute_success_returns_true():
     # Act
     result = jesse.swap_by_attribute(
         other_vendor=tai,
-        category='Decor',
+        category="Decor",
         attribute=8
     )
 
@@ -484,9 +484,9 @@ def test_swap_by_attribute_with_caller_empty_inventory_returns_false():
     # Arrange
     tai = Vendor(inventory=[])
 
-    item_d = Electronics(type='radio')
+    item_d = Electronics(type="radio")
     item_e = Decor(width=4, length=3)
-    item_f = Clothing(fabric='denim')
+    item_f = Clothing(fabric="denim")
     jesse = Vendor(
         inventory=[item_d, item_e, item_f]
     )
@@ -494,8 +494,8 @@ def test_swap_by_attribute_with_caller_empty_inventory_returns_false():
     # Act
     result = tai.swap_by_attribute(
         other_vendor=jesse,
-        category='Electronics',
-        attribute='radio'
+        category="Electronics",
+        attribute="radio"
     )
 
     # Assert
@@ -510,7 +510,7 @@ def test_swap_by_attribute_with_caller_empty_inventory_returns_false():
 def test_swap_by_attribute_with_other_empty_inventory_returns_false():
     # Arrange
     item_a = Decor(width=2, length=4)
-    item_b = Electronics(type='radio')
+    item_b = Electronics(type="radio")
     item_c = Decor(width=1, length=3)
     jesse = Vendor(
         inventory=[item_a, item_b, item_c]
@@ -521,8 +521,8 @@ def test_swap_by_attribute_with_other_empty_inventory_returns_false():
     # Act
     result = jesse.swap_by_attribute(
         other_vendor=tai,
-        category='Electronics',
-        attribute='radio'
+        category="Electronics",
+        attribute="radio"
     )
 
     # Assert
@@ -538,15 +538,15 @@ def test_swap_by_attribute_with_other_empty_inventory_returns_false():
 def test_swap_by_attribute_fails_if_caller_missing_item():
     # Arrange
     item_a = Decor(width=2, length=4)
-    item_b = Electronics(type='laptop')
+    item_b = Electronics(type="laptop")
     item_c = Decor(width=1, length=3)
     jesse = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Electronics(type='radio')
+    item_d = Electronics(type="radio")
     item_e = Decor(width=4, length=3)
-    item_f = Clothing(fabric='denim')
+    item_f = Clothing(fabric="denim")
     tai = Vendor(
         inventory=[item_d, item_e, item_f]
     )
@@ -554,8 +554,8 @@ def test_swap_by_attribute_fails_if_caller_missing_item():
     # Act
     result = jesse.swap_by_attribute(
         other_vendor=tai,
-        category='Electronics',
-        attribute='radio'
+        category="Electronics",
+        attribute="radio"
     )
 
     # Assert
@@ -574,15 +574,15 @@ def test_swap_by_attribute_fails_if_caller_missing_item():
 def test_swap_by_attribute_fails_if_other_missing_item():
     # Arrange
     item_a = Decor(width=2, length=4)
-    item_b = Electronics(type='laptop')
+    item_b = Electronics(type="laptop")
     item_c = Decor(width=1, length=3)
     jesse = Vendor(
         inventory=[item_a, item_b, item_c]
     )
 
-    item_d = Electronics(type='radio')
+    item_d = Electronics(type="radio")
     item_e = Decor(width=4, length=3)
-    item_f = Clothing(fabric='denim')
+    item_f = Clothing(fabric="denim")
     tai = Vendor(
         inventory=[item_d, item_e, item_f]
     )
@@ -590,8 +590,8 @@ def test_swap_by_attribute_fails_if_other_missing_item():
     # Act
     result = jesse.swap_by_attribute(
         other_vendor=tai,
-        category='Electronics',
-        attribute='laptop'
+        category="Electronics",
+        attribute="laptop"
     )
 
     # Assert
