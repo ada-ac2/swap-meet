@@ -146,7 +146,7 @@ class Vendor:
         return swapped
 
     def display_inventory(self, category = ""):
-        """Displays inventory."""
+        """Displays Vendor inventory with item descriptions."""
         
         if not self.inventory:
             print("No inventory to display.")
