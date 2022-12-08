@@ -95,4 +95,10 @@ class Vendor:
 
         self.swap_items(other_vendor,my_item, their_item )
         return True
-        
+
+    def choose_and_swap_items(self, other_vendor, category = ""):
+        self.display_inventory(category = category)
+        other_vendor.display_inventory(category = category)
+        my_item_id = input("Please provide the ID of the item you will giving to the other vendor: ")
+        other_vendor_item_id = input("Please provide the ID of the item you will be taking from the other vendor: ")
+        return self.swap_by_id(other_vendor , int(my_item_id), int(other_vendor_item_id))
