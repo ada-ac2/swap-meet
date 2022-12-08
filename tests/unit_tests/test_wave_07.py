@@ -104,7 +104,7 @@ def test_display_inventory_no_items_with_category(capfd):
 
 # ~~~~~ swap_by_id Tests ~~~~~
 
-@pytest.mark.skip
+
 def test_swap_by_id_success_returns_true():
     # Arrange
     item_a = Decor(id=123)
@@ -141,7 +141,7 @@ def test_swap_by_id_success_returns_true():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+
 def test_swap_by_id_with_caller_empty_inventory_returns_false():
     # Arrange
     tai = Vendor(inventory=[])
@@ -169,7 +169,7 @@ def test_swap_by_id_with_caller_empty_inventory_returns_false():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+
 def test_swap_by_id_with_other_empty_inventory_returns_false():
     # Arrange
     item_a = Decor(id=123)
@@ -198,7 +198,7 @@ def test_swap_by_id_with_other_empty_inventory_returns_false():
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+
 def test_swap_by_id_fails_if_caller_missing_item():
     # Arrange
     item_a = Decor(id=123)
@@ -235,7 +235,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+
 def test_swap_by_id_fails_if_other_missing_item():
     # Arrange
     item_a = Decor(id=123)
