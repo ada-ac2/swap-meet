@@ -4,7 +4,7 @@ class Item:
     cond_descriptions = ["Poor",
                          "Heavily Used",
                          "Fair",
-                         "Good"
+                         "Good",
                          "Very Good",
                          "Mint"]
 
@@ -13,11 +13,14 @@ class Item:
             if type(id) is int:
                 self.id = id
             else:
-                raise ValueError("The id for Item object must be an integer")
+                raise TypeError("The id for Item object must be an integer")
         else:
             self.id = uuid.uuid4().int
 
-        self.condition = round(condition)
+        if type(condition) is int or type(condition) is float:
+            self.condition = condition
+        else:
+            raise TypeError("The condition for an Item must me numerical")
 
     def get_category(self):
         return self.__class__.__name__

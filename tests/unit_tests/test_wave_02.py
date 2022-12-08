@@ -21,7 +21,7 @@ def test_items_use_custom_id_if_passed():
     assert item.id == 12345
 
 def test_item_init_raises_exception_when_invalid_custom_id_passed():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         item = Item(id=1.234)
     
 def test_item_init_raises_exception_when_given_non_numeric_condition():
