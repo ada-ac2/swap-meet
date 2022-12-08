@@ -46,6 +46,19 @@ class Vendor:
                 li.append(item)
         return li
 
+    def get_best_by_category(self, category):
+        category_list = self.get_by_category(category)
+        if category_list:
+            curr_best_item = category_list[0]
+            for item in category_list:
+                if item.condition > curr_best_item.condition:
+                    curr_best_item = item
+            return curr_best_item
+
+        else:
+            return None
+
+
 
 
 
