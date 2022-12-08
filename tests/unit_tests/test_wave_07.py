@@ -442,7 +442,7 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-    ###########New Test#############################
+    ########### New Test for code covergae #############################
 #@pytest.mark.skip
 def test_choose_and_swap_items_with_other_inventory_category(monkeypatch):
     # Arrange

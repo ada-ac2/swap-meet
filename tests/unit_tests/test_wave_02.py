@@ -36,7 +36,7 @@ def test_get_item_by_id():
 
     result_item = vendor.get_by_id(test_id)
     assert result_item is item_custom_id
-#########New Test
+######### New Test for Code coverage
 #@pytest.mark.skip
 def test_get_by_id_for_none_id():
     #Arrange
