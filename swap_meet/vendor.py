@@ -64,7 +64,6 @@ class Vendor:
                        and item.type == type]
         return electronics
 
-
     def display_inventory(self, category=""):
         display_items = self.get_by_category(category) if category else self.inventory
         

@@ -223,7 +223,6 @@ def test_swap_clothing_by_fabric_returns_true_default_fabric():
     assert item_e in maty.inventory
     assert len(maty.inventory) == 2
 
-
 def test_swap_clothing_by_fabric_returns_true_non_default_fabric():
     item_a = Clothing(fabric="wool")
     item_b = Clothing()
@@ -297,7 +296,6 @@ def test_swap_clothing_by_fabric_no_matching_item_in_other():
 
     assert len(maty.inventory) == 2
     assert maty.inventory == [item_d, item_e]
-
 
 def test_swap_clothing_by_fabric_no_clothing_items_in_self_inventory():
     item_a = Item()
@@ -415,7 +413,6 @@ def test_swap_electronics_by_type_returns_true_default_type():
     assert item_e in maty.inventory
     assert len(maty.inventory) == 2
 
-
 def test_swap_electronics_by_type_returns_true_non_default_type():
     item_a = Electronics(type="tablet")
     item_b = Item()
@@ -489,7 +486,6 @@ def test_swap_electronics_by_type_no_matching_item_in_other():
 
     assert len(maty.inventory) == 2
     assert maty.inventory == [item_d, item_e]
-
 
 def test_swap_electronics_by_type_no_electronic_items_in_self_inventory():
     item_a = Item()
