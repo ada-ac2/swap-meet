@@ -5,12 +5,11 @@ class Item:
     def __init__(self, id = None, condition = 0):
         if id is not None:
             if type(id) is not int:
-                raise ValueError("invalid id")
+                raise ValueError("invalid id input")
             else:
                 self.id = id
         else:
             self.id = uuid.uuid1().int
-        # self.id = id if id is not None and type(id) is int else uuid.uuid1().int
         self.condition = condition
 
     def get_category(self):

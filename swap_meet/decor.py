@@ -7,7 +7,8 @@ class Decor(Item):
         self.length = length
 
     def get_attribute(self):
-        return self.width * self.length
+        item_size = self.width * self.length
+        return item_size
 
     def __str__(self):
         
