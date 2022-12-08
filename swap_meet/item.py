@@ -27,3 +27,6 @@ class Item:
                 return ("condition is 4")
             case other:
                 return ("Lucky one with best condition")
+    
+    def is_similar(self):
+        return True

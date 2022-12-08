@@ -6,3 +6,7 @@ class Electronics(Item):
     
     def __str__(self):
         return (f"{super().__str__()}. This is a {self.type} device.")
+    
+
+    def is_similar(self, other_item):
+        return self.type == other_item.type

@@ -1,3 +1,4 @@
+import random
 class Vendor:
     
     def __init__(self, inventory=None):
@@ -46,7 +47,7 @@ class Vendor:
         my_first_item = self.inventory[0]
         their_first_item = other_vendor.inventory[0]
         return self.swap_items(other_vendor, my_first_item, their_first_item)
-        
+
     def get_by_category(self, category):
         return list(filter(lambda item: item.get_category()== category, self.inventory))
     
@@ -95,3 +96,12 @@ class Vendor:
         their_item_id = int(input(f"Please provide the id of the {category} you want to receive in exchange: "))
 
         return self.swap_by_id(other_vendor, my_item_id, their_item_id)
+    
+    def swap_similar_items(self, other_vendor, my_item):
+        their_inventory = other_vendor.get_by_category(my_item.get_category())
+        
+        final_candidates = list(filter(lambda item: my_item.is_similar(item), their_inventory))
+        their_item = None if not final_candidates else random.choice(final_candidates)
+        
+        return self.swap_items(other_vendor, my_item, their_item)
+
