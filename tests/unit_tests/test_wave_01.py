@@ -27,6 +27,13 @@ def test_adding_to_inventory():
     assert item in vendor.inventory
     assert result == item
 
+def test_adding_empty_item_to_inventory():
+    vendor = Vendor()
+    item = ""
+
+    with pytest.raises(ValueError):
+        vendor.add(item)
+
 # @pytest.mark.skip
 def test_removing_from_inventory_returns_item():
     item = "item to remove"
