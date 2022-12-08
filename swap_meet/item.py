@@ -1,6 +1,7 @@
 import uuid
 
 class Item:
+    """Item class has a unique id and a condition."""
     
     def __init__(self, id = None, condition = 0):
         if id is not None:
