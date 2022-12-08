@@ -45,6 +45,7 @@ class Vendor:
     def get_by_category(self, category):
         if not self.inventory:
             raise ValueError("Empty Inventory")
+            # change to return None?
 
         item_category_list = list(filter(lambda item: item.get_category() == category, self.inventory))
         return item_category_list
@@ -57,6 +58,11 @@ class Vendor:
         max_item = max(item_category_list, key=lambda item: item.condition)
         return max_item
 
-    def swap_best_by_category(self):
-        # use swap_items
-        pass
+    def swap_best_by_category(self, other_vendor, my_priority, their_priority):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        their_priority_item_in_my_inventory = self.get_best_by_category(their_priority)
+        my_priority_item_in_their_inventory = other_vendor.get_best_by_category(my_priority)
+        if my_priority_item_in_their_inventory == None or their_priority_item_in_my_inventory == None:
+            False
+        return self.swap_items(other_vendor, their_priority_item_in_my_inventory, my_priority_item_in_their_inventory)
