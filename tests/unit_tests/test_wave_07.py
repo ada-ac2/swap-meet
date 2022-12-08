@@ -274,7 +274,7 @@ def test_swap_by_id_fails_if_other_missing_item():
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 
-@pytest.mark.skip
+
 def test_choose_and_swap_items_success(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -311,7 +311,6 @@ def test_choose_and_swap_items_success(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
 
-@pytest.mark.skip
 def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     # Arrange
     tai = Vendor(inventory=[])
@@ -339,7 +338,7 @@ def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+
 def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -368,7 +367,7 @@ def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+
 def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -405,7 +404,7 @@ def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+
 def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)

@@ -80,7 +80,7 @@ class Vendor:
             print("No inventory to display.")
             return
 
-        self .print_inventory(category_based_inventory)
+        self.print_inventory(category_based_inventory)
         return
 
     def print_inventory(self, inventory):
@@ -110,5 +110,12 @@ class Vendor:
         return matching_item
 
 
-    def choose_and_swap_items(self):
-        pass
+    def choose_and_swap_items(self, other_vendor, category=""):
+        print("**Vendor 1**")
+        self.display_inventory(category=category)
+        user_vendor_1_id = input("Choose an item based on id")
+        print("**Vendor 2**")
+        other_vendor.display_inventory(category=category)
+        user_vendor_2_id = input("Choose an item based on id")
+        print("userid", user_vendor_1_id, user_vendor_2_id)
+        return self.swap_by_id(other_vendor, int(user_vendor_1_id), int(user_vendor_2_id))
