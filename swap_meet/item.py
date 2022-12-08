@@ -25,7 +25,7 @@ class Item:
         elif condition < 0:
             raise ValueError("The condition for Item must be greater or equal to Zero")
         else:
-            raise TypeError("The condition for an Item must me numerical")
+            raise TypeError("The condition for Item must me numerical")
 
     def get_category(self):
         return self.__class__.__name__
