@@ -38,14 +38,7 @@ class Vendor:
         if not self.inventory or not other_vendor.inventory:
             return False
         else:
-            #gets vendor's first item, removes it and add it to other vendor's inventory
-            vendor_first_item = self.inventory.pop(0)
-            other_vendor.inventory.append(vendor_first_item)
-
-            #gets other vendor's first item, removes it and add it to vendor's inventory
-            other_vendor_first_item = other_vendor.inventory.pop(0)
-            self.inventory.append(other_vendor_first_item)
-
+            self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
             return True
     
     #returns a list of objects in the inventory with that category
@@ -81,4 +74,44 @@ class Vendor:
         res = self.swap_items(other_vendor, my_best, thier_best)
         return res
 
+    def display_template(self, list_to_display):
+        idx = 1
+        for item in list_to_display:
+            print(f'{idx}. {item.__str__()}')
+            idx += 1
 
+    def display_inventory(self, category=''):
+
+        list_of_categories = self.get_by_category(category)
+
+        if not self.inventory or (category != '' and not list_of_categories):
+            print("No inventory to display.")
+        elif category == '':
+            self.display_template(self.inventory)
+        else:
+            self.display_template(list_of_categories)
+
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        
+        my_id = self.get_by_id(my_item_id)
+        their_id = other_vendor.get_by_id(their_item_id)
+        
+        res = self.swap_items(other_vendor, my_id, their_id)
+        return res
+
+    def choose_and_swap_items(self, other_vendor, category=None):
+
+        my_category_list = self.get_by_category(category)
+        thier_category_list = other_vendor.get_by_category(category)
+        
+        #output list of given category
+        self.display_template(my_category_list)
+        self.display_inventory(thier_category_list)
+
+        vendor_id_want_swapped = int(input("ID of item to swap"))
+        other_vendor_id_want_swapped = int(input("ID of item to swap"))
+
+        result = self.swap_by_id(other_vendor, vendor_id_want_swapped, other_vendor_id_want_swapped)
+        return result
