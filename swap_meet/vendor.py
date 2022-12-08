@@ -99,5 +99,16 @@ class Vendor:
         else:
             return False
 
+    def choose_and_swap_items(self, other_vendor, category=""):
+    
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
+        user_input_1 = input(f"Please provide the id of an item from your inventory list you want to swap: \n")
+        my_item_id = int(user_input_1)
+        user_input_2 = input(f"Please provide the id of an item from your friend's inventory list you want to receive \n")
+        their_item_id = int(user_input_2)
+
+        return self.swap_by_id(other_vendor, my_item_id, their_item_id)
+
 
 
