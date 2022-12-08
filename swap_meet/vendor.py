@@ -74,7 +74,6 @@ class Vendor:
             else:
                 print("No inventory to display.")
                 
-
         else:
             inventory_list =  self.inventory
             if inventory_list:
@@ -83,7 +82,22 @@ class Vendor:
             else: 
                 print("No inventory to display.")
 
+    def swap_by_id(self, other_vendor, my_item_id, their_item_id):
+        my_dic = {}
+        their_dic = {}
+        for item in self.inventory:
+            my_dic[item.id] = item
+        for item in other_vendor.inventory:
+            their_dic[item.id] = item
 
+        if my_item_id in my_dic and their_item_id in their_dic:
+            self.inventory.remove(my_dic[my_item_id])
+            other_vendor.inventory.append(my_dic[my_item_id])
+            other_vendor.inventory.remove(their_dic[their_item_id])
+            self.inventory.append(their_dic[their_item_id])
+            return True
+        else:
+            return False
 
 
 
