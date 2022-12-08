@@ -111,16 +111,17 @@ class Vendor:
 
         return self.swap_items(other_vendor,my_item,their_item)
 
-    '''
-    Swaps a Decor item between self and other_vendor by the space the items use
-    - my_desired_space is a tuple that holds the lenght and width if the Decor item self would like to get
-    - their_desired_space is tuple that holds the lenght and width of the Decor item other_vendor
-       would like to get
-    It goes throught both inventories and swaps the first items that match the desired areas returning True
-    If there aren't items matching the spaces desired in the respective inventories 
-    the swap doesn't happpen and returns False
-    '''
     def swap_decor_by_space_used(self, other_vendor, my_desired_space, their_desired_space):
+        """Swaps a Decor item between self and other_vendor by the space the items use
+
+            - my_desired_space is a tuple that holds the lenght and width if the Decor item self would like to get
+            - their_desired_space is tuple that holds the lenght and width of the Decor item other_vendor
+            would like to get
+            
+            It goes throught both inventories and swaps the first items that match the desired dimensions returning True
+            If there aren't items matching the spaces desired in the respective inventories 
+            the swap doesn't happpen and returns False"""
+
         if not other_vendor:
             return False
 
@@ -143,6 +144,8 @@ class Vendor:
         return True
 
     def swap_clothing_by_fabric(self, other_vendor, fabric):
+        """Swaps a the first clothing item between self and other vendor that matches the fabric
+        """
         if not other_vendor:
             return False
 
@@ -165,6 +168,8 @@ class Vendor:
         return True
 
     def swap_electronics_by_type(self,other_vendor, type):
+        """Swaps the first electronic item between self and other vendor that matches the type"""
+        
         if not other_vendor:
             return False
 
