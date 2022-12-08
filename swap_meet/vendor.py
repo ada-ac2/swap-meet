@@ -14,12 +14,6 @@ class Vendor:
 
     def get_by_id(self, id):
 
-        # for item in self.inventory:
-        #     if item.id == id:
-        #         return item
-        # item = list(filter(lambda x: x.id == id, self.inventory))[0]
-        # return item if item else None
-
         item = next((item for item in self.inventory if item.id == id), None)
 
         return item
@@ -32,15 +26,6 @@ class Vendor:
         
         return items
 
-        # category_items = []
-
-        # for item in self.inventory:
-        #     if item.get_category() == category:
-        #         category_items.append(item)
-        
-        # return category_items
-
-
     def get_best_by_category(self, category):
 
         items = self.get_by_category(category)
@@ -50,19 +35,10 @@ class Vendor:
 
         max_value = max([item.condition for item in items])
 
-        item = \
-            next((item for item in items if item.condition == max_value), None)
+        item = next(
+            (item for item in items if item.condition == max_value), None)
 
         return item
-
-        # highest_value = 0
-        # item_to_return = None
-
-        # for item in category_items:
-        #     if item.condition > highest_value:
-        #         highest_value = item.condition
-        #         item_to_return = item
-        # return item_to_return
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
         
@@ -76,26 +52,20 @@ class Vendor:
             
         return True
 
-    # Optional get_by method
-
     def get_by_category_attribute(self, category, attribute):
 
         category_items = self.get_by_category(category)
 
-        items = [item for item in category_items \
+        items = [item for item in category_items
             if attribute == item.get_attribute()]
 
         return items
 
-    # Optional swap method
-
     def swap_by_attribute(self, other_vendor, category, attribute):
-        # if not self.inventory or not other_vendor.inventory:
-        #     return False
         
         my_items = self.get_by_category_attribute(category, attribute)
-        their_items = \
-            other_vendor.get_by_category_attribute(category, attribute)
+        their_items = other_vendor.get_by_category_attribute(
+                category, attribute)
 
         if not their_items or not my_items:
             return False
@@ -109,8 +79,9 @@ class Vendor:
 
     def swap_items(self, other_vendor, my_item, their_item):
         
-        if my_item not in self.inventory or \
-            their_item not in other_vendor.inventory:
+        inventory = self.inventory
+
+        if my_item not in inventory or their_item not in other_vendor.inventory:
             return False
 
         self.inventory.remove(my_item)
@@ -159,8 +130,6 @@ class Vendor:
 
     def display_inventory(self, category = ''):
         
-        # Refactored
-
         if not self.inventory:
             print("No inventory to display.")
             return
@@ -172,18 +141,3 @@ class Vendor:
                 print(f"{i}. {str(item)}")
         else: 
             print("No inventory to display.")
-
-        # if not self.inventory:
-        #     print("No inventory to display.")
-        #     return
-
-        # if category:
-        #     items = self.get_by_category(category)
-        #     if items:
-        #         for i in range(len(items)):
-        #             print(f"{i + 1}. {str(items[i])}")
-        #     else: 
-        #         print("No inventory to display.")
-        # else:
-        #     for i in range(len(self.inventory)):
-        #         print(f"{i + 1}. {str(self.inventory[i])}")
