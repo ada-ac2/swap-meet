@@ -65,3 +65,35 @@ class Vendor:
         if my_priority_item_in_their_inventory == None or their_priority_item_in_my_inventory == None:
             False
         return self.swap_items(other_vendor, their_priority_item_in_my_inventory, my_priority_item_in_their_inventory)
+    
+    def display_inventory(self, category=""):
+        if not self.inventory:
+            print("No inventory to display.")
+            return
+
+        if not category:
+            self.print_inventory(self.inventory)
+            return
+
+        category_based_inventory = self.get_by_category(category)
+        if not category_based_inventory:
+            print("No inventory to display.")
+            return
+
+        self.print_inventory(category_based_inventory)
+        return
+
+    def print_inventory(self, inventory):
+        inventory_item = 1
+        for item in inventory:
+            print(f"{inventory_item}. {str(item)}")
+            inventory_item += 1
+        return
+
+
+
+    def swap_by_id(self):
+        pass
+
+    def choose_and_swap_items(self):
+        pass
