@@ -39,6 +39,7 @@ class Vendor:
         # Removes my_item from my inventory, add to other_vendor's inventory
         swap_item1 = self.remove(my_item)
         other_vendor.add(swap_item1)
+
         # Removes their_item from other_vendor's inventory, add to my inventory
         swap_item2 = other_vendor.remove(their_item)
         self.add(swap_item2)
@@ -47,7 +48,7 @@ class Vendor:
 
     def swap_first_item(self, other_vendor):
         # Check if either vendor's inventory is empty
-        if len(other_vendor.inventory) == 0 or len(self.inventory) == 0:
+        if not other_vendor.inventory or not self.inventory:
             return False
 
         return self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
