@@ -58,4 +58,42 @@ class Vendor:
         their_item = other_vendor.get_best_by_category(my_priority)
 
         return self.swap_items(other_vendor, my_item, their_item)
+    
+    #wave 07
+    def display_inventory(self, category=""):
+        display_items = self.get_by_category(category)
+        if not self.inventory:
+            print("No inventory to display.")
+        elif not category:
+            for i, item in enumerate(self.inventory):
+                    print(f"{i+1}. {str(item)}")
+        else:
+            display_items = self.get_by_category(category)
+            if not display_items:
+                print("No inventory to display.")
+            else:
+                for i, item in enumerate(display_items):
+                    print(f"{i+1}. {str(item)}")
+
+    def swap_by_id(self, other_vendor, my_item_id,their_item_id):
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
+
+        return self.swap_items(other_vendor, my_item, their_item)
+    
+    def choose_and_swap_items(self, other_vendor, category=""):
+
+        self.display_inventory(category)
+        my_item_id = int(input("Enter an item id from your inventory: "))
+
+        other_vendor.display_inventory(category)
+        their_item_id = int(input("Enter an item id from your friend's inventory:  "))
+        
+        return self.swap_by_id(other_vendor, my_item_id, their_item_id)
+        
+
+
+
+
+
 
