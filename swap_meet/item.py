@@ -2,8 +2,10 @@ import uuid
 import math
 
 class Item:
-    def __init__(self, id=None, condition=0):
+    def __init__(self, id=None, condition=0):           
         self.id = id if id else uuid.uuid4().int
+        if type(self.id) != int:
+            raise TypeError("Id should be interger")
         self.condition = condition
         
 
