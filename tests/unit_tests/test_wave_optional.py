@@ -17,7 +17,7 @@ def test_swap_decor_by_size():
     their_vendor = Vendor(inventory=[item_c, item_d])
 
     # Act
-    result = my_vendor.swap_decor_by_space(their_vendor)
+    result = my_vendor.swap_decor_by_similiar_item(their_vendor)
 
     # Assert
     assert result 
@@ -37,7 +37,7 @@ def test_swap_decor_by_size_reordered():
     their_vendor = Vendor(inventory=[item_c, item_d])
 
     # Act
-    result = my_vendor.swap_decor_by_space(their_vendor)
+    result = my_vendor.swap_decor_by_similiar_item(their_vendor)
 
     # Assert
     assert result 
@@ -60,7 +60,7 @@ def test_swap_clothings_by_fabric():
     their_vendor = Vendor(inventory=[item_c, item_d])
 
     # Act
-    result = my_vendor.swap_clothings_by_fabric(their_vendor)
+    result = my_vendor.swap_decor_by_similiar_item(their_vendor)
 
     # Assert
     assert result 
@@ -81,7 +81,7 @@ def test_swap_electronics_by_type():
     their_vendor = Vendor(inventory=[item_c, item_d])
 
     # Act
-    result = my_vendor.swap_electronics_by_type(their_vendor)
+    result = my_vendor.swap_decor_by_similiar_item(their_vendor)
 
     # Assert
     assert result 
