@@ -8,10 +8,10 @@ class Item:
         self.condition = condition
     
     def get_category(self):
-        return f'{self.__class__.__name__}'
+        return self.__class__.__name__
 
     def __str__(self):
-        return f"An object of type Item with id {self.id}"
+        return f"An object of type {self.get_category()} with id {self.id}"
     
     def condition_description(self):
         if self.condition == 0:

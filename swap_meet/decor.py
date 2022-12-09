@@ -7,4 +7,4 @@ class Decor(Item):
         self.length = length
 
     def __str__(self):
-        return f'An object of type Decor with id {self.id}. It takes up a {self.width} by {self.length} sized space.'
+        return super().__str__() + f'. It takes up a {self.width} by {self.length} sized space.'

@@ -1,6 +1,10 @@
 class Vendor:
-    def __init__(self, inventory=[]):
-        self.inventory = inventory
+    #default value should not be mutable!!!
+    def __init__(self, inventory=None): 
+        if not inventory:
+            self.inventory = []
+        else:
+            self.inventory = inventory
     
     def add(self, item):
         self.inventory.append(item)
@@ -26,7 +30,8 @@ class Vendor:
         self.add(their_item)
         other_vendor.remove(their_item)    
         return True
-    
+        
+    #TODO reuse swap_itme()
     def swap_first_item(self, other_vendor):
         if not other_vendor.inventory or not self.inventory:
             return False
@@ -43,7 +48,7 @@ class Vendor:
                 items.append(item)
         return items
 
-    def get_best_by_category(self, category):
+    def get_best_by_category(self, category=""):
         items = self.get_by_category(category)
         best_condition = 0.0  
         best_item = None
@@ -61,12 +66,11 @@ class Vendor:
     
     #wave 07
     def display_inventory(self, category=""):
-        display_items = self.get_by_category(category)
         if not self.inventory:
             print("No inventory to display.")
         elif not category:
             for i, item in enumerate(self.inventory):
-                    print(f"{i+1}. {str(item)}")
+                print(f"{i+1}. {str(item)}")
         else:
             display_items = self.get_by_category(category)
             if not display_items:
@@ -88,7 +92,7 @@ class Vendor:
 
         other_vendor.display_inventory(category)
         their_item_id = int(input("Enter an item id from your friend's inventory:  "))
-        
+
         return self.swap_by_id(other_vendor, my_item_id, their_item_id)
         
 
