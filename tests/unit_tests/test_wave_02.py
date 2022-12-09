@@ -21,6 +21,12 @@ def test_items_use_custom_id_if_passed():
     assert item.id == 12345
 
 #@pytest.mark.skip
+def test_items_throw_error_if_id_is_not_int():
+    with pytest.raises(TypeError) as err:
+        item = Item(id="1234")
+    assert str(err.value) == "Item id should be an int type object"
+
+#@pytest.mark.skip
 def test_item_obj_returns_text_item_for_category():
     item = Item()
     assert item.get_category() == "Item"

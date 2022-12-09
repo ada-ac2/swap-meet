@@ -3,6 +3,8 @@ class Item:
     def __init__(self, id=None, condition=0):
         unique_identifier = uuid.uuid4()
         self.id = id if id else unique_identifier.int
+        if not isinstance(self.id, int):
+            raise TypeError("Item id should be an int type object")
         self.condition = condition if condition else 0
 
     def get_category(self):

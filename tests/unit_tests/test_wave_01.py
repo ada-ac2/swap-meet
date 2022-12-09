@@ -17,6 +17,13 @@ def test_vendor_takes_optional_inventory():
     assert "c" in vendor.inventory
 
 #@pytest.mark.skip
+def test_vendor_inventory_should_be_list_object():
+    with pytest.raises(TypeError) as err:
+        vendor = Vendor(inventory="New Inventory")
+    
+    assert str(err.value) == "Inventory should be a list type object"
+
+#@pytest.mark.skip
 def test_adding_to_inventory():
     vendor = Vendor()
     item = "new item"
@@ -37,13 +44,6 @@ def test_adding_to_inventory_edge_case_item_is_None():
     assert len(vendor.inventory) == 0
     assert item not in vendor.inventory
     assert result == None
-
-#@pytest.mark.skip
-def test_adding_to_inventory_edge_case_inventory_is_a_string():
-    with pytest.raises(TypeError) as err:
-        vendor = Vendor(inventory="New Inventory")
-    
-    assert str(err.value) == "Inventory should be a list type object"
    
 #@pytest.mark.skip
 def test_removing_from_inventory_returns_item():
