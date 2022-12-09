@@ -88,8 +88,8 @@ class Vendor:
         return self.swap_items(other_vendor, my_item, their_item)
     
     def choose_and_swap_items(self, other_vendor, category=""):
-        my_inventory = self.display_inventory(category)
-        their_inventory = other_vendor.display_inventory(category)
+        self.display_inventory(category)
+        other_vendor.display_inventory(category)
 
         category = "Item" if not category else category
         my_item_id = int(input(f"Please provide the id of the {category} you want to give in exchange: "))
