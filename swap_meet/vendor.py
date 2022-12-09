@@ -10,7 +10,7 @@ class Vendor:
         if inventory is not None:
             self.inventory = inventory
         else:
-            self.inventory = []
+            self.inventory = []//I would like to know which is best practice in these two
     '''
         
     def add(self,new_item):

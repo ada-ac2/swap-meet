@@ -444,7 +444,7 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
 
     ########### New Test for code covergae #############################
 #@pytest.mark.skip
-def test_choose_and_swap_items_with_other_inventory_category(monkeypatch):
+def test_choose_and_swap_items_with_other_inventory_category_given(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
     item_b = Electronics(id=456)

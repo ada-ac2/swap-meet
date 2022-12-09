@@ -11,7 +11,8 @@ class Item:
         self.category = category
 
     def get_category(self):
-        return self.__class__.__name__#type(self).__name__
+        return self.__class__.__name__#type(self).__name__ I would like to know which is best practice in these two
+    
 
 # Wave 3
     def __str__(self):
