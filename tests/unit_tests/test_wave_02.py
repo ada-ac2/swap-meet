@@ -20,7 +20,11 @@ def test_items_use_custom_id_if_passed():
     assert isinstance(item.id, int)
     assert item.id == 12345
 
-@pytest.mark.skip
+def test_items_use_non_interger_id_if_passes():
+
+    with pytest.raises(TypeError):
+        item = Item(id="3456")
+
 def test_item_obj_returns_text_item_for_category():
     item = Item()
     assert item.get_category() == "Item"
