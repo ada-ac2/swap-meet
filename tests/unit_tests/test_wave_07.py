@@ -73,6 +73,21 @@ def test_display_inventory_with_category_and_no_matching_items(capfd):
     assert captured.out == expected_str
 
 #@pytest.mark.skip
+def test_display_inventory_with_no_existing_inventory(capfd):
+    # Arrange
+    vendor = Vendor()
+    
+    # Act
+    vendor.display_inventory()
+
+    # Assert
+    captured = capfd.readouterr()
+    expected_str = (
+        "No inventory to display.\n"
+    )
+    assert captured.out == expected_str
+
+#@pytest.mark.skip
 def test_display_inventory_no_items_no_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -271,6 +286,94 @@ def test_swap_by_id_fails_if_other_missing_item():
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
+
+#@pytest.mark.skip
+def test_get_by_id_fails_if_missing_item():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+    # Act
+    result = tai.get_by_id(None)
+
+    # Assert
+    assert result == None
+
+#@pytest.mark.skip
+def test_swap_items_fails_if_missing_item():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_items(
+        jesse,
+        None,
+        item_f
+    )
+    # Assert
+    assert result == False
+
+#@pytest.mark.skip
+def test_swap_items_fails_if_other_missing_item():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_items(
+        jesse,
+        item_a,
+        None
+    )
+    # Assert
+    assert result == False
+
+#@pytest.mark.skip
+def test_swap_first_items_fails_if_missing_other_vendor():
+    # Arrange
+    item_a = Decor(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = tai.swap_first_item(
+        None
+    )
+    # Assert
+    assert result == False
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 

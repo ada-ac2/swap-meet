@@ -43,6 +43,19 @@ def test_get_no_matching_items_by_category():
     assert item_c not in items
 
 #@pytest.mark.skip
+def test_by_category_empty_string_is_passed_as_argument():
+    item_a = Decor(condition=2.0)
+    item_b = Decor(condition=2.0)
+    item_c = Decor(condition=4.0)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item = tai.get_by_category("")
+
+    assert item is None
+
+#@pytest.mark.skip
 def test_best_by_category():
     item_a = Clothing(condition=2.0)
     item_b = Decor(condition=2.0)
@@ -68,6 +81,19 @@ def test_best_by_category_no_matches_is_none():
     )
 
     best_item = tai.get_best_by_category("Electronics")
+
+    assert best_item is None
+
+#@pytest.mark.skip
+def test_best_by_category_empty_string_is_passed_as_argument():
+    item_a = Decor(condition=2.0)
+    item_b = Decor(condition=2.0)
+    item_c = Decor(condition=4.0)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    best_item = tai.get_best_by_category("")
 
     assert best_item is None
 

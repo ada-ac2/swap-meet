@@ -28,6 +28,24 @@ def test_adding_to_inventory():
     assert result == item
 
 #@pytest.mark.skip
+def test_adding_to_inventory_edge_case_item_is_None():
+    vendor = Vendor()
+    item = None
+
+    result = vendor.add(item)
+
+    assert len(vendor.inventory) == 0
+    assert item not in vendor.inventory
+    assert result == None
+
+#@pytest.mark.skip
+def test_adding_to_inventory_edge_case_inventory_is_a_string():
+    with pytest.raises(TypeError) as err:
+        vendor = Vendor(inventory="New Inventory")
+    
+    assert str(err.value) == "Inventory should be a list type object"
+   
+#@pytest.mark.skip
 def test_removing_from_inventory_returns_item():
     item = "item to remove"
     vendor = Vendor(
