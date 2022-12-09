@@ -22,12 +22,6 @@ class Vendor:
         specific_item = list(filter(lambda item: item.id == item_id, self.inventory))
         return specific_item[0] if specific_item else None
 
-        # for item in self.inventory:
-        #     if item.id == item_id:
-        #         return item
-
-        # return None
-
 
     def swap_items(self, other_vendor, self_item, other_vendor_item):
         if self_item in self.inventory and other_vendor_item in other_vendor.inventory:
@@ -49,11 +43,6 @@ class Vendor:
 
 
     def get_by_category(self, category):
-        # items_from_category = []
-        # for item in self.inventory:
-        #     if item.get_category().lower() == category.lower():
-        #         items_from_category.append(item)
-
         items_from_category = list(filter(lambda item: item.get_category().lower() == category.lower(), self.inventory))
 
         return items_from_category

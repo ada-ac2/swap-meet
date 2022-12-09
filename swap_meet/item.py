@@ -1,8 +1,7 @@
 import uuid
 
 class Item:
-    def __init__(self, id = None, condition = 5):
-        #maybe check if id already exists so that there won't be duplicates??
+    def __init__(self, id = None, condition = 0):
         self.id = uuid.uuid4().int if id is None else int(id)
         condition = float(condition)
         if condition < 0 or condition > 5:

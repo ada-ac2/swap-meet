@@ -50,3 +50,10 @@ def test_removing_not_found_returns_none():
     result = vendor.remove(item)
 
     assert result == None
+
+# extra test:
+def test_if_inventory_is_passed_as_something_different_than_list_raisses_error():
+    invalid_inventory = "tshirt"
+
+    with pytest.raises(TypeError):
+        Vendor(invalid_inventory)

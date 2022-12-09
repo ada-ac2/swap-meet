@@ -2,6 +2,7 @@ import pytest
 from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
+from swap_meet.item import Item
 
 TEST_CUSTOM_ID = 12345
 
@@ -128,6 +129,36 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
         assert item.condition_description() == one_condition_description
 
     assert one_condition_description != five_condition_description
+
+# extra tests:
+def test_invalid_condition_less_than_zero_raises_error():
+    with pytest.raises(ValueError):
+        Item(condition = -1)
+
+def test_invalid_condition_bigger_than_five_raises_error():
+    with pytest.raises(ValueError):
+        Clothing(condition = 5.5)
+
+def test_valid_condition_input_and_default_condition_return_different_description():
+    item_a = Clothing(condition=4.3)
+    item_b = Decor(condition=3.1)
+    item_c = Electronics(condition=2.8)
+    item_d = Item(condition=1.7)
+    item_e = Clothing()
+
+    description_a = item_a.condition_description()
+    description_b = item_b.condition_description()
+    description_c = item_c.condition_description()
+    description_d = item_d.condition_description()
+    description_e = item_e.condition_description()
+
+    descriptions_set = {description_a, description_b, description_c, description_d, description_e}
+
+    assert len(descriptions_set) == 5
+
+
+
+
 
 # ~~~~~ Helper Functions ~~~~~
 
