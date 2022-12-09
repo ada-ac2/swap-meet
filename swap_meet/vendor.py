@@ -8,20 +8,22 @@ class Vendor:
         else:
             self.inventory = inventory
         
-
+    #help function to check inventory empty
+    def check_inventory_empty(self):
+        if len(self.inventory) == 0:
+            return None
     
     def add(self, item):
         self.inventory.append(item)
         return item
 
     def remove(self, item):
-        # can I use filter()
         if item in self.inventory:
             self.inventory.remove(item)
             return item
         else:
             return None
-    #filter()
+    
     def get_by_id(self, id):
         for item in self.inventory:
             if item.id == id:
@@ -38,13 +40,13 @@ class Vendor:
             b_vendor.remove(their_item)
             return True
 
-    def swap_first_item(self,b_vendor):
-        if  len(self.inventory) == 0 or len(b_vendor.inventory) == 0:
+    def swap_first_item(self,other_vendor):
+        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
             return False
         else:
             my_item = self.inventory.pop(0)
-            b_vendor.add(my_item)
-            their_item = b_vendor.inventory.pop(0)
+            other_vendor.add(my_item)
+            their_item = other_vendor.inventory.pop(0)
             self.add(their_item)
             return True
     # List comprehension
@@ -61,8 +63,9 @@ class Vendor:
         
 
     def swap_best_by_category(self, other_vendor, my_priority,their_priority):
-        if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
+        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
             return False
+        
         their_want_item = self.get_best_by_category(their_priority)
         
         my_want_item = other_vendor.get_best_by_category(my_priority)
@@ -71,7 +74,8 @@ class Vendor:
         return result
 
     def display_inventory(self, category=None):
-        if len(self.inventory) == 0:
+        if self.check_inventory_empty():
+        #if len(self.inventory) == 0:
             print("No inventory to display.")
         else:   
             if not category:
@@ -111,8 +115,8 @@ class Vendor:
         return res
 
 # new method swap clothing by fabric
-    def swap_clothing_by_fabric(self, other_vendor,category="Clothing",fabric="Cotton"):
-        if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
+    def swap_clothing_by_fabric(self, other_vendor, category, fabric):
+        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
             return False
         self_category_lst = self.get_by_category(category)
         other_category_lst = other_vendor.get_by_category(category)
@@ -124,7 +128,6 @@ class Vendor:
             for item_a in self_category_lst:
                 if item_a.fabric == fabric:
                     their_want_item = item_a
-                    #print(their_want_item)
                     break
                 else:
                     self_not_match_fabric.append(item_a)
@@ -135,7 +138,6 @@ class Vendor:
             for item_b in other_category_lst:
                 if item_b.fabric == fabric:
                     my_want_item = item_b
-                    #print(my_want_item)
                     break
                 else:
                    other_not_match_fabric.append(item_b)
@@ -143,3 +145,68 @@ class Vendor:
               return False
             result = self.swap_items(other_vendor, their_want_item, my_want_item)
             return result     
+
+
+# new method swap electronics by type
+    def swap_electronics_by_type(self, other_vendor, category, type):
+        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
+            return False
+        self_category_lst = self.get_by_category(category)
+        other_category_lst = other_vendor.get_by_category(category)
+        if len(self_category_lst) == 0 or len(other_category_lst) == 0:
+            return False
+        
+        else:
+            self_not_match_type = []
+            for item_a in self_category_lst:
+                if item_a.type == type:
+                    their_want_item = item_a
+                    break
+                else:
+                    self_not_match_type.append(item_a)
+            if len(self_not_match_type) == len(self_category_lst):
+              return False
+        
+            other_not_match_type = []       
+            for item_b in other_category_lst:
+                if item_b.type == type:
+                    my_want_item = item_b
+                    break
+                else:
+                   other_not_match_type.append(item_b)
+            if len(other_not_match_type) == len(other_category_lst):
+              return False
+            result = self.swap_items(other_vendor, their_want_item, my_want_item)
+            return result
+
+# new method swap decor by space
+    def swap_decor_by_space(self, other_vendor, category, space):
+        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
+            return False
+        self_category_lst = self.get_by_category(category)
+        other_category_lst = other_vendor.get_by_category(category)
+        if len(self_category_lst) == 0 or len(other_category_lst) == 0:
+            return False
+        
+        else:
+            self_not_match_space = []
+            for item_a in self_category_lst:
+                if item_a.space == space:
+                    their_want_item = item_a
+                    break
+                else:
+                    self_not_match_space.append(item_a)
+            if len(self_not_match_space) == len(self_category_lst):
+              return False
+        
+            other_not_match_space = []       
+            for item_b in other_category_lst:
+                if item_b.space == space:
+                    my_want_item = item_b
+                    break
+                else:
+                   other_not_match_space.append(item_b)
+            if len(other_not_match_space) == len(other_category_lst):
+              return False
+            result = self.swap_items(other_vendor, their_want_item, my_want_item)
+            return result

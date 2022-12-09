@@ -32,8 +32,7 @@ def test_swap_first_item_returns_true():
 
 #@pytest.mark.skip
 def test_swap_first_item_from_my_empty_returns_false():
-    fatimah = Vendor(
-        inventory=[]
+    fatimah = Vendor(inventory=[]
     )
 
     item_d = Item()

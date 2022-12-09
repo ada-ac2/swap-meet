@@ -10,11 +10,11 @@ class Decor(Item):
         else:
             self.width = 0
             self.length = 0
-    
+        
+        self.space = self.width * self.length
     
         
     def __str__(self):
         return f"An object of type {self.get_category()} with id {self.id}. It takes up a {self.width} by {self.length} sized space."
 
-    def space(self):
-        return self.width * self.length
+    
