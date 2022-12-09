@@ -110,7 +110,7 @@ class Vendor:
         their_item = other_vendor.get_by_id(their_item_id)
         return self.swap_items(other_vendor,my_item,their_item)
 
-#
+#user pick items to swap by id
     def choose_and_swap_items(self,other_vendor,category = ""):
         self.display_inventory(category)
         other_vendor.display_inventory(category)
@@ -119,3 +119,21 @@ class Vendor:
         return self.swap_by_id(other_vendor,my_item_id,their_item_id)
 
 
+#swap similar item in each category
+#assumption item to swap is from other vendor
+#get category of the item user trying to swap
+#iterate list of that category
+#find similar material/size items and swap it
+    def swap_similiar_material_items(self,other_vendor, item_to_swap = ""):
+        if item_to_swap is None or len(self.inventory) == 0:
+            return False
+            print("No item to swap. Please enter item that you'd like to swap!")
+        else:
+            item_list = self.get_by_category(item_to_swap.get_category())
+            for item in item_list:
+                if Item.compare_item(item,item_to_swap) == True:
+                    return self.swap_items(other_vendor,item,item_to_swap)
+                else:
+                    return self.swap_items(other_vendor,item,item_to_swap)
+                    print (f"No similiar item in the {item_to_swap.get_category} category. Please try another item.")
+            

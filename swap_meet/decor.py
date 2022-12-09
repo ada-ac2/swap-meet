@@ -16,3 +16,13 @@ class Decor(Item):
 
     def condition_description(self):
         return super().condition_description()
+
+#return the item with similiar space used
+    def compare_item(self, other_item):
+        #if self.width == other_item.width and self.length == other_item.length:
+            #return True
+        if abs(self.width-other_item.width) <=2 and abs(self.width-other_item.width) <=2:
+            return True
+        else:
+            return False
+        

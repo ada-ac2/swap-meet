@@ -3,14 +3,16 @@ import uuid
 class Item:
     #initalialize id to item
     def __init__(self,id = None,condition = 0):
-        if id is not None:
-            self.id = id
-            #print(id)
-        else:
-            self.id = uuid.uuid4().int
-        #if condition != 0:
-        self.condition = condition
-        #print(self.condition)
+            if id is not None:
+                #print(type(id))
+                if type(id) != int:
+                    raise TypeError("id needs to be an integer.")
+                else:
+                    self.id = id
+                #print(id)
+            else:
+                self.id = uuid.uuid4().int
+            self.condition = condition
 
 
     def get_category(self):
@@ -28,3 +30,8 @@ class Item:
             return "It's still workable."
         else:
             return "Heavily used!"
+
+    #get similar items
+    #abstract method. refercence:https://www.geeksforgeeks.org/abstract-classes-in-python/
+    def compare_item(self,other_item):
+        pass

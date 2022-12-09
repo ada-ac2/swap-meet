@@ -18,3 +18,10 @@ class Clothing(Item):
 
     def condition_description(self):
         return super().condition_description()
+
+#return the item with similiar fabric 
+    def compare_item(self,other_item):
+        if self.fabric == other_item.fabric:
+            return True
+        else:
+            return False
