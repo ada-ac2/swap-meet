@@ -544,3 +544,40 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
+
+#@pytest.mark.skip
+def test_choose_and_swap_same_items_with_other_vendor(monkeypatch):
+    # Arrange
+    item_a = Clothing(id=123)
+    item_b = Decor(id=456)
+    item_c = Electronics(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=123)
+    item_e = Decor(id=456)
+    item_f = Electronics(id=789)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "123"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other_vendor=jesse)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_d in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
