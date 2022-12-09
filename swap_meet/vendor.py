@@ -51,14 +51,14 @@ class Vendor:
             
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
-        my_best_item =  self.get_best_by_category(their_priority)
+        my_best_item = self.get_best_by_category(their_priority)
         their_best_item = other_vendor.get_best_by_category(my_priority)
         if not my_best_item or not their_best_item:
             return False
         self.swap_items(other_vendor, my_best_item, their_best_item)
         return True
 
-#work on this
+
     def display_inventory(self, category = ""):
         if not self.inventory:
             print("No inventory to display.")
@@ -80,11 +80,12 @@ class Vendor:
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
         their_item = other_vendor.get_by_id(their_item_id)
         my_item = self.get_by_id(my_item_id)
+        
         if not my_item or not their_item:
             return False
         return self.swap_items(other_vendor, my_item, their_item)
 
-# work on this function
+
     def choose_and_swap_items(self, other_vendor, category = ""):
         self.display_inventory(category)
         other_vendor.display_inventory(category)
@@ -97,3 +98,49 @@ class Vendor:
             return self.swap_items(other_vendor, my_item, their_item)
         else:
             return False
+    
+    def get_first_item_by_fabric(self, fabric):
+        for item in self.inventory:
+            if item.fabric == fabric:
+                return item
+        return None
+
+    def get_first_item_by_space_used(self, width, length):
+        for item in self.inventory:
+            if item.length == length and item.width == width:
+                return item
+        return None
+
+    def get_first_item_by_type(self, type):
+        for item in self.inventory:
+            if item.type == type:
+                return item
+        return None
+
+    def swap_clothing_by_fabric(self, other_vendor, fabric):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        
+        my_item = self.get_first_item_by_fabric(fabric)
+        their_item = other_vendor.get_first_item_by_fabric(fabric)
+
+        return self.swap_items(other_vendor, my_item, their_item)
+        
+
+    def swap_decor_by_space_used(self, other_vendor, width, length):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        
+        my_item = self.get_first_item_by_space_used(width, length)
+        their_item = other_vendor.get_first_item_by_space_used(width, length)
+
+        return self.swap_items(other_vendor, my_item, their_item)
+
+    def swap_electronics_by_type(self, other_vendor, type):
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        
+        my_item = self.get_first_item_by_type(type)
+        their_item = other_vendor.get_first_item_by_type(type)
+
+        return self.swap_items(other_vendor, my_item, their_item)
