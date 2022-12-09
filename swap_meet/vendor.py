@@ -41,7 +41,8 @@ class Vendor:
             return True
 
     def swap_first_item(self,other_vendor):
-        if self.check_inventory_empty() or other_vendor.check_inventory_empty():
+        #if self.check_inventory_empty() == None:
+        if len(self.inventory) == 0 or len(other_vendor.inventory) == 0:
             return False
         else:
             my_item = self.inventory.pop(0)
@@ -74,8 +75,8 @@ class Vendor:
         return result
 
     def display_inventory(self, category=None):
-        if self.check_inventory_empty():
-        #if len(self.inventory) == 0:
+        #if self.check_inventory_empty() == None:
+        if len(self.inventory) == 0:
             print("No inventory to display.")
         else:   
             if not category:

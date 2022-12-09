@@ -4,9 +4,12 @@ class Item:
         if id is None:
             self.id = uuid.uuid4().int
         else:
-            self.id = id
+            if type(id) is not int:
+                raise TypeError("Type id is int")
+            else:
+                self.id = id
         if condition:
-            self.condition = condition
+            self.condition = float(condition)
         else:
             self.condition = 0.0   
         

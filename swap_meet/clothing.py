@@ -5,8 +5,10 @@ class Clothing(Item):
     def __init__(self, id=None, condition=None, fabric=None) :
         super().__init__(id, condition)
         if fabric:
+            if type(fabric) is not str:
+                raise TypeError("Type fabric is string")
             self.fabric = fabric
-            self.fabric = fabric
+            
         else:
             self.fabric = "Unknown"
     
