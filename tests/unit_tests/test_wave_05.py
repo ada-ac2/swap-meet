@@ -2,22 +2,23 @@ import pytest
 from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
+from swap_meet.item import Item
 
 TEST_CUSTOM_ID = 12345
 
 # ~~~~~ Clothing Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_clothing_has_default_uuid_length_id():
     clothing = Clothing()
     check_for_default_uuid_length_id(clothing)
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_clothing_has_expected_category_and_custom_id():
     clothing = Clothing(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(clothing, TEST_CUSTOM_ID, "Clothing")
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_clothing_has_expected_default_to_str():
     clothing = Clothing(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -26,7 +27,7 @@ def test_clothing_has_expected_default_to_str():
     )
     assert str(clothing) == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_clothing_has_expected_to_str_with_custom_fabric():
     clothing = Clothing(id=TEST_CUSTOM_ID, fabric="Pinstriped")
     expected_str = (
@@ -37,17 +38,17 @@ def test_clothing_has_expected_to_str_with_custom_fabric():
 
 # ~~~~~ Decor Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_decor_has_default_uuid_length_id():
     decor = Decor()
     check_for_default_uuid_length_id(decor)
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_decor_has_expected_category_and_custom_id():
     decor = Decor(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(decor, TEST_CUSTOM_ID, "Decor")
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_decor_has_expected_default_to_str():
     decor = Decor(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -56,7 +57,7 @@ def test_decor_has_expected_default_to_str():
     )
     assert str(decor) == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_decor_has_expected_to_str_with_custom_size():
     decor = Decor(id=TEST_CUSTOM_ID, width=3, length=12)
     expected_str = (
@@ -67,17 +68,17 @@ def test_decor_has_expected_to_str_with_custom_size():
 
 # ~~~~~ Electronics Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_electronics_has_default_uuid_length_id():
     electronics = Electronics()
     check_for_default_uuid_length_id(electronics)
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_electronics_has_expected_category_and_custom_id():
     electronics = Electronics(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(electronics, TEST_CUSTOM_ID, "Electronics")
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_electronics_has_expected_default_to_str():
     electronics = Electronics(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -86,7 +87,7 @@ def test_electronics_has_expected_default_to_str():
     )
     assert str(electronics) == expected_str
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_electronics_has_expected_to_str_with_custom_type():
     electronics = Electronics(id=TEST_CUSTOM_ID, type="Mobile Phone")
     expected_str = (
@@ -97,7 +98,7 @@ def test_electronics_has_expected_to_str_with_custom_type():
 
 # ~~~~~ Item Tests ~~~~~
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_items_have_condition_as_float():
     items = [
         Clothing(condition=3.5),
@@ -107,7 +108,7 @@ def test_items_have_condition_as_float():
     for item in items:
         assert item.condition == pytest.approx(3.5)
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type():
     items = [
         Clothing(condition=5),
@@ -128,6 +129,36 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
         assert item.condition_description() == one_condition_description
 
     assert one_condition_description != five_condition_description
+
+# extra tests:
+def test_invalid_condition_less_than_zero_raises_error():
+    with pytest.raises(ValueError):
+        Item(condition = -1)
+
+def test_invalid_condition_bigger_than_five_raises_error():
+    with pytest.raises(ValueError):
+        Clothing(condition = 5.5)
+
+def test_valid_condition_input_and_default_condition_return_different_description():
+    item_a = Clothing(condition=4.3)
+    item_b = Decor(condition=3.1)
+    item_c = Electronics(condition=2.8)
+    item_d = Item(condition=1.7)
+    item_e = Clothing()
+
+    description_a = item_a.condition_description()
+    description_b = item_b.condition_description()
+    description_c = item_c.condition_description()
+    description_d = item_d.condition_description()
+    description_e = item_e.condition_description()
+
+    descriptions_set = {description_a, description_b, description_c, description_d, description_e}
+
+    assert len(descriptions_set) == 5
+
+
+
+
 
 # ~~~~~ Helper Functions ~~~~~
 
