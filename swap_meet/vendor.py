@@ -78,6 +78,7 @@ class Vendor:
         
 
     def display_inventory(self, category=""):
+        #populate inventory summaries
         inventory_summaries = ""
         if not category:
             for i in range(len(self.inventory)):
@@ -88,6 +89,7 @@ class Vendor:
                 if self.inventory[i].get_category() == category:
                     inventory_summaries += f"{items+1}. {self.inventory[i].__str__()}\n"
                     items += 1
+
         if inventory_summaries == "":
             print("No inventory to display.")
         else:
