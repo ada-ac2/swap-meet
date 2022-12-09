@@ -20,12 +20,12 @@ class Item:
         is_number = type(condition) is int or type(condition) is float
         if is_number and condition <= 5 and condition >=0:
             self.condition = condition
+        elif type(condition) is str:
+            raise TypeError("The condition for Item must me numerical")
         elif condition > 5:
             raise ValueError("The condition for Item can't be greater than Five")
-        elif condition < 0:
-            raise ValueError("The condition for Item must be greater or equal to Zero")
         else:
-            raise TypeError("The condition for Item must me numerical")
+            raise ValueError("The condition for Item must be greater or equal to Zero")
 
     def get_category(self):
         return self.__class__.__name__

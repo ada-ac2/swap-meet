@@ -90,7 +90,7 @@ class Vendor:
     def swap_first_item(self, other_vendor):
         if not self.inventory or not other_vendor.inventory:
             return False
-
+        # You could just access the first so you dont need to go to the whole 
         return self.swap_items(other_vendor,self.inventory[0],other_vendor.inventory[0])
 
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
