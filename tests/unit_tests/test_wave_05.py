@@ -126,6 +126,26 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
 
     assert one_condition_description != five_condition_description
 
+def test_item_condition_higher_than_five_return_five():
+    #Arrange
+    item = Clothing(condition=6)
+
+    #Act
+    five_condition = item.condition_description()
+
+    #Assert
+    assert five_condition == "Fresh out of the factory. Did anyone even touch it?"
+
+def test_item_condition_lower_than_zero_return_zero():
+    #Arrange
+    item = Clothing(condition=-1)
+
+    #Act
+    zero_condition = item.condition_description()
+
+    #Assert
+    assert zero_condition == "Eww... You will definitely need to clean it before use"
+
 # ~~~~~ Helper Functions ~~~~~
 
 def check_for_default_uuid_length_id(to_check):
