@@ -7,17 +7,17 @@ TEST_CUSTOM_ID = 12345
 
 # ~~~~~ Clothing Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_clothing_has_default_uuid_length_id():
     clothing = Clothing()
     check_for_default_uuid_length_id(clothing)
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_clothing_has_expected_category_and_custom_id():
     clothing = Clothing(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(clothing, TEST_CUSTOM_ID, "Clothing")
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_clothing_has_expected_default_to_str():
     clothing = Clothing(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -26,7 +26,7 @@ def test_clothing_has_expected_default_to_str():
     )
     assert str(clothing) == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_clothing_has_expected_to_str_with_custom_fabric():
     clothing = Clothing(id=TEST_CUSTOM_ID, fabric="Pinstriped")
     expected_str = (
@@ -37,17 +37,17 @@ def test_clothing_has_expected_to_str_with_custom_fabric():
 
 # ~~~~~ Decor Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_decor_has_default_uuid_length_id():
     decor = Decor()
     check_for_default_uuid_length_id(decor)
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_decor_has_expected_category_and_custom_id():
     decor = Decor(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(decor, TEST_CUSTOM_ID, "Decor")
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_decor_has_expected_default_to_str():
     decor = Decor(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -56,7 +56,7 @@ def test_decor_has_expected_default_to_str():
     )
     assert str(decor) == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_decor_has_expected_to_str_with_custom_size():
     decor = Decor(id=TEST_CUSTOM_ID, width=3, length=12)
     expected_str = (
@@ -67,17 +67,17 @@ def test_decor_has_expected_to_str_with_custom_size():
 
 # ~~~~~ Electronics Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_electronics_has_default_uuid_length_id():
     electronics = Electronics()
     check_for_default_uuid_length_id(electronics)
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_electronics_has_expected_category_and_custom_id():
     electronics = Electronics(id=TEST_CUSTOM_ID)
     check_category_and_custom_id(electronics, TEST_CUSTOM_ID, "Electronics")
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_electronics_has_expected_default_to_str():
     electronics = Electronics(id=TEST_CUSTOM_ID)
     expected_str = (
@@ -86,7 +86,7 @@ def test_electronics_has_expected_default_to_str():
     )
     assert str(electronics) == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_electronics_has_expected_to_str_with_custom_type():
     electronics = Electronics(id=TEST_CUSTOM_ID, type="Mobile Phone")
     expected_str = (
@@ -97,7 +97,7 @@ def test_electronics_has_expected_to_str_with_custom_type():
 
 # ~~~~~ Item Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_items_have_condition_as_float():
     items = [
         Clothing(condition=3.5),
@@ -107,7 +107,7 @@ def test_items_have_condition_as_float():
     for item in items:
         assert item.condition == pytest.approx(3.5)
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type():
     items = [
         Clothing(condition=5),
@@ -127,7 +127,42 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
         item.condition = 1
         assert item.condition_description() == one_condition_description
 
-    assert one_condition_description != five_condition_description
+    #test item condition = 2
+    items[0].condition = 2
+    two_condition_description = items[0].condition_description()
+    assert isinstance(two_condition_description, str)
+
+    for item in items:
+        item.condition = 2
+        assert item.condition_description() == two_condition_description
+
+    assert two_condition_description != five_condition_description
+
+    
+    #test item condition = 3
+    items[0].condition = 3
+    three_condition_description = items[0].condition_description()
+    assert isinstance(three_condition_description, str)
+
+    for item in items:
+        item.condition = 3
+        assert item.condition_description() == three_condition_description
+
+    assert three_condition_description != five_condition_description
+
+   
+   #test item condition = 4
+    items[0].condition = 4
+    four_condition_description = items[0].condition_description()
+    assert isinstance(four_condition_description, str)
+
+    for item in items:
+        item.condition = 4
+        assert item.condition_description() == four_condition_description
+
+    assert four_condition_description != five_condition_description
+
+
 
 # ~~~~~ Helper Functions ~~~~~
 

@@ -7,7 +7,7 @@ from swap_meet.electronics import Electronics
 
 # ~~~~~ display_inventory Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_with_items_no_category(capfd):
     # Arrange
     item_a = Clothing(id=123, fabric="Striped")
@@ -23,6 +23,7 @@ def test_display_inventory_with_items_no_category(capfd):
 
     # Assert
     captured = capfd.readouterr()
+    print(captured)
     expected_str = (
         "1. An object of type Clothing with id 123. It is made from Striped fabric.\n"
         "2. An object of type Electronics with id 456. This is a Handheld Game device.\n"
@@ -31,7 +32,7 @@ def test_display_inventory_with_items_no_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_with_items_and_category(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -52,7 +53,7 @@ def test_display_inventory_with_items_and_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_with_category_and_no_matching_items(capfd):
     # Arrange
     item_a = Decor(id=123, width=2, length=4)
@@ -72,7 +73,7 @@ def test_display_inventory_with_category_and_no_matching_items(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_no_items_no_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -87,7 +88,7 @@ def test_display_inventory_no_items_no_category(capfd):
     )
     assert captured.out == expected_str
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_display_inventory_no_items_with_category(capfd):
     # Arrange
     vendor = Vendor(inventory=[])
@@ -104,7 +105,7 @@ def test_display_inventory_no_items_with_category(capfd):
 
 # ~~~~~ swap_by_id Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_success_returns_true():
     # Arrange
     item_a = Decor(id=123)
@@ -141,7 +142,7 @@ def test_swap_by_id_success_returns_true():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_with_caller_empty_inventory_returns_false():
     # Arrange
     tai = Vendor(inventory=[])
@@ -169,7 +170,7 @@ def test_swap_by_id_with_caller_empty_inventory_returns_false():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_with_other_empty_inventory_returns_false():
     # Arrange
     item_a = Decor(id=123)
@@ -198,7 +199,7 @@ def test_swap_by_id_with_other_empty_inventory_returns_false():
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_fails_if_caller_missing_item():
     # Arrange
     item_a = Decor(id=123)
@@ -216,11 +217,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     )
 
     # Act
-    result = tai.swap_by_id(
-        other_vendor=jesse,
-        my_item_id=213,
-        their_item_id=654
-    )
+    result = tai.swap_by_id(other_vendor=jesse, my_item_id=213, their_item_id=654)
 
     # Assert
     assert result == False
@@ -235,7 +232,7 @@ def test_swap_by_id_fails_if_caller_missing_item():
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_swap_by_id_fails_if_other_missing_item():
     # Arrange
     item_a = Decor(id=123)
@@ -274,7 +271,7 @@ def test_swap_by_id_fails_if_other_missing_item():
 
 # ~~~~~ choose_and_swap_items Tests ~~~~~
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_success(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -311,7 +308,7 @@ def test_choose_and_swap_items_success(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     # Arrange
     tai = Vendor(inventory=[])
@@ -339,7 +336,7 @@ def test_choose_and_swap_items_with_calling_inventory_empty(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -368,7 +365,7 @@ def test_choose_and_swap_items_with_other_inventory_empty(monkeypatch):
 
     assert len(jesse.inventory) == 0
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -405,7 +402,7 @@ def test_choose_and_swap_items_with_caller_missing_item(monkeypatch):
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
 
-@pytest.mark.skip
+#@pytest.mark.skip
 def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     # Arrange
     item_a = Decor(id=123)
@@ -441,3 +438,80 @@ def test_choose_and_swap_items_with_other_vendor_missing_item(monkeypatch):
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
     assert item_f in jesse.inventory
+
+
+    # new test 
+def test_choose_and_swap_items_with_category_clothing_return_true(monkeypatch):
+    # Arrange
+    item_a = Clothing(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "321"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    result = tai.choose_and_swap_items(other_vendor=jesse, category=Clothing)
+
+    # Assert
+    assert result == True
+
+    assert len(tai.inventory) == 3
+    assert item_d in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+
+def test_choose_and_swap_items_with_category_clothing_return_false(monkeypatch):
+    # Arrange
+    item_a = Clothing(id=123)
+    item_b = Electronics(id=456)
+    item_c = Decor(id=789)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(id=321)
+    item_e = Decor(id=654)
+    item_f = Clothing(id=987)
+    jesse = Vendor(
+        inventory=[item_d, item_e, item_f]
+    )
+
+    # Mock user input for picking item ids
+    input_responses = iter(["123", "988"])
+    monkeypatch.setattr('builtins.input', lambda msg: next(input_responses))
+
+    # Act
+    
+    result = tai.choose_and_swap_items(other_vendor=jesse, category=Clothing)
+
+    # Assert
+    assert result == False
+
+    assert len(tai.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert len(jesse.inventory) == 3
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
