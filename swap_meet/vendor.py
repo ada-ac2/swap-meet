@@ -80,12 +80,7 @@ class Vendor:
         else return the first best conditioned item of the category
         """
         items = self.get_by_category(category)
-        if not items:
-            item = None
-        else:
-            item = max(items, key=lambda i: i.condition)
-            if not item:
-                item = None
+        item = None if not items else max(items, key=lambda i: i.condition)
         return item
     
     def swap_best_by_category(self, other_vendor, my_priority, their_priority):
@@ -103,13 +98,7 @@ class Vendor:
         print all inventory of some inventory of a given category
         print a message if inventory is empty or no inventory of the given category
         """
-        items = list()
-        if category is None:
-            # list out entire inventory
-            items = self.inventory
-        else:
-            # list out inventory of given category
-            items = self.get_by_category(category)
+        items = self.inventory if category is None else self.get_by_category(category)
         result = str()
         if items:
             for ind, item in enumerate(items):
@@ -126,14 +115,8 @@ class Vendor:
         use my_item_id and their_item_id to find the corresponding items
         return True if two items swapped successfully, False otherwise
         """
-        my_item = None
-        for item in self.inventory:
-            if item.id == my_item_id:
-                my_item = item
-        their_item = None
-        for item in other_vendor.inventory:
-            if item.id == their_item_id:
-                their_item = item
+        my_item = self.get_by_id(my_item_id)
+        their_item = other_vendor.get_by_id(their_item_id)
         return self.swap_items(other_vendor, my_item, their_item)
 
     def choose_and_swap_items(self, other_vendor, category=""):
@@ -149,3 +132,34 @@ class Vendor:
         other_id = int(input("Please enter the id number of the item from the other vendor's inventory: "))
         # swap the two items
         return self.swap_by_id(other_vendor, self_id, other_id)
+    
+    def get_item_feature(self, item):
+        """
+        return the feature the item has
+        """
+        category = item.__str__()
+        # in operator is not very efficient here
+        # but i cannot think of a better and simpler way
+        if "Clothing" in category:
+            feature = item.fabric
+        elif "Decor" in category:
+            feature = item.width * item.length
+        elif "Electronics" in category:
+            feature = item.type
+        else:
+            feature = None
+        return feature
+        
+    
+    def swap_similar_with_other_vendor(self, other_vendor, item):
+        """
+        if vendor has item similar to item I want to swap, swap it
+        else return None
+        """
+        feature = self.get_item_feature(item)
+        swapped = False
+        for vendor_item in other_vendor.inventory:
+            if feature and other_vendor.get_item_feature(vendor_item) == feature:
+                swapped = self.swap_items(other_vendor, item, vendor_item)
+                break
+        return swapped
