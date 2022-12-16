@@ -74,8 +74,8 @@ class Vendor:
         items_to_show = self.get_by_category(category) if category else self.inventory
 
         if items_to_show:
-            for i in range(len(items_to_show)):
-                print(f"{i+1}. {items_to_show[i].__str__()}")
+            for index, item in enumerate(items_to_show, start=1): 
+                print(f"{index}. {item}")
 
         else:
             print("No inventory to display.")
