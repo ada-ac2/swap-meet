@@ -1,13 +1,14 @@
 #Wave 2 , 5
+from math import floor
 import uuid
 #from swap_meet.vendor import Vendor
 class Item:
-    def __init__(self,id = None,category = "", condition = 0 ):
-        if id is None :
-            self.id = uuid.uuid4().int
-        else:
-            self.id = id
-        self.condition = condition
+    def __init__(self, id = None, category = "", condition = 0):
+        
+        if id is not None and not isinstance(id,int):
+            raise ValueError("ID must be an integer")
+        self.id = id if id else uuid.uuid4().int
+        self.condition = condition 
         self.category = category
 
     def get_category(self):
@@ -21,6 +22,7 @@ class Item:
 # Wave 5
     def condition_description(self):
         description_of_condition = ["Mint","Heavily Used","Like New","Gently Used","Best Used","New"]
-        return description_of_condition[self.condition]
+        
+        return description_of_condition[round(self.condition)]
     
     

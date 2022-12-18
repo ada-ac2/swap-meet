@@ -142,7 +142,7 @@ def test_swap_best_by_category_reordered():
 
     item_d = Clothing(condition=2.0)
     item_e = Decor(condition=4.0)
-    item_f = Clothing(condition=4.0)
+    item_f = Clothing(condition=3.3)
     jesse = Vendor(
         inventory=[item_f, item_e, item_d]
     )
