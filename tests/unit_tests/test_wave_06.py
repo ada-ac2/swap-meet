@@ -129,6 +129,7 @@ def test_swap_best_by_category():
     assert item_b in tai.inventory
     assert item_d in jesse.inventory
     assert item_e in jesse.inventory
+    assert item_c in jesse.inventory
 
 #@pytest.mark.skip
 def test_swap_best_by_category_reordered():

@@ -5,9 +5,6 @@ class Decor(Item):
         super().__init__(id, condition)
         self.width = width 
         self.length = length
-
-    def get_category(self):
-        return super().get_category() 
     
     def __str__(self):
         return f"{super().__str__()}. It takes up a {self.width} by {self.length} sized space."

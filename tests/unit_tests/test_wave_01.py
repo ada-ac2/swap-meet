@@ -54,6 +54,10 @@ def test_removing_not_found_returns_none():
     # ****** Complete Assert Portion of this test **********
     # *********************************************************************
     assert result is None 
+    assert "a" in vendor.inventory
+    assert "b" in vendor.inventory
+    assert "c" in vendor.inventory
+    assert len(vendor.inventory) == 3 
 
 # Additional tests added by Monica Bao 
 def test_adding_duplicated_item_raise_error(): 

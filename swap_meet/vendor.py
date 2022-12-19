@@ -92,7 +92,7 @@ class Vendor:
         else:
             index = 1
             for item in items_in_category:
-                print(f"{index}. {item.__str__()}")
+                print(f"{index}. {item}") # We don't need to implicitly call __str__ since we already override the method 
                 index += 1
 
     def swap_by_id(self, other_vendor, my_item_id, their_item_id):
